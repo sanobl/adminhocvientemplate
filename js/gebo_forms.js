@@ -48,7 +48,7 @@ $(document).ready(function() {
 //* masked input
 gebo_mask_input = {
     init: function() {
-        // $("#mask_date").inputmask("99/99/9999",{placeholder:"dd/mm/yyyy"});
+     
         // $("#mask_phone").inputmask("(999) 999-9999");
         // $("#mask_ssn").inputmask("999-99-9999");
         // $("#mask_product").inputmask("AA-999-A999");
@@ -58,8 +58,8 @@ gebo_mask_input = {
 //* bootstrap datepicker
 gebo_datepicker = {
     init: function() {
-        $('#dp1').datepicker();
-        $('#dp2').datepicker();
+        // $('#dp1').datepicker();
+        // $('#dp2').datepicker();
         $('#dp_from_start').datepicker({
             format: "mm/dd/yyyy"
         }).on('changeDate', function(ev) {

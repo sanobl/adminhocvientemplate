@@ -802,6 +802,21 @@ fieldset .span12{
 .width_number {
     width: 40px;
 }
+.width_number60 {
+    width: 60px;
+}
 .mb-10{
     margin-bottom: 10px;
+}
+
+.mb-margin20{
+    margin-left: -20px !important;
+    margin-bottom: 10px;
+}
+.width_number100 {
+    width: 100px;
+}
+
+.padding-top5 {
+    padding-top: 5px;
 }

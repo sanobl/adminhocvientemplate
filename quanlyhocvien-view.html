@@ -92,9 +92,9 @@
                                     <li>
                                         <a href="quanlykhoahoc.html">Khoá học</a>
                                     </li>
+                                    </li>
+                                </ul>
                             </li>
-                        </ul>
-                        </li>
 
                         </ul>
                     </div>
@@ -109,7 +109,7 @@
         <div class="row-fluid">
             <div class="span12">
 
-                <h3 class="heading">Thêm học viên</h3>
+                <h3 class="heading">Thông tin học viên</h3>
 
                 <div class="row-fluid sepH_c">
                     <div class="span12">
@@ -125,21 +125,21 @@
                                             <label class="control-label">Họ và tên</label>
 
                                             <div class="controls">
-                                                <input type="text" class="span10">
+                                                <label class="padding-top5">Nguyễn Khánh Bằng </label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Số điện thoại</label>
 
                                             <div class="controls">
-                                                <input type="text" class="span10">
+                                                <label class="padding-top5">01682682578</label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Email</label>
 
                                             <div class="controls">
-                                                <input type="text" class="span10">
+                                                <label class="padding-top5">bangnk@outlook.com</label>
                                             </div>
                                         </div>
 
@@ -155,21 +155,21 @@
                                             <label class="control-label">Họ và tên</label>
 
                                             <div class="controls">
-                                                <input type="text" class="span10">
+                                                <label class="padding-top5">Nguyen Van A</label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Số điện thoại </label>
 
                                             <div class="controls">
-                                                <input type="text" class="span10">
+                                                <label class="padding-top5"></label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Email</label>
 
                                             <div class="controls">
-                                                <input type="text" class="span10">
+                                                <label class="padding-top5"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -185,48 +185,45 @@
                                     <label class="control-label">Chọn khóa học</label>
 
                                     <div class="controls">
-                                        <select id="khoahoc">
-                                            <option>Vui lòng </option>
-                                            <option>Anh văn giao tiếp</option>
-                                            <option>Anh văn thiếu nhi</option>
-                                        </select>
+                                        <label class="padding-top5">Anh văn giao tiếp</label>
+
                                     </div>
                                 </div>
-                                <div id="khoahocinfo"></div>
-                                <div id="hinhthucthanhtoan"></div>
-                                <!--<div class="control-group">
-                                    <label class="control-label">Hình thức thanh toán</label>
-                                    <div class="controls">
-                                        <div class="span12">
-                                            <div>
-                                                <label class="checkbox inline">
-                                                        <input type="radio">
-                                                        Đóng 1 lần
-                                                    </label>
-                                            </div>
-                                            <div>
-                                                <label class="checkbox inline">
-                                                        <input type="radio">
-                                                        Theo tháng
-                                                    </label>
-                                            </div>
-                                            <div>
-                                                <label class="checkbox inline">
-                                                        <input type="radio">
-                                                        Theo đợt
-                                                    </label>
-                                                <input type="text" class="width_number" value="2" placeholder="số đợt">
-                                            </div>
+                                <div id="khoahocinfo">
+                                    <div class="control-group"><label class="control-label">Giáo viên</label>
+                                        <div class="controls" style="padding-top:5px"> Nguyễn Khánh Bằng</div>
+                                    </div>
+                                    <div class="control-group"><label class="control-label">Thời gian học</label>
+                                        <div class="controls" style="padding-top:5px"> Hai, Tư, Sáu (19h30-21h30)</div>
+                                    </div>
+                                    <div class="control-group"><label class="control-label">Số tiền/khoá(VNĐ)</label>
+                                        <div class="controls" style="padding-top:5px"> 500.000 VND</div>
+                                    </div>
+                                    <div class="control-group"><label class="control-label">Hình thức thanh toán</label>
+                                        <div class="controls" style="padding-top:5px"> Theo tháng</div>
+                                    </div>
+                                </div>
+                                <div id="hinhthucthanhtoan">
+                                    <div class="control-group"><label class="control-label"> </label>
+                                        <div class="controls">
+                                            <div class="span12"><label class="checkbox inline"> <input type="checkbox">
+                                                T1/2016Đ - 100,000 VNĐ</label><label class="checkbox inline"> <input
+                                                    type="checkbox"> T2/2016 - 100,000 VNĐ</label><label
+                                                    class="checkbox inline"> <input type="checkbox"> T3/2016 - 100,000
+                                                VNĐ </label><label class="checkbox inline"> <input type="checkbox">
+                                                T4/2016 - 100,000 VNĐ</label><label class="checkbox inline"> <input
+                                                    type="checkbox"> T5/2016 - 100,000 VNĐ </label></div>
                                         </div>
                                     </div>
-                                </div>-->
+                                </div>
 
 
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button class="btn btn-info" type="submit">Lưu thông tin</button>
-                                        <button class="btn btn-info" type="button" id="btnPrintInfo">Lưu & In thông tin</button>
-                                        <button class="btn btn-danger">Thoát</button>
+                                        <button class="btn btn-info" type="button" id="btnChangeInfo">Thay đổi thông tin</button>
+                                        <a style="background-color: #fff !important;" data-toggle="modal" data-backdrop="static" href="#myTasks" class="label ttip_b" title="In thông tin">
+                                        <button class="btn btn-info" type="button">In thông tin</button></a>
+                                        <button class="btn btn-danger" type="button" id="btnExit">Thoát</button>
                                     </div>
                                 </div>
                             </fieldset>
@@ -235,20 +232,20 @@
                 </div>
             </div>
         </div>
-        <!--<a data-toggle="modal" data-backdrop="static" href="#myTasks" class="label ttip_b" title="New tasks">10 <i class="splashy-calendar_week"></i></a>-->
 
-        <!--<div class="modal hide fade" id="myTasks">-->
-            <!--<div class="modal-header">-->
-                <!--<button class="close" data-dismiss="modal">×</button>-->
-                <!--<h3>Thông tin hoá đơn </h3>-->
-            <!--</div>-->
-            <!--<div class="modal-body">-->
 
-            <!--</div>-->
-            <!--<div class="modal-footer">-->
-                <!--<a href="javascript:void(0)" class="btn">In hoá đơn</a>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="modal hide fade" id="myTasks">
+            <div class="modal-header">
+                <button class="close" data-dismiss="modal">×</button>
+                <h3>Thông tin hoá đơn </h3>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" class="btn">In hoá đơn</a>
+            </div>
+        </div>
     </div>
 </div>
 <script src="js/jquery.min.js"></script>
@@ -287,64 +284,16 @@
     $(document).ready(function () {
         //* show all elements & remove preloader
         setTimeout('$("html").removeClass("js")', 1000);
-        $("#khoahoc").change(function () {
-            var select = $("#khoahoc option:selected").val();
-            console.log(select);
-            bindKhoaHoc(select);
+        $("#btnChangeInfo").click(function(){
+            window.location.href = "quanlyhocvien-add.html";
         });
-        $("input[name=hinhthucthanhtoan]:radio").change(function () {
-            console.log(11);
-        });
-        $("#btnPrintInfo").click(function(){
-            window.location.href = "quanlyhocvien-view.html";
+        $("#btnExit").click(function(){
+            window.location.href = "quanlyhocvien.html";
         });
     });
 
-    function bindKhoaHoc(select) {
-        var html = "<div class=\"control-group\"> <label class=\"control-label\">Giáo viên</label><div class=\"controls\" style=\"padding-top:5px\"> Nguyễn Khánh Bằng</div> </div>";
-        html += "<div class=\"control-group\"> <label class=\"control-label\">Thời gian học</label><div class=\"controls\" style=\"padding-top:5px\"> Hai, Tư, Sáu (19h30-21h30)</div> </div>";
-        html += "<div class=\"control-group\"> <label class=\"control-label\">Số tiền/khoá(VNĐ)</label><div class=\"controls\" style=\"padding-top:5px\"> 500.000 VND</div> </div>";
-        html += "<div class=\"control-group\"> <label class=\"control-label\">Hình thức thanh toán</label>";
-        html += " <div class=\"controls\"> <div class=\"span12\">";
-        html += '<label class=\"checkbox inline\"> \<input type=\"radio\" name="hinhthucthanhtoan" value="1" > Đóng 1 lần </label>';
-        html += '<label class="checkbox inline">    <input type="radio" name="hinhthucthanhtoan" value="2">  Theo tháng  </label>';
 
-        html += '<label class="checkbox inline"> <input type="radio" name="hinhthucthanhtoan" value="3"> Theo đợt </label>  </div>  </div>  </div>';
 
-        $("#khoahocinfo").html(html);
-        $("input[name=hinhthucthanhtoan]:radio").change(function () {
-            console.log(this.value);
-            bindHinhThucThanhToan(this.value);
-        });
-    }
-
-    function bindHinhThucThanhToan(value) {
-        var htmlHTTT = '';
-        console.log('value:' +value);
-        switch (value) {
-            case '1': //
-                break;
-            case '2':
-                    console.log('nguyen khanh ');
-                htmlHTTT += '<div class="control-group"> <label class="control-label"> </label> <div class="controls">';
-                htmlHTTT += ' <div class="span12">';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T1/2016Đ - 100,000 VNĐ</label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox">  T2/2016 - 100,000 VNĐ</label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T3/2016 - 100,000 VNĐ </label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T4/2016 - 100,000 VNĐ</label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T5/2016 - 100,000 VNĐ </label>';
-
-                htmlHTTT += '</div>';
-                htmlHTTT += '</div>';
-
-                break;
-            default:
-                console.log('nguyen khanh ');
-                break;
-        }
-        console.log(htmlHTTT);
-        $("#hinhthucthanhtoan").html(htmlHTTT);
-    }
 </script>
 </body>
 
