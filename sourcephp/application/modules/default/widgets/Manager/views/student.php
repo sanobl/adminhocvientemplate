@@ -78,7 +78,7 @@
                 <div class="span12">
                     <h3 class="heading">Danh sách học viên</h3>
                     <div class="btn-group sepH_b">
-                        <a href="quanlyhocvien-add.html"> <i class="splashy-add"></i> Thêm mới</a>
+                        <a href="them-hoc-vien.html"> <i class="splashy-add"></i> Thêm mới</a>
                     </div>
                     <div class="row-fluid sepH_c">
                         <div class="span12">
