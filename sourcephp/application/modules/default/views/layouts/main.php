@@ -35,7 +35,7 @@
             <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/colorbox/colorbox.css" />
             <!-- main styles -->
             <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/style.css" />
-
+            <script type="text/javascript" src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/jquery.min.js"></script>
             <!--[if lt IE 9]>
                 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
                 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -45,6 +45,7 @@
                 var token = "<?php echo ($token != '') ? $token : ''; ?>";
             </script>
 
+            
     </head>
     <body>
         <?php echo $this->layout()->content; ?>
