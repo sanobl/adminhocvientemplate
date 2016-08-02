@@ -4,6 +4,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
     public function run(){
         $isLogin = true;
         $studentid = intval($this->getRequest()->getParam("index1"));
+        $resultsubject = '';
         $studentdetail = '';
         $student_fullname = '';
         $student_fullname = '';
@@ -17,6 +18,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
         $teachername = '';
         $subjectname = '';
         $money_total = '';
+        $time = '';
         $haserror = false;
         if($isLogin){
             if($studentid != 0){
@@ -35,6 +37,30 @@ class Widget_Manager_StudentDetail extends Core_Widget{
                     $teachername = $studentdetail['name'];
                     $subjectname = $studentdetail['title'];
                     $money_total = $studentdetail['money_total'];
+                    $resultsubject = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($subject_id);
+                    if(is_array($resultsubject) && count($resultsubject)>0){
+                        if(isset($resultsubject[0]["monday"]) && $resultsubject[0]["monday"]!= null){
+                            $time .= 'Hai, ';
+                        }
+                        if(isset($resultsubject[0]["tuesday"]) && $resultsubject[0]["tuesday"]!= null){
+                            $time .= 'Ba, ';
+                        }
+                        if(isset($resultsubject[0]["wednesday"]) && $resultsubject[0]["wednesday"]!= null){
+                            $time .= 'Tư, ';
+                        }
+                        if(isset($resultsubject[0]["thursday"]) && $resultsubject[0]["thursday"]!= null){
+                            $time .= 'Năm, ';
+                        }
+                        if(isset($resultsubject[0]["friday"]) && $resultsubject[0]["friday"]!= null){
+                            $time .= 'Sáu, ';
+                        }
+                        if(isset($resultsubject[0]["saturday"]) && $resultsubject[0]["saturday"]!= null){
+                            $time .= 'Bảy, ';
+                        }
+                        if(isset($resultsubject[0]["sunday"]) && $resultsubject[0]["sunday"]!= null){
+                            $time .= 'Chủ nhật';
+                        }
+                    }
             }else {
                 $haserror = true;
                 $mess = 'Không có dữ liệu học viên hoặc có lỗi trong quá trình tải.';
@@ -60,7 +86,8 @@ class Widget_Manager_StudentDetail extends Core_Widget{
             'teachername'=>$teachername,
             'subjectname'=>$subjectname,
             'money_total'=>$money_total,
-            'studentid'=>$studentid
+            'studentid'=>$studentid,
+            'time'=>$time
         ));
         
          

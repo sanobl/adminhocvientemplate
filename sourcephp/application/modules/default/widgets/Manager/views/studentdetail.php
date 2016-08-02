@@ -140,7 +140,13 @@
                                         </div>
                                     </div>
                                     <div class="control-group"><label class="control-label">Thời gian học</label>
-                                        <div class="controls" style="padding-top:5px"> Hai, Tư, Sáu (19h30-21h30)</div>
+                                        <div class="controls" style="padding-top:5px">
+                                            <?php
+                                            if(isset($time) && $time!=''){
+                                                echo $time;
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
                                     <div class="control-group"><label class="control-label">Số tiền/khoá(VNĐ)</label>
                                         <div class="controls" style="padding-top:5px"> 

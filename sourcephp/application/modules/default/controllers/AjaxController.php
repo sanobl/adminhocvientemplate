@@ -175,16 +175,16 @@ class AjaxController extends Zend_Controller_Action {
                 $time .= 'Tư, ';
             }
             if(isset($result[0]["thursday"]) && $result[0]["thursday"]!= null){
-                $time .= 'Năm,';
+                $time .= 'Năm, ';
             }
             if(isset($result[0]["friday"]) && $result[0]["friday"]!= null){
-                $time .= 'Sáu,';
+                $time .= 'Sáu, ';
             }
             if(isset($result[0]["saturday"]) && $result[0]["saturday"]!= null){
-                $time .= 'Bảy,';
+                $time .= 'Bảy, ';
             }
             if(isset($result[0]["sunday"]) && $result[0]["sunday"]!= null){
-                $time .= 'Ba,';
+                $time .= 'Chủ nhật';
             }
             $totalpayment = isset($result[0]['money_total']) ? $result[0]['money_total'] : '';
             if($totalpayment != '' || $time != '' || $teachername != ''){
