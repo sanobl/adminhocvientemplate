@@ -78,7 +78,7 @@
                 <div class="span12">
                     <h3 class="heading">Danh sách học viên</h3>
                     <div class="btn-group sepH_b">
-                        <a href="quanlyhocvien-add.html"> <i class="splashy-add"></i> Thêm mới</a>
+                        <a href="them-hoc-vien.html"> <i class="splashy-add"></i> Thêm mới</a>
                     </div>
                     <div class="row-fluid sepH_c">
                         <div class="span12">
@@ -95,78 +95,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>134</td>
-                                        <td>Anh văn giao tiếp</td>
-                                        <td>Nguyễn Khánh Bằng</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>10/07/2016</td>
-                                        <td>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>T1/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>T2/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T3/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T4/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T5/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T6/2016</label>
-
-                                        </td>
-                                        <td><a href="quanlyhocvien-add.html"><i class="splashy-pencil" style="padding-right:10px"></i></a>
-                                            <a href="quanlyhocvien-view.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>
-                                            <!--<i class="splashy-remove"></i>-->
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>135</td>
-                                        <td>Anh văn cơ bản</td>
-                                        <td>Nguyễn Khánh Đằng</td>
-                                        <td>Nguyễn Văn B</td>
-                                        <td>10/07/2016</td>
-                                        <td>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>Đợt 1</label>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>Đợt 2</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>Đợt 3</label>
-                                           </td>
-                                        <td><a href="quanlyhocvien-add.html"><i class="splashy-pencil" style="padding-right:10px"></i></a>
-                                            <a href="quanlyhocvien-view.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>
-                                            <!--<i class="splashy-remove"></i>-->
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>134</td>
-                                        <td>Anh văn giao tiếp</td>
-                                        <td>Nguyễn Khánh Bằng</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>10/07/2016</td>
-                                        <td>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>T4/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>T5/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" checked disabled>T6/2016</label>
-
-                                        </td>
-                                        <td>
-                                            <a href="quanlyhocvien-add.html"><i class="splashy-pencil" style="padding-right:7px"></i></a>
-                                            <a href="quanlyhocvien-view.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>
-
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>134</td>
-                                        <td>Anh văn giao tiếp</td>
-                                        <td>Nguyễn Khánh Bằng</td>
-                                        <td>Nguyễn Văn A</td>
-                                        <td>10/07/2016</td>
-                                        <td>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T4/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T5/2016</label>
-                                            <label class="checkbox inline"><input type="checkbox" disabled>T6/2016</label>
-
-                                        </td>
-                                        <td>
-                                            <a href="quanlyhocvien-add.html"><i class="splashy-pencil" style="padding-right:7px"></i></a>
-                                            <a href="quanlyhocvien-view.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>
-                                            <i class="splashy-remove"></i>
-                                        </td>
-                                    </tr>
+                                    <?php if (isset($data) && count($data)>0){
+                                        for($i = 0;$i<count($data); $i++){
+                                               echo ' <tr>
+                                                <td>'. $data[$i]['id'] .'</td>
+                                                <td>'. $data[$i]['title'] .'</td>
+                                                <td>'. $data[$i]['name'].'</td>
+                                                <td>'. $data[$i]['student_fullname'].'</td>
+                                                <td>'. $data[$i]['created_at'].'</td>
+                                                <td>
+                                                    
+                                                </td>
+                                                <td><a href="chinh-sua-hoc-vien_'.$data[$i]['id'].'.html"><i class="splashy-pencil" style="padding-right:10px"></i></a>
+                                                    <a href="chi-tiet-hoc-vien_'.$data[$i]['id'].'.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>
+                                                    
+                                                </td>
+                                            </tr>';
+                                        }}?>
+                                    
+                                    
                                 </tbody>
                             </table>
                         </div>

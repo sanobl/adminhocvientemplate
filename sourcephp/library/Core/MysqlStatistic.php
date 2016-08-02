@@ -36,7 +36,7 @@ class Core_MysqlStatistic
                 'password' => $this->config->password,
                 'db' => $this->config->databasename,
                 'port' => 3306,
-                'prefix' => 'my_',
+                'prefix' => '',
                 'charset' => 'utf8'));
         } catch (Exception $e) {
             return false;
@@ -45,9 +45,9 @@ class Core_MysqlStatistic
 
     public function demomysql()
     {
-        // obtain db object created in init  ()
-//        $this->_db = MysqliDb::getInstance();
-        $users = $this->_db->rawQuery('SELECT * from students where id >= ?', Array(0));
+      
+        $users = $this->_db->rawQuery('SELECT * from students where id >= ?', Array (0));
+        //  print_r($this->_db);die;
         foreach ($users as $user) {
             print_r($user);
         }

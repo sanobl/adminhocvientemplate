@@ -6,7 +6,7 @@ class Widget_Manager_UserAdd extends Core_Widget{
         $user_id = intval($this->getRequest()->getParam("id"));
         $user = null;
         if($user_id !=0){
-            $user = Core_MysqlTeacher::getInstance()->getTeacher($user_id);
+            $user = Core_MysqlUser::getInstance()->getUser($user_id);
         }
         $error = 0; 
         /*-1: exist
@@ -16,17 +16,18 @@ class Widget_Manager_UserAdd extends Core_Widget{
             $user_name = $this->getRequest()->getParam("user_name");
             $user_email = $this->getRequest()->getParam("user_email");
             $user_phone = $this->getRequest()->getParam("user_phone");
+            $user_password = md5($this->getRequest()->getParam("user_password"));
             $user_fullname = $this->getRequest()->getParam("user_fullname");
-            $user_isDelete = $this->getRequest()->getParam("user_isDelete");
-            $user_isActive = $this->getRequest()->getParam("user_isActive");
+            $user_isDelete = $this->getRequest()->getParam("user_isdelete");
+            $user_isAdmin = $this->getRequest()->getParam("user_isadmin");
             
             $createat = date('Y/m/d H:i:s');
             if($user_id !=0 && $user != null){ //update
-                Core_MysqlTeacher::getInstance()->updateTeacher(array($user_name, $user_email, $user_phone, 
-                intval($user_isActive), intval($user_isDelete), $createat,  $user_address, $user_id));
+                Core_MysqlUser::getInstance()->updateUser(array($user_name, $user_email, $user_password,
+                    $createat, intval($user_isAdmin), intval($user_isDelete), $user_phone, $user_fullname, $user_id));
 
             } else{ //insert   
-                if(Core_MysqlTeacher::getInstance()->checkExist($user_name)){
+                if(Core_MysqlUser::getInstance()->checkExist($user_name)){
                     $error = -1;
                     return $this->render('user_add', array(    
                         'error' => $error,
@@ -34,14 +35,15 @@ class Widget_Manager_UserAdd extends Core_Widget{
                             'name' => $user_name,
                             'email' => $user_email,
                             'phone' => $user_phone,
-                            'address' => $user_address,
-                            'isactive' => $user_isActive,
-                            'isdelete' => $user_isDelete
+                            'password' => $user_password,
+                            'isadmin' => $user_isAdmin,
+                            'isdelete' => $user_isDelete,
+                            'full_name' => $user_fullname
                         )
                     ));
                 } else {
-                    Core_MysqlTeacher::getInstance()->insertTeacher(array($user_name, $user_email, $user_phone, 
-                    intval($user_isActive), intval($user_isDelete), $createat, $createat,  $user_address));
+                    Core_MysqlUser::getInstance()->insertUser(array($user_name, $user_password, $user_email, $user_phone, 
+                    intval($user_isAdmin), intval($user_isDelete), $createat, $createat,  $user_fullname));
                 }
             }
             $url = '/quan-ly-nguoi-dung.html';
