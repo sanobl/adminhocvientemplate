@@ -7,6 +7,11 @@
 
                 <div class="row-fluid sepH_c">
                     <div class="span12">
+                        <?php if(isset($haserror) && $haserror){ 
+                            
+                            echo '<h5 class="text-center text-error" style="text-align:center">'.$mess.'</h5>';
+                            
+                        }else {?>
                         <form class="form-horizontal">
                             <fieldset>
 
@@ -19,21 +24,38 @@
                                             <label class="control-label">Họ và tên</label>
 
                                             <div class="controls">
-                                                <label class="padding-top5">Nguyễn Khánh Bằng </label>
+                                                <label class="padding-top5">
+                                                <?php
+                                                if(isset($student_fullname) && $student_fullname!=''){
+                                                    echo $student_fullname;
+                                                }
+                                                ?> </label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Số điện thoại</label>
 
                                             <div class="controls">
-                                                <label class="padding-top5">01682682578</label>
+                                                <label class="padding-top5">
+                                                <?php
+                                                if(isset($student_phone) && $student_phone!=''){
+                                                    echo $student_phone;
+                                                }
+                                                ?>
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Email</label>
 
                                             <div class="controls">
-                                                <label class="padding-top5">bangnk@outlook.com</label>
+                                                <label class="padding-top5">
+                                                <?php
+                                                if(isset($student_email) && $student_email!=''){
+                                                    echo $student_email;
+                                                }
+                                                ?>
+                                                </label>
                                             </div>
                                         </div>
 
@@ -49,21 +71,39 @@
                                             <label class="control-label">Họ và tên</label>
 
                                             <div class="controls">
-                                                <label class="padding-top5">Nguyen Van A</label>
+                                                <label class="padding-top5">
+                                                <?php
+                                                if(isset($parent_fullname) && $parent_fullname!=''){
+                                                    echo $parent_fullname;
+                                                }
+                                                ?>
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Số điện thoại </label>
 
                                             <div class="controls">
-                                                <label class="padding-top5"></label>
+                                                <label class="padding-top5">
+                                                <?php
+                                                if(isset($parent_phone) && $parent_phone!=''){
+                                                    echo $parent_phone;
+                                                }
+                                                ?>
+                                                </label>
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Email</label>
 
                                             <div class="controls">
-                                                <label class="padding-top5"></label>
+                                                <label class="padding-top5">
+                                                <?php
+                                                if(isset($parent_email) && $parent_email!=''){
+                                                    echo $parent_email;
+                                                }
+                                                ?>
+                                                </label>
                                             </div>
                                         </div>
                                     </div>
@@ -76,22 +116,39 @@
                                 <h4 class="title-form"> Thông tin khóa học</h4>
 
                                 <div class="control-group">
-                                    <label class="control-label">Chọn khóa học</label>
+                                    <label class="control-label">Khóa học</label>
 
                                     <div class="controls">
-                                        <label class="padding-top5">Anh văn giao tiếp</label>
+                                        <label class="padding-top5">
+                                            <?php
+                                            if(isset($subjectname) && $subjectname!=''){
+                                                echo $subjectname;
+                                            }
+                                            ?>
+                                        </label>
 
                                     </div>
                                 </div>
                                 <div id="khoahocinfo">
                                     <div class="control-group"><label class="control-label">Giáo viên</label>
-                                        <div class="controls" style="padding-top:5px"> Nguyễn Khánh Bằng</div>
+                                        <div class="controls" style="padding-top:5px">
+                                            <?php
+                                            if(isset($teachername) && $teachername!=''){
+                                                echo $teachername;
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
                                     <div class="control-group"><label class="control-label">Thời gian học</label>
                                         <div class="controls" style="padding-top:5px"> Hai, Tư, Sáu (19h30-21h30)</div>
                                     </div>
                                     <div class="control-group"><label class="control-label">Số tiền/khoá(VNĐ)</label>
-                                        <div class="controls" style="padding-top:5px"> 500.000 VND</div>
+                                        <div class="controls" style="padding-top:5px"> 
+                                            <?php
+                                            if(isset($money_total) && $money_total!=''){
+                                                echo $money_total . ' VNĐ';
+                                            }
+                                            ?></div>
                                     </div>
                                     <div class="control-group"><label class="control-label">Hình thức thanh toán</label>
                                         <div class="controls" style="padding-top:5px"> Theo tháng</div>
@@ -114,7 +171,7 @@
 
                                 <div class="control-group">
                                     <div class="controls">
-                                        <button class="btn btn-info" type="button" id="btnChangeInfo">Thay đổi thông tin</button>
+                                        <a href="/them-hoc-vien_<?php echo $studentid;?>.html" class="btn btn-info" type="button" id="btnChangeInfo">Thay đổi thông tin</a>
                                         <a style="background-color: #fff !important;" data-toggle="modal" data-backdrop="static" href="#myTasks" class="label ttip_b" title="In thông tin">
                                             <button class="btn btn-info" type="button">In thông tin</button></a>
                                         <button class="btn btn-danger" type="button" id="btnExit">Thoát</button>
@@ -125,6 +182,7 @@
                                 </div>
                             </fieldset>
                         </form>
+                        <?php }?>
                     </div>
                 </div>
             </div>

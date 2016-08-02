@@ -3,23 +3,35 @@
             <div class="formSep">
                 <div class="row-fluid">
                     <h3 class="heading">Tìm kiếm</h3>
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="POST" action="">
                         <fieldset>
                             <div class="span12">
                                 <div class="row mb-10">
                                     <div class="span5">
                                         <label class="control-label">Tên học viên</label>
                                         <div class="controls">
-                                            <input type="text">
+                                            <input name="fullname" value="<?php if (isset($fullname) && $fullname != '')
+                                                            echo $fullname;?>" type="text">
                                         </div>
                                     </div>
                                     <div class="span5">
                                         <label class="control-label">Giáo viên</label>
                                         <div class="controls">
-                                            <select>
+                                            <select name="teacher">
                                                 <option>Tất cả</option>
-                                                    <option>Nguyễn Khánh Bằng</option>
-                                                    <option>Nguyễn Lê Khánh Đằng</option>
+                                                    <?php if(isset($listteacher) && count($listteacher)>0){
+                                                        
+                                                        for($i=0;$i<count($listteacher);$i++){
+                                                            $selected = '';
+                                                            if(isset($teacherid) && $teacherid != '' && $listteacher[$i]['id'] == $teacherid){
+                                                                
+                                                                $selected = 'selected';
+                                                                
+                                                            }
+                                                            
+                                                            echo '<option value="'.$listteacher[$i]['id'].'" '.$selected.'>'.$listteacher[$i]['name'].'</option>';
+                                                        }
+                                                    }?>
 
                                                 </select>
                                         </div>
@@ -32,10 +44,19 @@
                                     <div class="span5">
                                         <label class="control-label">Khoá học</label>
                                         <div class="controls">
-                                            <select>
+                                            <select name="subjects">
                                                     <option>Tất cả</option>
-                                                    <option>Anh Văn giao tiếp</option>
-                                                    <option>Anh Văn cơ bản</option>
+                                                    <?php if(isset($listsubjects) && count($listsubjects)>0){
+                                                        for($i=0;$i<count($listsubjects);$i++){
+                                                            $selected = '';
+                                                            if(isset($subjectsid) && $subjectsid != '' && $listsubjects[$i]['id'] == $subjectsid){
+                                                                
+                                                                $selected = 'selected';
+                                                                
+                                                            }
+                                                            echo '<option value="'.$listsubjects[$i]['id'].'" '.$selected.'>'.$listsubjects[$i]['title'].'</option>';
+                                                        }
+                                                    }?>
 
                                                 </select>
                                         </div>
@@ -43,7 +64,8 @@
                                     <div class="span5">
                                         <label class="control-label">Nhân viên tạo</label>
                                         <div class="controls">
-                                            <input type="text">
+                                            <input type="text" value="<?php if (isset($usercreate) && $usercreate != '')
+                                                            echo $usercreate;?>" name="usercreate">
                                         </div>
                                     </div>
 
@@ -53,10 +75,9 @@
                                         <label class="control-label">Hoàn thành học phí</label>
                                         <div class="controls">
                                             <select>
-                                                <option>All</option>
-                                                <option>Yes</option>
-                                                <option>No</option>
-
+                                                <option value="">All</option>
+                                                <option value="1">Yes</option>
+                                                <option value="2">No</option>
                                             </select>
                                         </div>
                                     </div>
@@ -64,7 +85,7 @@
 
                                     </div>
                                     <div class="span2">
-                                        <button class="btn btn-info">Tìm kiếm</button>
+                                        <button class="btn btn-info" type="submit">Tìm kiếm</button>
                                     </div>
                                 </div>
                             </div>
@@ -97,8 +118,9 @@
                                 <tbody>
                                     <?php if (isset($data) && count($data)>0){
                                         for($i = 0;$i<count($data); $i++){
+                                            $j = $i + 1;
                                                echo ' <tr>
-                                                <td>'. $data[$i]['id'] .'</td>
+                                                <td>'. $j .'</td>
                                                 <td>'. $data[$i]['title'] .'</td>
                                                 <td>'. $data[$i]['name'].'</td>
                                                 <td>'. $data[$i]['student_fullname'].'</td>
@@ -106,9 +128,8 @@
                                                 <td>
                                                     
                                                 </td>
-                                                <td><a href="chinh-sua-hoc-vien_'.$data[$i]['id'].'.html"><i class="splashy-pencil" style="padding-right:10px"></i></a>
-                                                    <a href="chi-tiet-hoc-vien_'.$data[$i]['id'].'.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>
-                                                    
+                                                <td><a href="them-hoc-vien_'.$data[$i]['id'].'.html"><i class="splashy-pencil" style="padding-right:10px"></i></a>
+                                                    <a href="chi-tiet-hoc-vien_'.$data[$i]['id'].'.html">  <i class="splashy-printer" style="padding-right:7px"></i></a>                                                   
                                                 </td>
                                             </tr>';
                                         }}?>

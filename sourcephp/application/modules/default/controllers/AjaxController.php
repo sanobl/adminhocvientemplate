@@ -147,9 +147,8 @@ class AjaxController extends Zend_Controller_Action {
     public function getinfocourseAction() {
         
         $courseid = intval($this->_request->getParam('id'));
-        $datacourse[] = $courseid;
         $result = null;
-        $result = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($datacourse);
+        $result = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($courseid);
         $html = '';
         $time = '';
         $datatecher = array();

@@ -58,8 +58,47 @@ class Core_MySQLManagerStudent
         return $result;
     }
     
+    public function getstudentbyid($id) {
+        $result = $this->_db->rawQuery('
+            SELECT
+                students.id,
+                student_fullname,
+                student_phone,
+                student_email,
+                parent_fullname,
+                parent_phone,
+                parent_email,
+                is_old_student,
+                students.subject_id,
+                students.teacher_id,
+                students.money_total,
+                students.money_detail,
+                students.payment_type,
+                students.created_at,
+                students.updated_at,
+                students.created_by,
+                students.updated_by,
+                subjects.title,
+                teachers.name
+              FROM
+                students
+              INNER JOIN
+                teachers ON students.teacher_id = teachers.id
+              INNER JOIN
+                subjects ON students.subject_id = subjects.id
+              WHERE
+                students.id = ?',
+                array($id));       
+        return $result;
+    }
+    
+    public function getlistteacher() {
+        $result = $this->_db->rawQuery('SELECT `id`, `name` FROM `teachers` ');       
+        return $result;
+    }
+    
     public function getsubjectsbyid($data) {
-        $listsubjects = $this->_db->rawQuery('SELECT id, title,teacher_id,money_total,payment_type,monday,tuesday,wednesday,thursday,friday,saturday,sunday,fromdate,todate,fromhours,tohours from subjects where id = ?',$data);        
+        $listsubjects = $this->_db->rawQuery('SELECT id, title,teacher_id,money_total,payment_type,monday,tuesday,wednesday,thursday,friday,saturday,sunday,fromdate,todate,fromhours,tohours from subjects where id = ?',array($data));        
         return $listsubjects;
     }
     
@@ -69,14 +108,108 @@ class Core_MySQLManagerStudent
         return $listsubjects;
     }
     
-    public function insertstudent($data) {
-        $result = $this->_db->rawQuery('INSERT INTO `students`(`student_fullname`, `student_phone`, `student_email`, `parent_fullname`, `parent_phone`, `parent_email`,`subject_id`,`teacher_id`,`payment_type`,`money_total`) '
-        . 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $data);     
+    public function insertstudent($student_fullname,$student_phone, $student_email,
+            $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby) {
+        $result = $this->_db->rawQuery('
+                INSERT INTO `students` 
+                    (`student_fullname`, 
+                    `student_phone`, 
+                    `student_email`, 
+                    `parent_fullname`, 
+                    `parent_phone`, 
+                    `parent_email`,
+                    `subject_id`,
+                    `teacher_id`,
+                    `payment_type`,
+                    `money_total`,
+                    `created_at`,
+                    `created_by`
+                    ) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)', array(
+                    $student_fullname,
+                    $student_phone, 
+                    $student_email,
+                    $parent_fullname,
+                    $parent_phone,
+                    $parent_email,
+                    $subject_id,
+                    $teacher_id,
+                    $payment_type,
+                    $money_total,
+                    $created_at,
+                    $createdby
+                ));     
 //        $id = $this->_db->insert ('students', $data);
 //        if($id)
 //            echo 'user was created. Id=' . $id;
 //        else 
 //            echo 'die';
     }
+    
+     public function updatestudent($student_fullname,$student_phone, $student_email,
+            $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby,$id) {
+        $result = $this->_db->rawQuery('
+                UPDATE
+                    `students`
+                SET
+                    `student_fullname` = ?,
+                    `student_phone` = ?,
+                    `student_email` = ?,
+                    `parent_fullname` = ?,
+                    `parent_phone` = ?,
+                    `parent_email` = ?,
+                    `subject_id` = ?,
+                    `teacher_id` = ?,
+                    `payment_type` = ?,
+                    `money_total` = ?, 
+                    `updated_at` = ?,
+                    `updated_by` = ?
+                WHERE
+                    `id` = ?
+                  ', array(
+                    $student_fullname,
+                    $student_phone, 
+                    $student_email,
+                    $parent_fullname,
+                    $parent_phone,
+                    $parent_email,
+                    $subject_id,
+                    $teacher_id,
+                    $payment_type,
+                    $money_total,
+                    $created_at,
+                    $createdby,
+                    $id
+                ));     
+//        $id = $this->_db->insert ('students', $data);
+//        if($id)
+//            echo 'user was created. Id=' . $id;
+//        else 
+//            echo 'die';
+    }
+    
+    public function searchstudent($fullname,$teacherid,$subjectsid,$usercreate) {
+        $result = $this->_db->rawQuery('
+            SELECT 
+                students.id,
+                subjects.title, 
+                student_fullname, 
+                teachers.name,
+                students.created_at 
+            from students 
+            INNER JOIN teachers ON students.teacher_id = teachers.id 
+            INNER JOIN subjects ON students.subject_id = subjects.id
+            Where 
+                student_fullname like  \'%'.$fullname.'%\'
+                OR
+                students.teacher_id  = \''.intval($teacherid).'\'
+                OR
+                students.subject_id  = \''.intval($subjectsid).'\'
+                
+                ');
+        return $result;
+    }
+    
+
 
 }

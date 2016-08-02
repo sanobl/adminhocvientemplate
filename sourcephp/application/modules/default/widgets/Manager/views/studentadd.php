@@ -19,21 +19,30 @@
                                             <label class="control-label">Họ và tên</label>
 
                                             <div class="controls">
-                                                <input value="" name="student_fullname" type="text" class="span10">
+                                                <input value="<?php
+                                                if(isset($student_fullname) && $student_fullname != '')
+                                                    echo $student_fullname;
+                                                ?>" name="student_fullname" type="text" class="span10">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label  class="control-label">Số điện thoại</label>
 
                                             <div class="controls">
-                                                <input name="student_phone" value="" type="text" class="span10">
+                                                <input name="student_phone" value="<?php
+                                                if(isset($student_phone) && $student_phone != '')
+                                                    echo $student_phone;
+                                                ?>" type="text" class="span10">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Email</label>
 
                                             <div class="controls">
-                                                <input value="" name="student_email" type="text" class="span10">
+                                                <input value="<?php
+                                                if(isset($student_email) && $student_email != '')
+                                                    echo $student_email;
+                                                ?>" name="student_email" type="text" class="span10">
                                             </div>
                                         </div>
 
@@ -49,21 +58,30 @@
                                             <label class="control-label">Họ và tên</label>
 
                                             <div class="controls">
-                                                <input name="parent_fullname" type="text" class="span10">
+                                                <input value="<?php
+                                                if(isset($parent_fullname) && $parent_fullname != '')
+                                                    echo $parent_fullname;
+                                                ?>" name="parent_fullname" type="text" class="span10">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Số điện thoại </label>
 
                                             <div class="controls">
-                                                <input name="parent_phone" type="text" class="span10">
+                                                <input value="<?php
+                                                if(isset($parent_phone) && $parent_phone != '')
+                                                    echo $parent_phone;
+                                                ?>" name="parent_phone" type="text" class="span10">
                                             </div>
                                         </div>
                                         <div class="control-group">
                                             <label class="control-label">Email</label>
 
                                             <div class="controls">
-                                                <input name="parent_email" type="text" class="span10">
+                                                <input value="<?php
+                                                if(isset($parent_email) && $parent_email != '')
+                                                    echo $parent_email;
+                                                ?>" name="parent_email" type="text" class="span10">
                                             </div>
                                         </div>
                                     </div>
@@ -83,7 +101,13 @@
                                             <option>Vui lòng </option>
                                             <?php if(isset($listsubjects) && is_array($listsubjects) ) {
                                                 for($i=0;$i < count($listsubjects); $i++){
-                                                    echo '<option value='.$listsubjects[$i]["id"].'>'.$listsubjects[$i]['title'].'</option>';
+                                                    $selected = '';
+                                                    if(isset($subject_id) && $subject_id != ''){
+                                                        if($listsubjects[$i]["id"] == $subject_id){
+                                                            $selected = 'selected';
+                                                        }
+                                                    }
+                                                    echo '<option value="'.$listsubjects[$i]["id"].'" '.$selected.'>'.$listsubjects[$i]['title'].'</option>';
                                                 }
                                             }?>
                                         </select>
@@ -156,6 +180,23 @@
             console.log(select);
             bindKhoaHoc(select);
         });
+        if($("#khoahoc option").is(':selected')){
+            var select = $("#khoahoc option:selected").val();
+            if(select != undefined && select != ''){
+                bindKhoaHoc(select);
+                <?php if(isset($payment_type) && $payment_type != ''){?>
+                setTimeout(function(){
+                    $('input[name="payment_type"]').each(function(){
+                        if($(this).val() == "<?php echo $payment_type; ?>"){
+                            $(this).prop('checked',true);
+                        }
+                    });
+                },200);
+                    
+                <?php } ?>
+                
+            }
+        }
         $("input[name=hinhthucthanhtoan]:radio").change(function () {
             console.log(11);
         });
