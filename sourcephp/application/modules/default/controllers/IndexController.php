@@ -10,7 +10,7 @@ class IndexController extends Zend_Controller_Action {
             if(!empty($page->_page['title']))
                 $this->view->headTitle()->prepend($page->_page['title']);
             else
-                $this->view->headTitle()->prepend('Hỗ trợ khách hàng');
+                $this->view->headTitle()->prepend('Nhà thiếu nhi quận 4');
             foreach ($page->_page['meta'] as $key => $des) {
                 if (!empty($des)){
                     $this->view->headMeta()->prependName($key, $des);
