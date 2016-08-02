@@ -7,37 +7,43 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="robots" content="INDEX,FOLLOW"/>
         <meta http-equiv="Cache-control" content="public, max-age=86400">
-        <meta property="og:image" content="http://img.zing.vn/vng/skin/vng-2014/image/vng-logo-share-v2.jpg"/>
-        <link rel="shortcut icon" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->images; ?>/ico_cs_vng.ico" />
-        <?php echo $this->headTitle(); ?>
-        <?php echo $this->headMeta(); ?>
-        <?php echo $this->headLink(); ?>
-        <?php $token = Core_TokenKey::getInstance()->create_token();?>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/bootstrap.css" rel="stylesheet"/>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/bootstrap-theme.css" rel="stylesheet"/>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/style.css" rel="stylesheet"/>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/font-awesome.css" rel="stylesheet"/>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->source; ?>/jquery.fancybox.css" rel="stylesheet"/>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/datepicker.css" rel="stylesheet"/>
-        <link href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/datepicker3.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/dataTables.bootstrap.css"/>
-        <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/dataTables.responsive.css"/>      
-        <!--[if lt IE 9]>
-            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-            
-        <![endif]-->
-        <script src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/jquery-1.11.2.js"></script>
-        <script src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/bootstrap.min.js"></script>        
-        <script type="text/javascript" src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/jquery.mousewheel-3.0.6.pack.js"></script>
-        <script type="text/javascript" src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->source; ?>/jquery.fancybox.pack.js"></script>
-        <script src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/bootstrap-datepicker.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/dataTables.responsive.min.js"></script>
-        <script type="text/javascript" language="javascript" src="<?php echo Core_Global::getApplicationIni()->app->static->frontend->js; ?>/dataTables.bootstrap.js"></script>
-        <script type="text/javascript">
-            var token = "<?php echo ($token != '')?  $token: ''; ?>";
-        </script>
+            <meta property="og:image" content="http://img.zing.vn/vng/skin/vng-2014/image/vng-logo-share-v2.jpg"/>
+            <link rel="shortcut icon" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->images; ?>/ico_cs_vng.ico" />
+            <?php echo $this->headTitle(); ?>
+            <?php echo $this->headMeta(); ?>
+            <?php echo $this->headLink(); ?>
+            <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans" />
+            <?php $token = Core_TokenKey::getInstance()->create_token(); ?>
+
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->bootstrap; ?>/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->bootstrap; ?>/css/bootstrap-responsive.min.css" />
+            <!-- gebo blue theme-->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/blue.css" id="link_theme" />
+            <!-- breadcrumbs-->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/jBreadcrumbs/css/BreadCrumb.css" />
+            <!-- tooltips-->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/qtip2/jquery.qtip.min.css" />
+            <!-- notifications -->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/sticky/sticky.css" />
+            <!-- code prettify -->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/google-code-prettify/prettify.css" />
+            <!-- notifications -->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/sticky/sticky.css" />
+            <!-- splashy icons -->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->img; ?>/splashy/splashy.css" />
+            <!-- colorbox -->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->lib; ?>/colorbox/colorbox.css" />
+            <!-- main styles -->
+            <link rel="stylesheet" href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->css; ?>/style.css" />
+
+            <!--[if lt IE 9]>
+                <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+                <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+                
+            <![endif]-->
+            <script type="text/javascript">
+                var token = "<?php echo ($token != '') ? $token : ''; ?>";
+            </script>
 
     </head>
     <body>
