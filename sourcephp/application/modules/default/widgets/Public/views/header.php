@@ -23,22 +23,22 @@
                     <div class="nav-collapse">
                         <ul class="nav">
                             <li class="dropdown">
-                                <a class="dropdown-toggle" href="quanlyhocvien.html"> Quản lý học viên </a>
+                                <a class="dropdown-toggle" href="/quan-ly-hoc-vien.html"> Quản lý học viên </a>
                             </li>
                             <li class="dropdown">
                                 <a data-toggle="dropdown" class="dropdown-toggle" href="#"> Quản trị <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li>
-                                        <a href="quanlynguoidung.html">Người dùng</a>
+                                        <a href="/quan-ly-nguoi-dung.html">Người dùng</a>
                                     </li>
                                     <li>
-                                        <a href="quanlygiaovien.html">Giáo viên</a>
+                                        <a href="/quan-ly-giao-vien.html">Giáo viên</a>
                                     </li>
                                     <li>
-                                        <a href="quanlykhoahoc.html">Khoá học</a>
+                                        <a href="/quan-ly-khoa-hoc.html">Khoá học</a>
                                     </li>
                                     <li>
-                                        <a href="thongke.html">Thống kê</a>
+                                        <a href="/thong-ke.html">Thống kê</a>
                                     </li>
                             </li>
                         </ul>
