@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="23937690-b54c-4ca7-aff4-3b582ffa5a0a" name="httdocs" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="/Applications/XAMPP/xamppfiles/htdocs/ntnq4" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
