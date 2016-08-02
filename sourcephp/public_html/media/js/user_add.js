@@ -1,21 +1,21 @@
 $(document).ready(function() {
-    $('#btnAddTeacher').click(function () {
+    $('#btnAddUser').click(function () {
         $('#myform').submit();
 //        window.location.href = "/quan-ly-giao-vien.html";
 
     });
-    $('#btnTeacherExit').click(function () {
-        window.location.href = "/quan-ly-giao-vien.html";
+    $('#btnExitUser').click(function () {
+        window.location.href = "/quan-ly-nguoi-dung.html";
 
     });
-    $('#btnSearchTeacher').click(function(){
-        $('#searchTeacherForm').submit();
-//        if($('#teacher_name_search').val() != ''){
+    $('#btnSearchUser').click(function(){
+        $('#searchUserForm').submit();
+//        if($('#user_name_search').val() != ''){
 //            
 //        }
     });
     $(".splashy-remove").on("click", function() {
-        $('#teacheredt_id').val($(this).attr('rel'));
-        $('#editTeacherForm').submit();
+        $('#useredt_id').val($(this).attr('rel'));
+        $('#editUserForm').submit();
     });
 });
