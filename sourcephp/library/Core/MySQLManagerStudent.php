@@ -54,9 +54,8 @@ class Core_MySQLManagerStudent
         return $listsubjects;
     }
     public function getliststudent() {
-        $listsubjects = $this->_db->rawQuery('SELECT id, title from students join');
-        
-        return $listsubjects;
+        $result = $this->_db->rawQuery('SELECT students.id,subjects.title, student_fullname, teachers.name,students.created_at from students INNER JOIN teachers ON students.teacher_id = teachers.id INNER JOIN subjects ON students.subject_id = subjects.id');       
+        return $result;
     }
     
     public function getsubjectsbyid($data) {

@@ -36,11 +36,10 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                         
                     }
                 }
-                //var_dump($datapost);die;
-                $result = Core_MySQLManagerStudent::getInstance()->insertstudent($datapost);
+                $result = Core_MySQLManagerStudent::getInstance()->insertstudent($datapost);                
+                $url = '/quan-ly-hoc-vien.html';
+                $this->forward($url);
                 
-                
-                var_dump($result);
             }
         } else {
             
