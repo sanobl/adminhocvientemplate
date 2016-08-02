@@ -8,7 +8,11 @@
                     <div class="span12">
                         <form class="form-horizontal" id="myform" action="" method="post">
                             <fieldset>
-
+                                <?php if(isset($error) && $error != 0){ ?>
+                                    <div class="control-group">
+                                        <span style="color: red;"><?php if($error == -1){echo "Nguoi dung đã tồn tại";}?></span>
+                                    </div>
+                                <?php }?>
                                 <div class="control-group">
                                     <label class="control-label">Tên đăng nhập</label>
                                     <div class="controls">
@@ -20,9 +24,7 @@
                                 <div class="control-group">
                                     <label class="control-label">Mật khẩu</label>
                                     <div class="controls">
-                                        <input type="password" id="user_password" name="user_password"
-                                            value="<?php if(isset($user) && $user != null) 
-                                                echo $user["password"];?>">   
+                                        <input type="password" id="user_password" name="user_password"/>   
                                     </div>
                                 </div>
                                 <div class="control-group">
