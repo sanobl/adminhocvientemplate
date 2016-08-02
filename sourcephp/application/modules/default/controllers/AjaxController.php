@@ -144,6 +144,88 @@ class AjaxController extends Zend_Controller_Action {
     }
 
     
+    public function getinfocourseAction() {
+        
+        $courseid = intval($this->_request->getParam('id'));
+        $datacourse[] = $courseid;
+        $result = null;
+        $result = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($datacourse);
+        $html = '';
+        $time = '';
+        $datatecher = array();
+        $teacherresult = null;
+        $teachername =  '';
+        //var_dump($result);die;
+        if(is_array($result) && count($result) > 0){
+            $teacherid = isset($result[0]['teacher_id']) ? $result[0]['teacher_id'] : 0;
+            if($teacherid > 0){
+                $datatecher[] = $teacherid;                
+                $teacherresult = Core_MySQLManagerStudent::getInstance()->getteacherbyid($datatecher);
+                //var_dump($teacherresult);die;
+                if(is_array($teacherresult) && count($teacherresult) > 0){
+                    $teachername = $teacherresult[0]['name'];
+                }
+            }
+            if(isset($result[0]["monday"]) && $result[0]["monday"]!= null){
+                $time .= 'Hai, ';
+            }
+            if(isset($result[0]["tuesday"]) && $result[0]["tuesday"]!= null){
+                $time .= 'Ba, ';
+            }
+            if(isset($result[0]["wednesday"]) && $result[0]["wednesday"]!= null){
+                $time .= 'Tư, ';
+            }
+            if(isset($result[0]["thursday"]) && $result[0]["thursday"]!= null){
+                $time .= 'Năm,';
+            }
+            if(isset($result[0]["friday"]) && $result[0]["friday"]!= null){
+                $time .= 'Sáu,';
+            }
+            if(isset($result[0]["saturday"]) && $result[0]["saturday"]!= null){
+                $time .= 'Bảy,';
+            }
+            if(isset($result[0]["sunday"]) && $result[0]["sunday"]!= null){
+                $time .= 'Ba,';
+            }
+            $totalpayment = isset($result[0]['money_total']) ? $result[0]['money_total'] : '';
+            if($totalpayment != '' || $time != '' || $teachername != ''){
+                $html = '<div id="khoahocinfo">
+                    <div class="control-group"> 
+                    <label class="control-label">Giáo viên</label>
+                    <div class="controls" style="padding-top:5px"> '.$teachername.'</div> 
+                    </div>
+            <div class="control-group"> 
+                    <label class="control-label">Thời gian học</label>
+                    <div class="controls" style="padding-top:5px"> '.$time.'</div>  
+                    </div>
+            <div class="control-group"> 
+                    <label class="control-label">Số tiền/khoá(VNĐ)</label>
+             <div class="controls" style="padding-top:5px"> '. $totalpayment .' VNĐ</div> 
+                    </div>
+            <div class="control-group"> 
+                    <label class="control-label">Hình thức thanh toán</label> 
+                    <div class="controls"> 
+                    <div class="span12">
+                    <label class="checkbox inline"> 
+                    <input type="radio" name="payment_type" value="1"> Đóng 1 lần </label>
+                    <label class="checkbox inline">    
+                    <input type="radio" name="payment_type" value="2">  Theo tháng  </label>
+                    <label class="checkbox inline"> 
+                    <input type="radio" name="payment_type" value="3"> Theo đợt </label>  
+                    </div>  
+                    </div>  
+                    </div>
+                    </div>';
+            }else {
+                $html = '<div class="control-group">Chưa có thông tin khóa học</div>';
+            }
+            
+            echo $html;
+            die;
+        }
+        
+    }
+    
 }
 
 ?>
