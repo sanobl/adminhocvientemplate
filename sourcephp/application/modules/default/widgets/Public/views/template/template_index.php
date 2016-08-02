@@ -4,7 +4,7 @@
 // }
 $this->widget('Public_Header');
 
-$this->widget('Home_Maincontent');
+$this->widget('Manager_Teacher');
 
 $this->widget('Public_Footer');
 // $this->widget('Home_FooterJs');
