@@ -46,47 +46,52 @@ class Core_MysqlUser
         return $user!=null;
     }
     
-    public function insertTeacher ($user) {
+    public function insertUser ($user) {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
-        $result = $this->_db->rawQuery('INSERT INTO `users`(`name`, `password`, `email`, `phone`, `isactive`, `isdelete`, `created_at`, `updated_at`, `full_name`) '
+        $result = $this->_db->rawQuery('INSERT INTO `users`(`name`, `password`, `email`, `phone`, `isadmin`, `isdelete`, `created_at`, `updated_at`, `full_name`) '
                 . 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', $user);
         
         return $result!=null;
     }
-    public function updateTeacher ($user) {
+    public function updateUser ($user) {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
         $result = $this->_db->rawQuery('UPDATE `users` SET `name`=?,`email`=?,'
-                . '`password`=?,`remember_token`=?, `updated_at`=?,'
+                . '`password`=?, `updated_at`=?,'
+                . '`isadmin` =?, `isdelete`=?,'
                 . '`phone`=?,`full_name`=? WHERE `id` = ?', $user);
         //var_dump($user);die;
         return $result!=null;
     }
-    public function getTeacher ($id) {
+    public function getUser ($id) {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
-        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name` FROM `users` WHERE `id` = ?', Array ($id));
+        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name`, `isdelete`, `isadmin` FROM `users` WHERE `id` = ?', Array ($id));
         
         return $user!=null?$user:null;
     }
-    public function getTeachers () {
+    public function getUsers () {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
-        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name` FROM `users`');
+        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name`, `isdelete`, `isadmin` FROM `users`');
         
         return $user;
     }
-    public function getTeachersSearch ($name, $fullName) {
+    public function getUserSearch ($name, $fullName) {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
-        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name` FROM `users` WHERE `name` like \'%'.$name.'%\' '
+        if($name != '' && $fullName != '')
+        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name`, `isdelete`, `isadmin` FROM `users` WHERE `name` like \'%'.$name.'%\' and '
                 . '`full_name` like \'%'.$fullName.'%\'');
 //        $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `phone`, `isactive`, `isdelete`, `address` FROM `users` WHERE `name` like \'%?%\'', array($name));
-        
+        else if($fullName != '')
+            $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name`, `isdelete`, `isadmin` FROM `users` WHERE `full_name` like \'%'.$fullName.'%\'');
+        else if($name != '')
+            $user = $this->_db->rawQuery('SELECT `id`, `name`, `email`, `password`, `remember_token`, `phone`, `full_name`, `isdelete`, `isadmin` FROM `users` WHERE `name` like \'%'.$name.'%\'');
         return $user;
     }
-    public function deleteTeachers ($id) {
+    public function deleteUser ($id) {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
         $user = $this->_db->rawQuery('UPDATE `users` SET `isdelete`=1 WHERE `id` = ?', array($id));
