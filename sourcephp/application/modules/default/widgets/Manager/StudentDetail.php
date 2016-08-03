@@ -4,6 +4,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
     public function run(){
         $isLogin = true;
         $studentid = intval($this->getRequest()->getParam("index1"));
+        $isprint = intval($this->getRequest()->getParam("index2"));
         $resultsubject = '';
         $studentdetail = '';
         $student_fullname = '';
@@ -20,6 +21,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
         $money_total = '';
         $time = '';
         $haserror = false;
+        $mess = '';
         if($isLogin){
             if($studentid != 0){
                 $studentdetail = Core_MySQLManagerStudent::getInstance()->getstudentbyid($studentid);
@@ -60,6 +62,9 @@ class Widget_Manager_StudentDetail extends Core_Widget{
                         if(isset($resultsubject[0]["sunday"]) && $resultsubject[0]["sunday"]!= null){
                             $time .= 'Chủ nhật';
                         }
+                        if(isset($result[0]["fromhours"]) && isset($result[0]["tohours"])){
+                            $time .= '('.$result[0]["fromhours"] .'-'. $result[0]["tohours"].')';
+                        }
                     }
             }else {
                 $haserror = true;
@@ -87,7 +92,8 @@ class Widget_Manager_StudentDetail extends Core_Widget{
             'subjectname'=>$subjectname,
             'money_total'=>$money_total,
             'studentid'=>$studentid,
-            'time' => $time
+            'time' => $time,
+            'isprint'=> $isprint
         ));
         
          

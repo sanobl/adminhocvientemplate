@@ -48,7 +48,7 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                     'payment_type'=>$payment_type
                 ));
             } else {
-                //var_dump($_POST);die;
+                //echo json_encode($_POST);die;
                 $datapost = array();
                 $teacher_id = 0;
                 $money_total = 0;
@@ -76,12 +76,22 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                                                                                 $subject_id,$teacher_id,$payment_type,
                                                                                 $money_total,$created_at,$createdby,$studentid);  
                 }else {
-                    $result = Core_MySQLManagerStudent::getInstance()->insertstudent($student_fullname,$student_phone, $student_email,
+                    $result = Core_MySQLManagerStudent::getInstance()->insertstudent2($student_fullname,$student_phone, $student_email,
                                                                                 $parent_fullname,$parent_phone,$parent_email,
                                                                                 $subject_id,$teacher_id,$payment_type,
                                                                                 $money_total,$created_at,$createdby);  
+                
+                    if(isset($_POST['save_print']) && $_POST['save_print'] == 1){
+                        if($result != ''){
+                            $url = '/chi-tiet-hoc-vien_'.(intval($result)).'.html';
+                            $this->forward($url);
+                        }else {
+                            
+                        }
+                    }
+                    
                 }
-                              
+                             
                 $url = '/quan-ly-hoc-vien.html';
                 $this->forward($url);
                 

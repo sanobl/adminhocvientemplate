@@ -148,6 +148,7 @@
                                         <button class="btn btn-info" type="submit">Lưu thông tin</button>
                                         <button class="btn btn-info" type="button" id="btnPrintInfo">Lưu & In thông tin</button>
                                         <button class="btn btn-danger">Thoát</button>
+                                        <input type="hidden" name="save_print" value="">
                                     </div>
                                 </div>
                             </fieldset>
@@ -206,8 +207,11 @@
             bindHinhThucThanhToan(this.value);
         });
         $("#btnPrintInfo").click(function(){
-            window.location.href = "quanlyhocvien-view.html";
+            //window.location.href = "quanlyhocvien-view.html";
+            $('input[name="save_print"]').val(1);
+            $('form').submit();
         });
+        
     });
 
     function bindKhoaHoc(select) {
