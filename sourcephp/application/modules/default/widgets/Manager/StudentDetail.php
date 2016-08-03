@@ -19,6 +19,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
         $teachername = '';
         $subjectname = '';
         $money_total = '';
+        $money_convert = '';
         $time = '';
         $haserror = false;
         $mess = '';
@@ -39,6 +40,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
                     $teachername = $studentdetail['name'];
                     $subjectname = $studentdetail['title'];
                     $money_total = $studentdetail['money_total'];
+                    $money_convert = Core_Utilities::convert_number_to_words($money_total);
                     $resultsubject = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($subject_id);
                     if(is_array($resultsubject) && count($resultsubject)>0){
                         if(isset($resultsubject[0]["monday"]) && $resultsubject[0]["monday"]!= null){
@@ -93,7 +95,8 @@ class Widget_Manager_StudentDetail extends Core_Widget{
             'money_total'=>$money_total,
             'studentid'=>$studentid,
             'time' => $time,
-            'isprint'=> $isprint
+            'isprint'=> $isprint,
+            'money_convert'=>$money_convert
         ));
         
          
