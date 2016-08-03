@@ -197,8 +197,13 @@
                 
             }
         }
+        
         $("input[name=hinhthucthanhtoan]:radio").change(function () {
             console.log(11);
+        });
+        $(document).on('change','input[name="payment_type"]',function(){
+            console.log(this.value);
+            bindHinhThucThanhToan(this.value);
         });
         $("#btnPrintInfo").click(function(){
             window.location.href = "quanlyhocvien-view.html";
@@ -217,10 +222,11 @@
 //        html += '<label class="checkbox inline"> <input type="radio" name="payment_type" value="3"> Theo đợt </label>  </div>  </div>  </div>';
 
         $("#khoahocinfo").html('');
-        $("input[name=hinhthucthanhtoan]:radio").change(function () {
+        $("input[name=payment_type]:radio").change(function () {
             console.log(this.value);
             bindHinhThucThanhToan(this.value);
         });
+        
         var dataadd = {
             id:select
         };
@@ -246,29 +252,33 @@
 
     function bindHinhThucThanhToan(value) {
         var htmlHTTT = '';
-        console.log('value:' +value);
-        switch (value) {
-            case '1': //
-                break;
-            case '2':
-                    console.log('nguyen khanh ');
-                htmlHTTT += '<div class="control-group"> <label class="control-label"> </label> <div class="controls">';
-                htmlHTTT += ' <div class="span12">';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T1/2016Đ - 100,000 VNĐ</label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox">  T2/2016 - 100,000 VNĐ</label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T3/2016 - 100,000 VNĐ </label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T4/2016 - 100,000 VNĐ</label>';
-                htmlHTTT += '<label class="checkbox inline">  <input type="checkbox"> T5/2016 - 100,000 VNĐ </label>';
+        $("#hinhthucthanhtoan").html('');
+        var id = $("#khoahoc option:selected").val();
+        if(value == '2' || value == '3'){
+            var dataadd = {
+                id:id,
+                type:value
+            };
+            $.ajax({
+                url: '/Ajax/paymenttypedetail',
+                type: 'Post',
+                cache: false,
+                async: true,
+                data: dataadd,
+                dataType: "html",
+                success: function (result) {
+                    if (result != "") {
+                        //dataresult = jQuery.parseJSON(result);
+                        $("#hinhthucthanhtoan").html(result);
+                    }
+                },
+                complete: function () {
 
-                htmlHTTT += '</div>';
-                htmlHTTT += '</div>';
-
-                break;
-            default:
-                console.log('nguyen khanh ');
-                break;
+                }
+        });
         }
-        console.log(htmlHTTT);
-        $("#hinhthucthanhtoan").html(htmlHTTT);
+        
+        
+        //$("#hinhthucthanhtoan").html(htmlHTTT);
     }
 </script>

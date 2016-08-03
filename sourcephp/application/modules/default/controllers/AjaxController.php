@@ -186,6 +186,9 @@ class AjaxController extends Zend_Controller_Action {
             if(isset($result[0]["sunday"]) && $result[0]["sunday"]!= null){
                 $time .= 'Chủ nhật';
             }
+            if(isset($result[0]["fromhours"]) && isset($result[0]["tohours"])){
+                $time .= '('.$result[0]["fromhours"] .'-'. $result[0]["tohours"].')';
+            }
             $totalpayment = isset($result[0]['money_total']) ? $result[0]['money_total'] : '';
             if($totalpayment != '' || $time != '' || $teachername != ''){
                 $html = '<div id="khoahocinfo">
@@ -224,6 +227,70 @@ class AjaxController extends Zend_Controller_Action {
         }
         
     }
+    
+    public function paymenttypedetailAction(){
+        $courseid = intval($this->_request->getParam('id'));
+        $paymenttype = intval($this->_request->getParam('type'));
+        $formdate = '';
+        $todate = '';
+        $money_total = '';
+        $timedate = '';
+        $result = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($courseid);
+        $html = '';
+        if(is_array($result) && count($result) > 0){
+            $money_total = ($result[0]["money_total"] != '')? $result[0]["money_total"] : 0;            
+            switch ($paymenttype) {                
+                case '2':                    
+                    if(isset($result[0]["fromdate"]) && $result[0]["fromdate"]!= null){
+                        $formdate = $result[0]["fromdate"];
+                    }                    
+                    if(isset($result[0]["todate"]) && $result[0]["todate"]!= null){
+                        $todate = $result[0]["todate"];
+                    }
+                    
+                    if($formdate != '' && $todate != ''){
+                        $ts1 = strtotime($formdate);
+                        $ts2 = strtotime($todate);
+                        
+                        $year1 = date('Y', $ts1);
+                        $year2 = date('Y', $ts2);
+
+                        $month1 = date('m', $ts1);
+                        $month2 = date('m', $ts2);
+                        $diff = (($year2 - $year1) * 12) + ($month2 - $month1);
+                        
+                        $html = '<div class="control-group"> <label class="control-label"> </label> <div class="controls"><div class="span12">';
+                        
+                        if($diff > 0){
+                                $moneyonmonth = $money_total / ($diff+1);
+                                $months = 0;
+                                $html .= '<label class="checkbox inline">  <input type="checkbox"> T'.$month1.'/'.$year1.' - '. $moneyonmonth .' VNĐ</label>';
+                                while ($months < $diff) {
+                                    $months++;
+                                    $datetmp = strtotime('+ '.$months.' MONTH', $ts1);
+                                    $monthtmp = date('m', $datetmp);
+                                    $yeartmp = date('Y', $datetmp);
+                                    $html .= '<label class="checkbox inline">  <input type="checkbox"> T'.$monthtmp.'/'.$yeartmp.' - '. $moneyonmonth .' VNĐ</label>';
+                                }
+                        }else {
+                            $moneyonmonth = $money_total;
+                            $html .= '<label class="checkbox inline">  <input type="checkbox"> T'.$month1.'/'.$year1.' - '. $moneyonmonth .' VNĐ</label>';
+                        }
+                        $html .= '</div></div>';
+                        
+                    }                    
+                    break;
+                case '3':
+                    
+                    break;
+            
+            }
+        }
+        echo $html;die;
+        
+    }
+        
+    
     
 }
 
