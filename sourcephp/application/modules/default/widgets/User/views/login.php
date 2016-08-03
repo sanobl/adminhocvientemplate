@@ -1,26 +1,25 @@
 <div class="login_page">
     <div class="login_box">
 
-        <form action="/quan-ly-hoc-vien.html" method="post" id="login_form">
+        <form action="/dang-nhap.html" method="post" id="login_form">
             <div class="top_b"> Nhà thiếu nhi quận 4</div>
             <!--<div class="alert alert-info alert-login">-->
             <!--Clear username and password field to see validation.-->
             <!--</div>-->
             <div class="cnt_b">
+                <p style="color: #ff0712"><?php if (isset($error)) echo $error;?></p>
                 <div class="formRow">
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-user"></i></span><input type="text" id="username"
                                                                                     name="username"
-                                                                                    placeholder="Username"
-                                                                                    value="bangnk"/>
+                                                                                    placeholder="Tên đăng nhập"/>
                     </div>
                 </div>
                 <div class="formRow">
                     <div class="input-prepend">
                         <span class="add-on"><i class="icon-lock"></i></span><input type="password" id="password"
                                                                                     name="password"
-                                                                                    placeholder="Password"
-                                                                                    value="password"/>
+                                                                                    placeholder="Mật khẩu"/>
                     </div>
                 </div>
                 <!--<div class="formRow clearfix">-->

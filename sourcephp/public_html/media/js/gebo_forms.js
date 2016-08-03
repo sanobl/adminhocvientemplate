@@ -61,11 +61,11 @@ gebo_datepicker = {
         // $('#dp1').datepicker();
         // $('#dp2').datepicker();
         $('#dp_from_start').datepicker({
-            format: "mm/dd/yyyy"
+            format: "dd/mm/yyyy"
         }).on('changeDate', function(ev) {
             var dateText = $(this).data('date');
 
-            var endDateTextBox = $('#dp_to_start input');
+            var endDateTextBox = $('#dp_from_start input');
             if (endDateTextBox.val() != '') {
                 var testStartDate = new Date(dateText);
                 var testEndDate = new Date(endDateTextBox.val());
@@ -79,11 +79,11 @@ gebo_datepicker = {
             $('#dp_from_start').datepicker('hide');
         });
         $('#dp_to_start').datepicker({
-            format: "mm/dd/yyyy"
+            format: "dd/mm/yyyy"
         }).on('changeDate', function(ev) {
             var dateText = $(this).data('date');
 
-            var endDateTextBox = $('#dp_from_start input');
+            var endDateTextBox = $('#dp_to_start input');
             if (endDateTextBox.val() != '') {
                 var testStartDate = new Date(dateText);
                 var testEndDate = new Date(endDateTextBox.val());
@@ -116,7 +116,7 @@ gebo_datepicker = {
             $('#dp_start').datepicker('hide');
         });
         $('#dp_end').datepicker({
-            format: "mm/dd/yyyy"
+            format: "dd/mm/yyyy"
         }).on('changeDate', function(ev) {
             var dateText = $(this).data('date');
             var startDateTextBox = $('#dp_start input');

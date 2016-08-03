@@ -397,6 +397,94 @@
                 <h3>Thông tin hoá đơn </h3>
             </div>
             <div class="modal-body">
+
+                <style>
+                    body {
+                        background: rgb(204, 204, 204);
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 11px;
+                    }
+
+                    table {
+                        border: 1px solid #000;
+                        width: 100%;
+                        max-width: 100%;
+                        border-spacing: 0;
+                        border-collapse: collapse;
+                    }
+
+                    table > thead > tr > th, table > tbody > tr > td, table > tfoot > tr > td {
+                        border: 1px solid #000;
+                        line-height: 1.42857143;
+                        padding: 8px;
+                    }
+
+                    table > tbody > tr > td, table > tfoot > tr > td {
+                        border-top: 1px solid #000;
+                    }
+
+                    page {
+                        background: white;
+                        display: block;
+                        margin: 0 auto;
+                        margin-bottom: 0.5cm;
+                    }
+
+                    page[size="A4"] {
+                        width: 19cm;
+                        height: 29.7cm;
+                    }
+
+                    page[size="A4"][layout="portrait"] {
+                        width: 27.9cm;
+                        height: 21cm;
+                    }
+
+                    page[size="A3"] {
+                        width: 29.7cm;
+                        height: 42cm;
+                    }
+
+                    page[size="A3"][layout="portrait"] {
+                        width: 42cm;
+                        height: 29.7cm;
+                    }
+
+                    page[size="A5"] {
+                        width: 14.8cm;
+                        height: 21cm;
+                    }
+
+                    page[size="A5"][layout="portrait"] {
+                        width: 21cm;
+                        height: 14.8cm;
+                    }
+
+                    @media print {
+                        body, page {
+                            margin: 0;
+                            box-shadow: 0;
+                            font-family: Arial, Helvetica, sans-serif;
+                            font-size: 11px;
+                        }
+
+                        body * {
+                            visibility: hidden;
+                        }
+
+                        page * {
+                            visibility: visible;
+                        }
+
+                        page {
+                            position: absolute;
+                            left: 0;
+                            top: 0;
+                        }
+                    }
+                </style>
+
+
                 <page size="A5" layout="portrait">
                     <div style="width: 50%; float: left; display: inline-block; line-height: 21px; text-align: left">
                         <span><b>Nhà Thiếu Nhi Quận 4</b></span></br>
@@ -468,6 +556,9 @@
             </div>
         </div>
         <div class="modal hide fade" id="bangtonghop" style="width: 22cm;left:40%;">
+
+
+
             <div class="modal-header">
                 <button class="close" data-dismiss="modal">×</button>
                 <h3>Thông tin hoá đơn </h3>

@@ -98,7 +98,7 @@ class Core_MySQLManagerStudent
     }
     
     public function getsubjectsbyid($data) {
-        $listsubjects = $this->_db->rawQuery('SELECT id, title,teacher_id,money_total,payment_type,monday,tuesday,wednesday,thursday,friday,saturday,sunday,fromdate,todate,fromhours,tohours from subjects where id = ?',array($data));        
+        $listsubjects = $this->_db->rawQuery('SELECT id, title,teacher_id,money_total,payment_type,timelearning,fromdate,todate,fromhours,tohours from subjects where id = ?',array($data));
         return $listsubjects;
     }
     
