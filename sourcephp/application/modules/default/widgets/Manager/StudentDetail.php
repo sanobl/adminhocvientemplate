@@ -20,6 +20,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
         $money_total = '';
         $time = '';
         $haserror = false;
+        $mess = '';
         if($isLogin){
             if($studentid != 0){
                 $studentdetail = Core_MySQLManagerStudent::getInstance()->getstudentbyid($studentid);
@@ -59,6 +60,9 @@ class Widget_Manager_StudentDetail extends Core_Widget{
                         }
                         if(isset($resultsubject[0]["sunday"]) && $resultsubject[0]["sunday"]!= null){
                             $time .= 'Chủ nhật';
+                        }
+                        if(isset($result[0]["fromhours"]) && isset($result[0]["tohours"])){
+                            $time .= '('.$result[0]["fromhours"] .'-'. $result[0]["tohours"].')';
                         }
                     }
             }else {
