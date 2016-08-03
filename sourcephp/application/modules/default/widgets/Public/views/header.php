@@ -2,7 +2,7 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="brand" href="quanlyhocvien.html"><i class="icon-home icon-white"></i> Nhà thiếu nhi Quận 4</a>
+                <a class="brand" href="/quan-ly-hoc-vien.html"><i class="icon-home icon-white"></i> Nhà thiếu nhi Quận 4</a>
                 <ul class="nav user_menu pull-right">
                     <li class="divider-vertical hidden-phone hidden-tablet"></li>
                     <li class="dropdown">

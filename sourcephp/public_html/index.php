@@ -23,21 +23,13 @@ error_reporting(1);
 error_reporting(E_ALL);
 require_once APPLICATION_PATH . '/configs/defined.php';
 try{
-	$URI = $_SERVER['REQUEST_URI'];
-	if (preg_match("/^\/(pRtNM\/)/", $URI)) {	
-		try{
-			header("Location: http://hotro.zing.vn");
-			} 
-catch(Exception $exception){   
-//var_dump($exception);die;
-}		}
+
 	//$key = "application_".APPLICATION_ENV.'.ini';	    
 	$config = APPLICATION_PATH.'/configs/application-'.APPLICATION_ENV.'.ini';	
 	//Get options
 	$options = array(
 		'config' => array(
-			APPLICATION_PATH.'/configs/application-'.APPLICATION_ENV.'.ini',
-			APPLICATION_PATH.'/configs/application-'.APPLICATION_ENV.'.ini',
+			APPLICATION_PATH.'/configs/application-'.APPLICATION_ENV.'.ini'
 		)	    
 	);
 //	$cached = true;	

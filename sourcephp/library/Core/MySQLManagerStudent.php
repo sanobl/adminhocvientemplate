@@ -189,8 +189,7 @@ class Core_MySQLManagerStudent
     }
     
     public function searchstudent($fullname,$teacherid,$subjectsid,$usercreate) {
-        $result = $this->_db->rawQuery('
-            SELECT 
+        $sql= " SELECT 
                 students.id,
                 subjects.title, 
                 student_fullname, 
@@ -199,14 +198,10 @@ class Core_MySQLManagerStudent
             from students 
             INNER JOIN teachers ON students.teacher_id = teachers.id 
             INNER JOIN subjects ON students.subject_id = subjects.id
-            Where 
-                student_fullname like  \'%'.$fullname.'%\'
-                OR
-                students.teacher_id  = \''.intval($teacherid).'\'
-                OR
-                students.subject_id  = \''.intval($subjectsid).'\'
-                
-                ');
+            Where student_fullname like  '%".$fullname."%' and
+                students.teacher_id  = ".intval($teacherid)." and
+                students.subject_id  = ".intval($subjectsid);
+        $result = $this->_db->rawQuery($sql);
         return $result;
     }
     
