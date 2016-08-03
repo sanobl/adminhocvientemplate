@@ -26,6 +26,8 @@
     <script src="<?php echo $this->getView()->app->static->frontend->lib; ?>/colorbox/jquery.colorbox.min.js"></script>
     <!-- common functions -->
     <script src="<?php echo $this->getView()->app->static->frontend->js; ?>/gebo_common.js"></script>
+    <script src="<?php echo $this->getView()->app->static->frontend->lib; ?>/datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="<?php echo $this->getView()->app->static->frontend->js; ?>/gebo_forms.js"></script>
     <script>
         $(document).ready(function() {
             //* show all elements & remove preloader

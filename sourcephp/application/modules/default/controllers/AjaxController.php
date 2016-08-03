@@ -154,7 +154,7 @@ class AjaxController extends Zend_Controller_Action {
         $datatecher = array();
         $teacherresult = null;
         $teachername =  '';
-        //var_dump($result);die;
+//        var_dump($result);die;
         if(is_array($result) && count($result) > 0){
             $teacherid = isset($result[0]['teacher_id']) ? $result[0]['teacher_id'] : 0;
             if($teacherid > 0){
@@ -165,27 +165,8 @@ class AjaxController extends Zend_Controller_Action {
                     $teachername = $teacherresult[0]['name'];
                 }
             }
-            if(isset($result[0]["monday"]) && $result[0]["monday"]!= null){
-                $time .= 'Hai, ';
-            }
-            if(isset($result[0]["tuesday"]) && $result[0]["tuesday"]!= null){
-                $time .= 'Ba, ';
-            }
-            if(isset($result[0]["wednesday"]) && $result[0]["wednesday"]!= null){
-                $time .= 'Tư, ';
-            }
-            if(isset($result[0]["thursday"]) && $result[0]["thursday"]!= null){
-                $time .= 'Năm, ';
-            }
-            if(isset($result[0]["friday"]) && $result[0]["friday"]!= null){
-                $time .= 'Sáu, ';
-            }
-            if(isset($result[0]["saturday"]) && $result[0]["saturday"]!= null){
-                $time .= 'Bảy, ';
-            }
-            if(isset($result[0]["sunday"]) && $result[0]["sunday"]!= null){
-                $time .= 'Chủ nhật';
-            }
+            if(isset($result[0]["timelearning"]) &&  !empty($result[0]["timelearning"]))
+                $time = Core_Utilities::convertListDayToVN($result[0]["timelearning"]);
             $totalpayment = isset($result[0]['money_total']) ? $result[0]['money_total'] : '';
             if($totalpayment != '' || $time != '' || $teachername != ''){
                 $html = '<div id="khoahocinfo">

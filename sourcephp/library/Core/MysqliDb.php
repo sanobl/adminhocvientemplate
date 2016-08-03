@@ -1838,6 +1838,8 @@ class MysqliDb
         }
 
         if ($this->_mysqli) {
+//            echo '<pre>';
+//            var_dump($this->_mysqli);
             $this->_mysqli->close();
             $this->_mysqli = null;
         }
