@@ -31,7 +31,7 @@ class Core_MySQLManagerStudent
                 'password' => $this->config->password,
                 'db'=> $this->config->databasename,
                 'port' => 3306,
-                'prefix' => 'my_',
+                'prefix' => '',
                 'charset' => 'utf8'));
         } catch (Exception $e) {
             return false;
@@ -145,7 +145,32 @@ class Core_MySQLManagerStudent
 //        else 
 //            echo 'die';
     }
-    
+    public function insertstudent2($student_fullname,$student_phone, $student_email,
+            $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby) {
+        $data = Array ("student_fullname" => $student_fullname,
+                        "student_phone" => $student_phone,
+                        "student_email" => $student_email,
+                        "parent_fullname"=> $parent_fullname,
+                        "parent_phone"=> $parent_phone,
+                        "parent_email"=> $parent_email,
+                        "subject_id" => $subject_id,
+                        "teacher_id"=> $teacher_id,
+                        "payment_type"=>$payment_type,
+                        "money_total"=>$money_total,
+                        "created_at"=>$created_at,
+                        "created_by"=>$createdby
+                    );
+        $id = $this->_db->insert ('students', $data);
+        if($id)
+            return $id;
+        else 
+            return '';
+//        $id = $this->_db->insert ('students', $data);
+//        if($id)
+//            echo 'user was created. Id=' . $id;
+//        else 
+//            echo 'die';
+    }
      public function updatestudent($student_fullname,$student_phone, $student_email,
             $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby,$id) {
         $result = $this->_db->rawQuery('

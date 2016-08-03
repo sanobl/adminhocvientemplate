@@ -517,7 +517,11 @@
                     <br style="clear: both">
                     <div style="display: table; width: 100%; height: 21px;">
                         <span  style="display: table-cell; width: 100px; vertical-align: bottom;">Họ tên người nộp :</span>
-                        <span  style="display: table-cell;border-bottom: 1px #000 dotted"></span>
+                        <span  style="display: table-cell;border-bottom: 1px #000 dotted"><?php
+                                                if(isset($student_fullname) && $student_fullname!=''){
+                                                    echo $student_fullname;
+                                                }
+                                                ?></span>
                         <span  style="display: table-cell; width: 10px; "></span>
                     </div>
                     <div style="display: table; width: 100%;height: 21px;">
@@ -527,7 +531,7 @@
                     </div>
                     <div style="display: table; width: 100%;height: 21px;">
                         <span  style="display: table-cell; width: 70px; vertical-align: bottom;">Nội dung thu :</span>
-                        <span  style="display: table-cell;border-bottom: 1px #000 dotted"></span>
+                        <span  style="display: table-cell;border-bottom: 1px #000 dotted">Nộp tiền </span>
                         <span  style="display: table-cell; width: 10px; "></span>
                     </div>
                     <div style="display: table; width: 100%;height: 21px;">
