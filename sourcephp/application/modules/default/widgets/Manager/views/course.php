@@ -62,7 +62,7 @@
                                         <td><?php echo $item['name']; ?></td>
                                         <td><?php echo Core_Utilities::convertListDayToVN($item['timelearning']); ?></td>
                                         <td><?php echo $item['fromhours'] . '-' . $item['tohours']; ?></td>
-                                        <td><?php echo date("d/m/Y", strtotime($item['name'])); ?></td>
+                                        <td><?php echo date("d/m/Y", strtotime($item['created_at'])); ?></td>
                                         <td><a href="/them-khoa-hoc.html?subid=<?php echo $item['id'];?>"><i
                                                 class="splashy-pencil" style="padding-right:10px"></i></a>
                                             <i class="splashy-remove" rel="<?php echo $item['id'];?>"></i>

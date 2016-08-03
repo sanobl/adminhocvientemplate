@@ -260,4 +260,14 @@ where s.id = ?';
         return $user;
     }
 
+    public function checkUserLogin($username,$password)
+    {
+        $this->_db = MysqliDb::getInstance();
+        $results = $this->_db
+            ->where('name', $username)
+            ->where('isdelete',0)
+            ->where("password", md5($password))
+            ->get('users');
+        return $results;
+    }
 }

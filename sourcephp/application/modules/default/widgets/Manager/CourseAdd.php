@@ -31,7 +31,15 @@ class Widget_Manager_CourseAdd extends Core_Widget
                 $datapost["title"] = isset($_POST['title']) ? $_POST['title'] : '';
                 $datapost["description"] = isset($_POST['description']) ? $_POST['description'] : '';
                 $datapost["subject_payment_type"] = isset($_POST['subject_payment_type']) ? $_POST['subject_payment_type'] : '';
-                $datapost["subject_type"] = isset($_POST['subject_type']) ? $_POST['subject_type'] : '';
+                $subjecttype = $_POST['subject_type'];
+                $datapost["subject_type"] = isset($subjecttype) ? $subjecttype : '';
+                if ($subjecttype == 2)
+                {
+                    $datapost["payment_type"] = 2;
+                }
+                else {
+                    $datapost["payment_type"] = 0;
+                }
                 if (isset($_POST['fromdate'])) {
 //                    $dt = DateTime::createFromFormat('d/m/Y', $_POST['fromdate']);
 //                    date("Y-m-d H:i:s",strtotime($_POST['fromdate']);
@@ -59,7 +67,7 @@ class Widget_Manager_CourseAdd extends Core_Widget
                 $datapost["teacher_id"] = isset($_POST['teachers']) ? $_POST['teachers'] : 0;
                 $datapost["money_total"] = isset($_POST['money_total']) ? $_POST['money_total'] : 0;
                 $datapost["money_percent_for_teacher"] = isset($_POST['money_percent_for_teacher']) ? $_POST['money_percent_for_teacher'] : 0;
-                $datapost["payment_type"] = isset($_POST['payment_type']) ? $_POST['payment_type'] : 0;
+
                 $datapost["phase"] = isset($_POST['phase']) ? $_POST['phase'] : 0;
                 $datapost["isactive"] = isset($_POST['isactive']) ? $_POST['isactive'] : 0;
                 $datapost["is_support_old_student"] = isset($_POST['is_support_old_student']) ? $_POST['is_support_old_student'] : 0;
@@ -70,9 +78,9 @@ class Widget_Manager_CourseAdd extends Core_Widget
                     "payment_phase_hidden" => isset($_POST['payment_phase_hidden'])?$_POST['payment_phase_hidden']: null,
                     "payment_phase" => isset($_POST['payment_phase'])?$_POST['payment_phase']: null);
 //                echo '<pre>';
-//                print_r($dataDetail);die;
+//                print_r($datapost);die;
                 $result = Core_MysqlStatistic::getInstance()->insertSubject($datapost, $dataDetail,$id);
-                $url = '/them-khoa-hoc.html';
+                $url = '/quan-ly-khoa-hoc.html';
                 $this->forward($url);
 
             }

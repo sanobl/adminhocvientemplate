@@ -176,7 +176,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label">Số tiền/khoá(VNĐ)</label>
+                                    <label class="control-label" id="titlemoney">Số tiền/khoá(VNĐ)</label>
                                     <div class="controls">
                                         <input type="text"
                                                value="<?php echo isset($dataget['money_total']) ? $dataget['money_total'] : ''; ?>"
@@ -186,12 +186,12 @@
                                 <div class="control-group">
                                     <label class="control-label">Tỷ lệ % chia giáo viên</label>
                                     <div class="controls">
-                                        <input type="text" value="" name="money_percent_for_teacher"
+                                        <input type="text" name="money_percent_for_teacher"
                                                id="money_percent_for_teacher"
                                                value="<?php echo isset($dataget['money_percent_for_teacher']) ? $dataget['money_percent_for_teacher'] : ''; ?>">
                                     </div>
                                 </div>
-                                <div class="control-group">
+                                <div class="control-group" id="hinhthucthanhtoan">
                                     <label class="control-label">Hình thức thanh toán</label>
                                     <?php
                                     $lsPaymentType = array();
@@ -269,17 +269,23 @@
         $("#timemonhoc").css("display", "none");
         <?php  if($dataget['subject_type'] == 1) {?>
         $("#timemonhoc").css("display", "block");
+        <?php }else if($dataget["subject_type"] == 2) {?>
+        $("#hinhthucthanhtoan").css("display", "none");
         <?php }?>
         $("input[name=subject_type]:radio").change(function () {
             if (this.value == '1') {
                 $("#payment_type_onetime").css("display", "block");
                 $("#payment_type_phase").css("display", "block");
                 $("#timemonhoc").css("display", "block");
+                $("#titlemoney").html('Số tiền/khoá(VNĐ)');
+                $("#hinhthucthanhtoan").css("display", "block");
             }
             else if (this.value == '2') {
                 $("#payment_type_onetime").css("display", "none");
                 $("#payment_type_phase").css("display", "none");
                 $("#timemonhoc").css("display", "none");
+                $("#titlemoney").html('Số tiền/tháng(VNĐ)');
+                $("#hinhthucthanhtoan").css("display", "none");
             }
         });
         $('.hinhthucthanhtoan').on('change', function () {

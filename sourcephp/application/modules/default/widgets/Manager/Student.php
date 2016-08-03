@@ -3,6 +3,7 @@
 class Widget_Manager_Student extends Core_Widget {
 
     public function run() {
+       
         $fullname = isset($_POST['fullname']) ? trim($_POST['fullname']) : '';
         $teacherid = isset($_POST['teacher']) ? trim($_POST['teacher']) : '';
         $subjectsid = isset($_POST['subjects']) ? trim($_POST['subjects']) : '';
