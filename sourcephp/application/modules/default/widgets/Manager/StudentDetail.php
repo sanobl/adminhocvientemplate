@@ -87,7 +87,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
             'subjectname'=>$subjectname,
             'money_total'=>$money_total,
             'studentid'=>$studentid,
-            'time'=>$time
+            'time' => $time
         ));
         
          
