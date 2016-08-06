@@ -21,6 +21,7 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                 $parent_email = '';
                 $subject_id = '';
                 $payment_type = '';
+                $is_old_student = 0;
                 if($studentid != 0){
                     $studentdetail = Core_MySQLManagerStudent::getInstance()->getstudentbyid($studentid);
                     if(is_array($studentdetail) && count($studentdetail) > 0){
@@ -33,6 +34,7 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                         $parent_email = $studentdetail['parent_email'];
                         $subject_id = $studentdetail['subject_id'];
                         $payment_type = $studentdetail['payment_type'];
+                        $is_old_student = $studentdetail['is_old_student'];
                     }
                    
                 }
@@ -45,7 +47,8 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                     'parent_phone'=> $parent_phone,
                     'parent_email'=> $parent_email,
                     'subject_id'=> $subject_id,
-                    'payment_type'=>$payment_type
+                    'payment_type'=>$payment_type,
+                    'is_old_student'=>$is_old_student
                 ));
             } else {
                 //echo json_encode($_POST);die;
@@ -60,6 +63,7 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                 $parent_email = isset($_POST['parent_email']) ? $_POST['parent_email'] : '';
                 $subject_id = isset($_POST['subject_id']) ? $_POST['subject_id'] : 0;
                 $payment_type = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
+                $is_old_student = isset($_POST['is_old_student']) ? $_POST['is_old_student'] : 0;
                 if($_POST['subject_id'] != ''){
                     $subjectsdetail = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid(intval($subject_id));
                     if($subjectsdetail != '' && is_array($subjectsdetail)){
@@ -74,12 +78,12 @@ class Widget_Manager_StudentAdd extends Core_Widget {
                     $result = Core_MySQLManagerStudent::getInstance()->updatestudent($student_fullname,$student_phone, $student_email,
                                                                                 $parent_fullname,$parent_phone,$parent_email,
                                                                                 $subject_id,$teacher_id,$payment_type,
-                                                                                $money_total,$created_at,$createdby,$studentid);  
+                                                                                $money_total,$created_at,$createdby,$studentid,$is_old_student);
                 }else {
                     $result = Core_MySQLManagerStudent::getInstance()->insertstudent2($student_fullname,$student_phone, $student_email,
                                                                                 $parent_fullname,$parent_phone,$parent_email,
                                                                                 $subject_id,$teacher_id,$payment_type,
-                                                                                $money_total,$created_at,$createdby);  
+                                                                                $money_total,$created_at,$createdby,$is_old_student);
                 
                     if(isset($_POST['save_print']) && $_POST['save_print'] == 1){
                         if($result != ''){

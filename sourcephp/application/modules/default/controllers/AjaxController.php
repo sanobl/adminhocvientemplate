@@ -155,6 +155,7 @@ class AjaxController extends Zend_Controller_Action
     {
 
         $courseid = intval($this->_request->getParam('id'));
+        $is_old_student = intval($this->_request->getParam('is_old_student'));
         $result = null;
         $result = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($courseid);
 //        print_r($result);die;
@@ -163,7 +164,7 @@ class AjaxController extends Zend_Controller_Action
         $datatecher = array();
         $teacherresult = null;
         $teachername = '';
-//        var_dump($result);die;
+//       var_dump($result);
         if (is_array($result) && count($result) > 0) {
             $teacherid = isset($result[0]['teacher_id']) ? $result[0]['teacher_id'] : 0;
             if ($teacherid > 0) {
@@ -190,11 +191,46 @@ class AjaxController extends Zend_Controller_Action
             <div class="control-group"> 
                     <label class="control-label">Thời gian học</label>
                     <div class="controls" style="padding-top:5px"> ' . $time . '</div>  
-                    </div>
+                    </div>';
+                if ($result[0]['payment_type'] == 2) {
+                    $html .= '
+            <div clascontrol-group"> 
+                    <label class="control-label">Số tiền/tháng(VNĐ)</label>
+             <div class="controls" style="padding-top:5px"> ' . $totalpayment . ' VNĐ</div> 
+                    </div>';
+                } else {
+                    $html .= '
             <div class="control-group"> 
                     <label class="control-label">Số tiền/khoá(VNĐ)</label>
              <div class="controls" style="padding-top:5px"> ' . $totalpayment . ' VNĐ</div> 
                     </div>';
+                }
+                if ($is_old_student == 1)
+                    $htmlCheck = 'checked="checked"';
+                if ($result[0]['is_support_old_student'] == 1) {
+                    $html .= '<div class="control-group">
+                                            <label class="control-label">Hỗ trợ học viên cũ </label>
+  <div class="controls"> 
+                    <div class="span12">
+                                           
+                                                <input name="is_old_student" value="1" type="checkbox" '.$htmlCheck.'>';
+                    $html .= '</div></div>
+                                               
+                                        </div>';
+                }
+                if ($result[0]['subject_type'] == 1) {
+                    $html .= '<div class="control-group">
+                                            <label class="control-label">Khoá học </label>
+                                             <div class="controls" style="padding-top:5px"> ngắn hạn </div>  
+                                               
+                                        </div>';
+                } else if ($result[0]['subject_type'] == 2) {
+                    $html .= '<div class="control-group">
+                                            <label class="control-label">Khoá học </label>
+                                             <div class="controls" style="padding-top:5px"> dài hạn </div>  
+                                               
+                                        </div>';
+                }
                 if ($result[0]['payment_type'] == 2) {
 
                 } else {

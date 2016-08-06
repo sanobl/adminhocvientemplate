@@ -232,7 +232,8 @@
         });
         
         var dataadd = {
-            id:select
+            id:select,
+            is_old_student:<?php echo $is_old_student;?>
         };
         $.ajax({
             url: '/Ajax/getinfocourse',

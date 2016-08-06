@@ -1,35 +1,40 @@
 <?php
-require_once ('MysqliDb.php');
+require_once('MysqliDb.php');
+
 class Core_MySQLManagerStudent
 {
     var $config;
     protected $_db;
     protected static $_instance = null;
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->config = Core_Global::getApplicationIni()->app->static->mysql;
         //var_dump($this->config);die;
         $this->initialize();
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (null === self::$_instance) {
             self::$_instance = new self();
         }
         return self::$_instance; //singleton
     }
 
-    private function initialize() {
+    private function initialize()
+    {
         try {
             if (empty($this->config->host) && empty($this->config->username) && empty($this->config->databasename)) {
                 return false;
                 //Zend_Cache::throwException('Redis \'server\' not specified.');
             }
 
-            $this->_db = new MysqliDb (Array (
+            $this->_db = new MysqliDb (Array(
                 'host' => $this->config->host,
                 'username' => $this->config->username,
                 'password' => $this->config->password,
-                'db'=> $this->config->databasename,
+                'db' => $this->config->databasename,
                 'port' => 3306,
                 'prefix' => '',
                 'charset' => 'utf8'));
@@ -38,27 +43,35 @@ class Core_MySQLManagerStudent
         }
     }
 
-    public function demomysql () {
+    public function demomysql()
+    {
         // obtain db object created in init  ()
         $this->_db = MysqliDb::getInstance();
-        $users = $this->_db->rawQuery('SELECT * from students where id >= ?', Array (0));
+        $users = $this->_db->rawQuery('SELECT * from students where id >= ?', Array(0));
         foreach ($users as $user) {
-            print_r ($user);
+            print_r($user);
         }
         return $users;
     }
-    
-    public function getlistsubjects() {
+
+    public function getlistsubjects()
+    {
         $listsubjects = $this->_db->rawQuery('SELECT id, title from subjects');
-        
+
         return $listsubjects;
     }
-    public function getliststudent() {
-        $result = $this->_db->rawQuery('SELECT students.id,subjects.title, student_fullname, teachers.name,students.created_at from students INNER JOIN teachers ON students.teacher_id = teachers.id INNER JOIN subjects ON students.subject_id = subjects.id');       
+
+    public function getliststudent()
+    {
+        $result = $this->_db->rawQuery('SELECT students.id,subjects.title, student_fullname, teachers.name,students.created_at 
+from students INNER JOIN teachers ON students.teacher_id = teachers.id 
+INNER JOIN subjects ON students.subject_id = subjects.id
+order by students.id desc');
         return $result;
     }
-    
-    public function getstudentbyid($id) {
+
+    public function getstudentbyid($id)
+    {
         $result = $this->_db->rawQuery('
             SELECT
                 students.id,
@@ -88,28 +101,33 @@ class Core_MySQLManagerStudent
                 subjects ON students.subject_id = subjects.id
               WHERE
                 students.id = ?',
-                array($id));       
+            array($id));
         return $result;
     }
-    
-    public function getlistteacher() {
-        $result = $this->_db->rawQuery('SELECT `id`, `name` FROM `teachers` ');       
+
+    public function getlistteacher()
+    {
+        $result = $this->_db->rawQuery('SELECT `id`, `name` FROM `teachers` ');
         return $result;
     }
-    
-    public function getsubjectsbyid($data) {
-        $listsubjects = $this->_db->rawQuery('SELECT id, title,teacher_id,money_total,payment_type,timelearning,fromdate,todate,fromhours,tohours from subjects where id = ?',array($data));
+
+    public function getsubjectsbyid($data)
+    {
+        $listsubjects = $this->_db->rawQuery('SELECT id, title,teacher_id,money_total,payment_type,timelearning,fromdate,todate,fromhours,tohours,
+        is_support_old_student,subject_type from subjects where id = ?', array($data));
         return $listsubjects;
     }
-    
-    public function getteacherbyid($data) {
-        $listsubjects = $this->_db->rawQuery('SELECT id, name from teachers where id = ?',$data);
+
+    public function getteacherbyid($data)
+    {
+        $listsubjects = $this->_db->rawQuery('SELECT id, name from teachers where id = ?', $data);
         //var_dump($listsubjects);die;
         return $listsubjects;
     }
-    
-    public function insertstudent($student_fullname,$student_phone, $student_email,
-            $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby) {
+
+    public function insertstudent($student_fullname, $student_phone, $student_email,
+                                  $parent_fullname, $parent_phone, $parent_email, $subject_id, $teacher_id, $payment_type, $money_total, $created_at, $createdby)
+    {
         $result = $this->_db->rawQuery('
                 INSERT INTO `students` 
                     (`student_fullname`, 
@@ -126,44 +144,47 @@ class Core_MySQLManagerStudent
                     `created_by`
                     ) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)', array(
-                    $student_fullname,
-                    $student_phone, 
-                    $student_email,
-                    $parent_fullname,
-                    $parent_phone,
-                    $parent_email,
-                    $subject_id,
-                    $teacher_id,
-                    $payment_type,
-                    $money_total,
-                    $created_at,
-                    $createdby
-                ));     
+            $student_fullname,
+            $student_phone,
+            $student_email,
+            $parent_fullname,
+            $parent_phone,
+            $parent_email,
+            $subject_id,
+            $teacher_id,
+            $payment_type,
+            $money_total,
+            $created_at,
+            $createdby
+        ));
 //        $id = $this->_db->insert ('students', $data);
 //        if($id)
 //            echo 'user was created. Id=' . $id;
 //        else 
 //            echo 'die';
     }
-    public function insertstudent2($student_fullname,$student_phone, $student_email,
-            $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby) {
-        $data = Array ("student_fullname" => $student_fullname,
-                        "student_phone" => $student_phone,
-                        "student_email" => $student_email,
-                        "parent_fullname"=> $parent_fullname,
-                        "parent_phone"=> $parent_phone,
-                        "parent_email"=> $parent_email,
-                        "subject_id" => $subject_id,
-                        "teacher_id"=> $teacher_id,
-                        "payment_type"=>$payment_type,
-                        "money_total"=>$money_total,
-                        "created_at"=>$created_at,
-                        "created_by"=>$createdby
-                    );
-        $id = $this->_db->insert ('students', $data);
-        if($id)
+
+    public function insertstudent2($student_fullname, $student_phone, $student_email,
+                                   $parent_fullname, $parent_phone, $parent_email, $subject_id, $teacher_id, $payment_type, $money_total, $created_at, $createdby, $is_old_student)
+    {
+        $data = Array("student_fullname" => $student_fullname,
+            "student_phone" => $student_phone,
+            "student_email" => $student_email,
+            "parent_fullname" => $parent_fullname,
+            "parent_phone" => $parent_phone,
+            "parent_email" => $parent_email,
+            "subject_id" => $subject_id,
+            "teacher_id" => $teacher_id,
+            "payment_type" => $payment_type,
+            "money_total" => $money_total,
+            "created_at" => $created_at,
+            "created_by" => $createdby,
+            "is_old_student" => $is_old_student
+        );
+        $id = $this->_db->insert('students', $data);
+        if ($id)
             return $id;
-        else 
+        else
             return '';
 //        $id = $this->_db->insert ('students', $data);
 //        if($id)
@@ -171,8 +192,10 @@ class Core_MySQLManagerStudent
 //        else 
 //            echo 'die';
     }
-     public function updatestudent($student_fullname,$student_phone, $student_email,
-            $parent_fullname,$parent_phone,$parent_email,$subject_id,$teacher_id,$payment_type,$money_total,$created_at,$createdby,$id) {
+
+    public function updatestudent($student_fullname, $student_phone, $student_email,
+                                  $parent_fullname, $parent_phone, $parent_email, $subject_id, $teacher_id, $payment_type, $money_total, $created_at, $createdby, $id, $is_old_student)
+    {
         $result = $this->_db->rawQuery('
                 UPDATE
                     `students`
@@ -188,33 +211,35 @@ class Core_MySQLManagerStudent
                     `payment_type` = ?,
                     `money_total` = ?, 
                     `updated_at` = ?,
-                    `updated_by` = ?
+                    `updated_by` = ?,
+                    `is_old_student` = ?
                 WHERE
                     `id` = ?
                   ', array(
-                    $student_fullname,
-                    $student_phone, 
-                    $student_email,
-                    $parent_fullname,
-                    $parent_phone,
-                    $parent_email,
-                    $subject_id,
-                    $teacher_id,
-                    $payment_type,
-                    $money_total,
-                    $created_at,
-                    $createdby,
-                    $id
-                ));     
+            $student_fullname,
+            $student_phone,
+            $student_email,
+            $parent_fullname,
+            $parent_phone,
+            $parent_email,
+            $subject_id,
+            $teacher_id,
+            $payment_type,
+            $money_total,
+            $created_at,
+            $createdby,
+            $id, $$is_old_student
+        ));
 //        $id = $this->_db->insert ('students', $data);
 //        if($id)
 //            echo 'user was created. Id=' . $id;
 //        else 
 //            echo 'die';
     }
-    
-    public function searchstudent($fullname,$teacherid,$subjectsid,$usercreate) {
-        $sql= " SELECT 
+
+    public function searchstudent($fullname, $teacherid, $subjectsid, $usercreate)
+    {
+        $sql = " SELECT 
                 students.id,
                 subjects.title, 
                 student_fullname, 
@@ -222,14 +247,19 @@ class Core_MySQLManagerStudent
                 students.created_at 
             from students 
             INNER JOIN teachers ON students.teacher_id = teachers.id 
-            INNER JOIN subjects ON students.subject_id = subjects.id
-            Where student_fullname like  '%".$fullname."%' and
-                students.teacher_id  = ".intval($teacherid)." and
-                students.subject_id  = ".intval($subjectsid);
-        $result = $this->_db->rawQuery($sql);
+            INNER JOIN subjects ON students.subject_id = subjects.id";
+        $sqlWhere = ' where 1=1';
+        if (!empty($fullname))
+            $sqlWhere .= " and students.student_fullname like  '%" . $fullname . "%'";
+        if (!empty($usercreate))
+            $sqlWhere .= " and students.created_by like  '%" . $usercreate . "%'";
+        if ($teacherid > 0)
+            $sqlWhere .= " and students.teacher_id  = " . intval($teacherid);
+        if ($subjectsid > 0)
+            $sqlWhere .= "  and students.subject_id  = " . intval($subjectsid);
+        $result = $this->_db->rawQuery($sql . $sqlWhere);
         return $result;
     }
-    
 
 
 }
