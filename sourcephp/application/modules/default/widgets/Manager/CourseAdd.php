@@ -24,7 +24,7 @@ class Widget_Manager_CourseAdd extends Core_Widget
                 ));
             } else {
 //                echo '<pre>';
-//                var_dump($_POST);
+//                echo json_encode($_POST);
 //                die;
                 $datapost = array();
                 $id = isset($_POST['id']) ? $_POST['id'] : 0;

@@ -820,3 +820,11 @@ fieldset .span12{
 .padding-top5 {
     padding-top: 5px;
 }
+.class {
+    border-top: 1px #ddd solid;
+    margin-bottom: 15px;
+    padding-top: 10px;
+}
+.class:first-child {
+    border: none;
+}

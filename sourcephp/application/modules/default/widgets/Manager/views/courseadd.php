@@ -70,7 +70,7 @@
                                                     <input class="span8" type="text" readonly="readonly"
                                                            name="fromdate" id="fromdate"
                                                            value="<?php echo isset($dataget['fromdate']) ? date("d/m/Y", strtotime($dataget['fromdate'])) : ''; ?>"><span
-                                                        class="add-on"><i class="splashy-calendar_day_up"></i></span>
+                                                           class="add-on"><i class="splashy-calendar_day_up"></i></span>
                                                 </div>
                                             </div>
 
@@ -82,97 +82,19 @@
                                                     <input class="span8" type="text" readonly="readonly"
                                                            name="todate" id="todate"
                                                            value="<?php echo isset($dataget['todate']) ? date("d/m/Y", strtotime($dataget['todate'])) : ''; ?>"><span
-                                                        class="add-on"><i class="splashy-calendar_day_up"></i></span>
+                                                           class="add-on"><i class="splashy-calendar_day_up"></i></span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Thời gian học</label>
-                                    <?php
-                                    $lsTime = array();
-                                    if (isset($dataget['timelearning'])) {
-
-                                        $lsTime = explode(',', $dataget['timelearning']);
-                                    } ?>
-                                    <div class="controls">
-                                        <div class="span12">
-                                            <div class="span12">
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="monday" <?php if (in_array('monday', $lsTime)) echo 'checked="checked"'; ?> >
-                                                    Thứ Hai
-                                                </label>
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="tuesday" <?php if (in_array('tuesday', $lsTime)) echo 'checked="checked"'; ?>>
-                                                    Thứ Ba
-                                                </label>
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="wednesday" <?php if (in_array('wednesday', $lsTime)) echo 'checked="checked"'; ?>>
-                                                    Thứ Tư
-                                                </label>
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="thursday" <?php if (in_array('thursday', $lsTime)) echo 'checked="checked"'; ?>>
-                                                    Thứ Năm
-                                                </label>
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="friday" <?php if (in_array('friday', $lsTime)) echo 'checked="checked"'; ?>>
-                                                    Thứ Sáu
-                                                </label>
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="saturday" <?php if (in_array('saturday', $lsTime)) echo 'checked="checked"'; ?>>
-                                                    Thứ Bảy
-                                                </label>
-                                                <label class="checkbox inline">
-                                                    <input type="checkbox" name="timelearning[]"
-                                                           value="sunday" <?php if (in_array('sunday', $lsTime)) echo 'checked="checked"'; ?>>
-                                                    Chủ nhật
-                                                </label>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
+                                
+                                
                                 <div class="control-group">
                                     <label class="control-label">Hỗ trợ học viên cũ</label>
                                     <div class="controls">
                                         <input type="checkbox" value="1"
                                                name="is_support_old_student" <?php if ($dataget['is_support_old_student'] == 1) echo 'checked="checked"'; ?>>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label"></label>
-                                    <div class="controls">
-                                        <div class="span12">
-                                            <input type="text" class="width_number60" placeholder="Từ giờ"
-                                                   name="fromhours"
-                                                   value="<?php echo isset($dataget['fromhours']) ? $dataget['fromhours'] : ''; ?>">
-                                            <input type="text" class="width_number60" placeholder="Đến giờ"
-                                                   name="tohours"
-                                                   value="<?php echo isset($dataget['tohours']) ? $dataget['tohours'] : ''; ?>">
-                                        </div>
-
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Giáo viên</label>
-                                    <div class="controls">
-                                        <select name="teachers">
-                                            <option value="0">Vui lòng chọn</option>
-                                            <?php if (isset($lsTeachers)) {
-                                                foreach ($lsTeachers as $teacher) {
-                                                    ?>
-                                                    <option
-                                                        value="<?php echo $teacher['id']; ?>" <?php if ($dataget['teacher_id'] == $teacher['id']) echo 'selected="selected"'; ?> ><?php echo $teacher['name']; ?></option>
-                                                <?php }
-                                            } ?>
-                                        </select>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -197,7 +119,8 @@
                                     $lsPaymentType = array();
                                     if (isset($dataget['payment_type'])) {
                                         $lsPaymentType = explode(',', $dataget['payment_type']);
-                                    } ?>
+                                    }
+                                    ?>
                                     <div class="controls">
                                         <div class="span12">
                                             <div id="payment_type_onetime">
@@ -226,7 +149,7 @@
                                                 <input type="text" class="width_number" value="2"
                                                        placeholder="số đợt" name="phase" id="phase"
                                                        vocab="value="<?php echo isset($dataget['phase']) ? $dataget['phase'] : ''; ?>
-                                                "">
+                                                       "">
                                             </div>
                                         </div>
                                     </div>
@@ -248,6 +171,179 @@
                                                name="isactive" <?php if ($dataget['isactive'] == 1) echo 'checked="checked"'; ?>>
                                     </div>
                                 </div>
+                                
+                                <div class="list-class">
+                                    <div class="class collection-fields-list" data-last-index="1" data-row-count-add="1" data-index="0" data-prototype="<?php
+                                    if (isset($lsTeachers)) {
+                                        $stringTeachers = '';
+                                        foreach ($lsTeachers as $teacher) {
+                                            $stringTeachers .= '<option value="'.$teacher['id'].'">'.$teacher['name'].'</option>';
+                                            
+                                        }
+                                    }
+                                    $stringaddmore = '<div class="class" data-content=" __name__">'.
+                                            '<h5>Thêm lớp mới | <a class="removeRow " type="button" data-related="__name__">xóa lớp</a></h5>'.
+                                        '<div class="control-group">'.
+                                            '<label class="control-label">Thời gian học</label>'.
+                                            '<div class="controls">'.
+                                                '<div class="span12">'.
+                                                    '<div class="span12">'.
+                                                        '<label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="monday">'.
+                                                            'Thứ Hai'.
+                                                        '</label>'.
+                                                       ' <label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="tuesday">'.
+                                                            'Thứ Ba'.
+                                                        '</label>'.
+                                                        '<label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="wednesday">'.
+                                                            'Thứ Tư'.
+                                                        '</label>'.
+                                                        '<label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="thursday">'.
+                                                           ' Thứ Năm'.
+                                                       ' </label>'.
+                                                        '<label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="friday">'.
+                                                            'Thứ Sáu'.
+                                                       ' </label>'.
+                                                        '<label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="saturday">'.
+                                                            'Thứ Bảy'.
+                                                        '</label>'.
+                                                       ' <label class="checkbox inline">'.
+                                                            '<input type="checkbox" name="class[__name__][timelearning][]" value="sunday">'.
+                                                            'Chủ nhật'.
+                                                        '</label>'.
+                                                    '</div>'.
+
+                                                '</div>'.
+                                            '</div>'.
+                                        '</div>'.                               
+                                        '<div class="control-group">'.
+                                            '<label class="control-label"></label>'.
+                                            '<div class="controls">'.
+                                                '<div class="span12">'.
+                                                    '<input type="text" class="width_number60" placeholder="Từ giờ" name="class[__name__][fromhours]" value="">'.
+                                                    '<input type="text" class="width_number60" placeholder="Đến giờ" name="class[__name__][tohours]" value="">'.
+                                                '</div>'.
+
+                                            '</div>'.
+                                        '</div>'.
+                                        '<div class="control-group">'.
+                                            '<label class="control-label">Giáo viên</label>'.
+                                            '<div class="controls">'.
+                                                '<select name="class[__name__][teachers]">'.
+                                                    '<option value="0">Vui lòng chọn</option>'.
+                                                    $stringTeachers.
+                                                    '</select>'.
+                                            '</div>'.
+                                        '</div>'.
+                                    '</div>';
+                                echo htmlentities($stringaddmore);
+                                ?>">
+                                        <div class="class">
+                                            <h5>Lớp khởi tạo</h5>
+                                            <div class="control-group">
+                                                <label class="control-label">Thời gian học</label>
+                                                <?php
+                                                $lsTime = array();
+                                                if (isset($dataget['timelearning'])) {
+
+                                                    $lsTime = explode(',', $dataget['timelearning']);
+                                                }
+                                                ?>
+                                                <div class="controls">
+                                                    <div class="span12">
+                                                        <div class="span12">
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="monday" <?php if (in_array('monday', $lsTime)) echo 'checked="checked"'; ?> >
+                                                                Thứ Hai
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="tuesday" <?php if (in_array('tuesday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                Thứ Ba
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="wednesday" <?php if (in_array('wednesday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                Thứ Tư
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="thursday" <?php if (in_array('thursday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                Thứ Năm
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="friday" <?php if (in_array('friday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                Thứ Sáu
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="saturday" <?php if (in_array('saturday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                Thứ Bảy
+                                                            </label>
+                                                            <label class="checkbox inline">
+                                                                <input type="checkbox" name="class[0][timelearning][]"
+                                                                       value="sunday" <?php if (in_array('sunday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                Chủ nhật
+                                                            </label>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>                               
+                                            <div class="control-group">
+                                                <label class="control-label"></label>
+                                                <div class="controls">
+                                                    <div class="span12">
+                                                        <input type="text" class="width_number60" placeholder="Từ giờ"
+                                                               name="class[0][fromhours]"
+                                                               value="<?php echo isset($dataget['fromhours']) ? $dataget['fromhours'] : ''; ?>">
+                                                        <input type="text" class="width_number60" placeholder="Đến giờ"
+                                                               name="class[0][tohours]"
+                                                               value="<?php echo isset($dataget['tohours']) ? $dataget['tohours'] : ''; ?>">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <label class="control-label">Giáo viên</label>
+                                                <div class="controls">
+                                                    <select name="class[0][teachers]">
+                                                        <option value="0">Vui lòng chọn</option>
+                                                        <?php
+                                                        if (isset($lsTeachers)) {
+                                                            $stringTeachers = '';
+                                                            foreach ($lsTeachers as $teacher) {                                                            
+                                                                ?>
+
+                                                                <option
+                                                                    value="<?php echo $teacher['id']; ?>" <?php if ($dataget['teacher_id'] == $teacher['id']) echo 'selected="selected"'; ?> ><?php echo $teacher['name']; ?></option>
+        <?php }
+    }
+    ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="control-group">
+                                           <label class="control-label"></label>
+                                           <div class="controls" >
+                                               <a class="btn add-list-item" data-last-index="1" data-row-count-add="1" data-index="0" href="javascript: void(0);">
+                                                    <i class="icon-plus"></i>Mở lớp mới
+                                                </a>
+                                           </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
                                 <div class="control-group">
                                     <div class="controls">
                                         <button class="btn btn-info" type="submit">Lưu thông tin</button>
@@ -267,11 +363,11 @@
         $("#payment_type_onetime").css("display", "none");
         $("#payment_type_phase").css("display", "none");
         $("#timemonhoc").css("display", "none");
-        <?php  if($dataget['subject_type'] == 1) {?>
-        $("#timemonhoc").css("display", "block");
-        <?php }else if($dataget["subject_type"] == 2) {?>
-        $("#hinhthucthanhtoan").css("display", "none");
-        <?php }?>
+<?php if ($dataget['subject_type'] == 1) { ?>
+            $("#timemonhoc").css("display", "block");
+<?php } else if ($dataget["subject_type"] == 2) { ?>
+            $("#hinhthucthanhtoan").css("display", "none");
+<?php } ?>
         $("input[name=subject_type]:radio").change(function () {
             if (this.value == '1') {
                 $("#payment_type_onetime").css("display", "block");
@@ -279,8 +375,7 @@
                 $("#timemonhoc").css("display", "block");
                 $("#titlemoney").html('Số tiền/khoá(VNĐ)');
                 $("#hinhthucthanhtoan").css("display", "block");
-            }
-            else if (this.value == '2') {
+            } else if (this.value == '2') {
                 $("#payment_type_onetime").css("display", "none");
                 $("#payment_type_phase").css("display", "none");
                 $("#timemonhoc").css("display", "none");
@@ -303,8 +398,7 @@
                     default:
                         break;
                 }
-            }
-            else {
+            } else {
                 switch (this.value) {
                     case '1':
                         bindOneTimeHide();
@@ -325,17 +419,17 @@
 
 
 
-        <?php if (in_array('2', $lsPaymentType)) {?>
-        bindMonthShow();
-        <?php }?>
-        <?php if (in_array('1', $lsPaymentType)) {?>
-        $("#payment_type_onetime").css("display", "block");
-        bindOneTimeShow();
-        <?php }?>
-        <?php if (in_array('3', $lsPaymentType)) {?>
-        $("#payment_type_phase").css("display", "block");
-        bindPhaseShow();
-        <?php }?>
+<?php if (in_array('2', $lsPaymentType)) { ?>
+            bindMonthShow();
+<?php } ?>
+<?php if (in_array('1', $lsPaymentType)) { ?>
+            $("#payment_type_onetime").css("display", "block");
+            bindOneTimeShow();
+<?php } ?>
+<?php if (in_array('3', $lsPaymentType)) { ?>
+            $("#payment_type_phase").css("display", "block");
+            bindPhaseShow();
+<?php } ?>
     });
 </script>
 <script src="<?php echo $this->getView()->app->static->frontend->js; ?>/subject_add.js"></script>

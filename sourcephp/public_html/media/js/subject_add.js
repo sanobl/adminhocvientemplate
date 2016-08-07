@@ -15,8 +15,7 @@ function bindMonthShow() {
             html += '<label class="checkbox inline">' + getMMYYYYDisplayFromDate(fromDate);
             html += '<input type="hidden" name="payment_month_hidden[]" value="' + getMMYYYYDisplayFromDate(fromDate) + '">';
             html += '<input type="text" name="payment_month[]" class="width_number60" value="' + total + '"></label>';
-        }
-        else {
+        } else {
             month = parseInt(month);
             var moneyPhase = Math.round(total / parseInt(month + 1));
             var totalPhase = 0;
@@ -28,8 +27,7 @@ function bindMonthShow() {
                 if (i == month) {
                     moneyPhase = total - totalPhase;
                     html += '<input type="text" name="payment_month[]" class="width_number60" value="' + moneyPhase + '"></label>';
-                }
-                else {
+                } else {
                     html += '<input type="text" name="payment_month[]" class="width_number60" value="' + moneyPhase + '"></label>';
                     totalPhase = totalPhase + moneyPhase;
                 }
@@ -37,8 +35,7 @@ function bindMonthShow() {
         }
         html += '</div></div>';
 
-    }
-    else {
+    } else {
         //loi nhap lieu
     }
     $('#thanhtoanthang').html(html);
@@ -76,8 +73,7 @@ function bindPhaseShow() {
         if (i == phase) {
             moneyPhase = total - totalPhase;
             html += '<input type="text" name="payment_phase[]"  class="width_number60" value="' + moneyPhase + '" placeholder="">';
-        }
-        else {
+        } else {
             html += '<input type="text" name="payment_phase[]"  class="width_number60" value="' + moneyPhase + '" placeholder="">';
             totalPhase = totalPhase + moneyPhase;
         }
@@ -156,7 +152,40 @@ function CheckNumeric() {
 }
 
 
-$(".splashy-remove").on("click", function() {
+$(".splashy-remove").on("click", function () {
     $('#course_id').val($(this).attr('rel'));
     $('#editCourseForm').submit();
+});
+var addmore = function (e) {
+    var t = e.data("last-index") || e.children().length
+            , i = "__name__"
+            , n = e.attr("data-prototype");
+    return {
+        nextIndex: t,
+        prototypeHtml: n,
+        prototypeName: i
+    }
+}
+, newclasshtml = function (e) {
+    return e.prototypeHtml.replace(new RegExp(e.prototypeName, "g"), e.nextIndex)
+}
+$(document).on('click', '.add-list-item', function (t) {
+    if (t.preventDefault(),
+            !$(this).attr("disabled")) {
+        for (var classnew = ".collection-fields-list",
+                newoption = $(this).closest(".list-class").find(classnew).first(),
+                numclass = $(classnew).data("row-count-add") || 1,
+                config = addmore(newoption),
+                r = 1; numclass >= r; r++) {
+            var a = newclasshtml(config);
+            config.nextIndex++,
+                    newoption.append(a).trigger("content:changed").data("last-index", config.nextIndex)
+        }
+    }
+});
+$(document).on("click", ".removeRow", function (t) {
+    t.preventDefault(),
+    $(this).attr("disabled") || $(this).closest("*[data-content]").trigger("content:remove").remove();
+   
+    
 });
