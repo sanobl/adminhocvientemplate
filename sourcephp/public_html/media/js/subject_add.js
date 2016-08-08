@@ -1,11 +1,12 @@
 function bindMonthShow() {
     var total = $('#money_total').val();
-    total = parseInt(total);
+    total = replaceDotCharacter(total); //parseInt(total);
+    // console.log('total: ' + total);
     var fromDate = convertDateDate($('#fromdate').val())
     var toDate = convertDateDate($('#todate').val());
     // var mFromDate = pa fromDate.getMonth();
     var month = parseInt(monthDiff(fromDate, toDate));
-    console.log('month:' + month);
+    // console.log('month:' + month);
     if (month >= 0) {
         var mFrom = parseInt(getMMYYYYFromDate(fromDate));
         var mTo = parseInt(getMMYYYYFromDate(toDate));
@@ -26,9 +27,9 @@ function bindMonthShow() {
                 html += '<input type="hidden" name="payment_month_hidden[]" value="' + getMMYYYYDisplayFromDate(fromDate) + '">';
                 if (i == month) {
                     moneyPhase = total - totalPhase;
-                    html += '<input type="text" name="payment_month[]" class="width_number60" value="' + moneyPhase + '"></label>';
+                    html += '<input type="text" name="payment_month[]" class="width_number60" value="' + addCommas(moneyPhase) + '"></label>';
                 } else {
-                    html += '<input type="text" name="payment_month[]" class="width_number60" value="' + moneyPhase + '"></label>';
+                    html += '<input type="text" name="payment_month[]" class="width_number60" value="' + addCommas(moneyPhase) + '"></label>';
                     totalPhase = totalPhase + moneyPhase;
                 }
             }
@@ -47,9 +48,11 @@ function bindMonthHide() {
 
 function bindOneTimeShow() {
     var total = $('#money_total').val();
+    total = replaceDotCharacter(total); //parseInt(total);
+    // console.log('total: ' + total);
     var html = '<label class="control-label">Tiền thanh toán 1 lần </label>';
     html += '<input type="hidden" name="payment_onetime_hidden[]" value="All">';
-    html += '<div class="controls"> <div class="span12"><input type="text" name="payment_onetime[]" class="width_number60" value="' + total + '" placeholder="">';
+    html += '<div class="controls"> <div class="span12"><input type="text" name="payment_onetime[]" class="width_number60" value="' + addCommas(total) + '" placeholder="">';
     html += '</div></div>';
     $('#thanhtoan1lan').html(html);
 }
@@ -60,7 +63,9 @@ function bindOneTimeHide() {
 
 function bindPhaseShow() {
     var total = $('#money_total').val();
-    total = parseInt(total);
+
+    total = replaceDotCharacter(total); //parseInt(total);
+    // console.log('total: ' + total);
     var phase = $('#phase').val();
     phase = parseInt(phase);
     var html = '<label class="control-label">Tiền thanh toán theo ' + phase + ' đợt </label>';
@@ -72,9 +77,9 @@ function bindPhaseShow() {
         html += '<input type="hidden" name="payment_phase_hidden[]" value="P' + i + '">';
         if (i == phase) {
             moneyPhase = total - totalPhase;
-            html += '<input type="text" name="payment_phase[]"  class="width_number60" value="' + moneyPhase + '" placeholder="">';
+            html += '<input type="text" name="payment_phase[]"  class="width_number60" value="' + addCommas(moneyPhase) + '" placeholder="">';
         } else {
-            html += '<input type="text" name="payment_phase[]"  class="width_number60" value="' + moneyPhase + '" placeholder="">';
+            html += '<input type="text" name="payment_phase[]"  class="width_number60" value="' + addCommas(moneyPhase) + '" placeholder="">';
             totalPhase = totalPhase + moneyPhase;
         }
         html += '</label>';

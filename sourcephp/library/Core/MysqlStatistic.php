@@ -125,7 +125,7 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
         return $arr;
     }
 
-    public function insertSubject($data, $datadetail,$id)
+    public function insertSubject($data, $datadetail, $id, $dataClass)
     {
         try {
             $this->_db = MysqliDb::getInstance();
@@ -136,27 +136,23 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
 // `fromdate`, `todate`,`timelearning`,`fromhours`,`tohours`,`teacher_id`,
 //`money_total`,`payment_type`,`phase`,`isactive`) '
 //                . 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $data);
-            if ($id > 0)
-            { //update
-                $this->_db->where ('id', $id);
+            if ($id > 0) { //update
+                $this->_db->where('id', $id);
                 $data['updated_at'] = $this->_db->now();
-                if ($this->_db->update ('subjects', $data))
-                { //update thanh cong
+                if ($this->_db->update('subjects', $data)) { //update thanh cong
                     $subjectId = $id;
                 }
-            }
-            else {
+            } else {
                 $data['created_at'] = $this->_db->now();
                 $data['updated_at'] = $this->_db->now();
                 $subjectId = $this->_db->insert('subjects', $data);
             }
             if ($subjectId > 0) {
+                //data detail
                 if (isset($datadetail) && count($datadetail) > 1) {
-                    if ($id > 0)
-                    { //delete data cu
+                    if ($id > 0) { //delete data cu
                         $this->_db->where('subject_id', $id);
-                        if($this->_db->delete('subject_detail'))
-                        {
+                        if ($this->_db->delete('subject_detail')) {
                             //delete thanh cong
                         }
                     }
@@ -193,6 +189,34 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
                     if (isset($arr) && count($arr) > 0)
                         $ids = $this->_db->insertMulti('subject_detail', $arr);
                 }
+                //data class
+                if (isset($dataClass) && count($dataClass) > 0) {
+                    if ($id > 0) { //delete data cu
+                        $this->_db->where('subject_id', $id);
+                        if ($this->_db->delete('subject_class')) {
+                            //delete thanh cong
+                        }
+                    }
+                    $arrClass = [];
+                    foreach ($dataClass as $item) {
+                        $timeLearning = '';
+                        if (isset($item['timelearning'])) {
+                            for ($i = 0; $i < count($item['timelearning']); $i++) {
+                                if ($i != count($item['timelearning']))
+                                    $timeLearning .= ',';
+                                $timeLearning .= $item['timelearning'][$i];
+                            }
+
+                        }
+                        $arrClass[] = array("timelearning" => $timeLearning,
+                            "fromhours" => $item['fromhours'],
+                            "tohours" => $item['tohours'],
+                            "subject_id" => $subjectId,
+                            "teacher_id" => $item['teachers']);
+                    }
+                    if (isset($arrClass) && count($arrClass) > 0)
+                        $ids = $this->_db->insertMulti('subject_class', $arrClass);
+                }
             }
         } catch (Exception $e) {
             print_r($e);
@@ -219,7 +243,23 @@ where s.id = ?';
         return $data;
     }
 
-    public function getListSubjectWithPaging($title,$teacherName,$pageIndex,$pageSize)
+
+    public function getListSubjectClassById($id)
+    {
+        try {
+            $this->_db = MysqliDb::getInstance();
+            $sql = 'select sc.id,sc.subject_id,sc.timelearning,sc.fromhours,sc.tohours,sc.teacher_id,t.`name` from `subject_class` sc 
+inner join `teachers` t on sc.teacher_id = t.id
+where sc.subject_id = ?';
+            $data = $this->_db->rawQuery($sql, Array($id));
+        } catch (Exception $e) {
+            print_r($e);
+            die;
+        }
+        return $data;
+    }
+
+    public function getListSubjectWithPaging($title, $teacherName, $pageIndex, $pageSize)
     {
         try {
             $this->_db = MysqliDb::getInstance();
@@ -228,8 +268,8 @@ where s.id = ?';
                 s.fromdate,s.timelearning from `subjects` s inner join `teachers` t
                 on s.teacher_id = t.id
                 where IFNULL(s.isdelete,0) <> 1 ';
-            $sqlWhere ='';
-            if(!empty($title)) {
+            $sqlWhere = '';
+            if (!empty($title)) {
                 $sqlWhere .= " and s.title like '%$title%'";
 //                $param[] = $title;
             }
@@ -241,31 +281,31 @@ where s.id = ?';
             $param[] = $pageIndex;
             $param[] = $pageSize;
             $sqlOrder = ' order by s.id desc limit ?,?';
-            $sql = $sql.$sqlWhere.$sqlOrder;
+            $sql = $sql . $sqlWhere . $sqlOrder;
 //           var_dump($sql);
 //            print_r($param);die;
-            $data = $this->_db->rawQuery($sql,$param);
+            $data = $this->_db->rawQuery($sql, $param);
 //            print_r($data);die;
-        }  catch (Exception $e)
-        {
+        } catch (Exception $e) {
             print_r($e);
             die;
         }
         return $data;
     }
 
-    public function deleteSubject ($id) {
+    public function deleteSubject($id)
+    {
         $this->_db = MysqliDb::getInstance();
         $user = $this->_db->rawQuery('update `subjects` set `subjects`.`isdelete` = 1 where id =?', array($id));
         return $user;
     }
 
-    public function checkUserLogin($username,$password)
+    public function checkUserLogin($username, $password)
     {
         $this->_db = MysqliDb::getInstance();
         $results = $this->_db
             ->where('name', $username)
-            ->where('isdelete',0)
+            ->where('isdelete', 0)
             ->where("password", md5($password))
             ->get('users');
         return $results;

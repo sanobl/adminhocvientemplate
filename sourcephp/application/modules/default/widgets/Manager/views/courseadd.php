@@ -432,4 +432,6 @@
 <?php } ?>
     });
 </script>
+
+<script src="<?php echo $this->getView()->app->static->frontend->js; ?>/utilities.js"></script>
 <script src="<?php echo $this->getView()->app->static->frontend->js; ?>/subject_add.js"></script>

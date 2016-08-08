@@ -6,6 +6,8 @@ class Widget_Manager_CourseAdd extends Core_Widget
     public function run()
     {
         $isLogin = true;
+        $dataSubject[] = null;
+        $dataSubjectClass = null;
         $listsubjects = '';
         $creatby = 'thuatnv';
         if ($isLogin) {
@@ -13,18 +15,21 @@ class Widget_Manager_CourseAdd extends Core_Widget
 
             $lsTeachers = Core_MysqlStatistic::getInstance()->getListTeacherActive();
             if (empty($_POST)) {
-                if (isset($subjectId) && $subjectId > 0)
+                if (isset($subjectId) && $subjectId > 0) {
                     $dataSubject = Core_MysqlStatistic::getInstance()->getSubjectById($subjectId);
+                    $dataSubjectClass = Core_MysqlStatistic::getInstance()->getListSubjectClassById($subjectId);
+                }
 //                echo '<pre>';
 //                print_r($dataSubject);
                 $this->render('courseadd', array(
                     'lsTeachers' => $lsTeachers,
                     'dataget' => $dataSubject[0],
-                    'id' => $subjectId
+                    'id' => $subjectId,
+                    'dataclass' => $dataSubjectClass
                 ));
             } else {
 //                echo '<pre>';
-//                echo json_encode($_POST);
+//                print_r($_POST['class']);
 //                die;
                 $datapost = array();
                 $id = isset($_POST['id']) ? $_POST['id'] : 0;
@@ -79,7 +84,8 @@ class Widget_Manager_CourseAdd extends Core_Widget
                     "payment_phase" => isset($_POST['payment_phase'])?$_POST['payment_phase']: null);
 //                echo '<pre>';
 //                print_r($datapost);die;
-                $result = Core_MysqlStatistic::getInstance()->insertSubject($datapost, $dataDetail,$id);
+                $dataClass = $_POST['class'];
+                $result = Core_MysqlStatistic::getInstance()->insertSubject($datapost, $dataDetail,$id,$dataClass);
                 $url = '/quan-ly-khoa-hoc.html';
                 $this->forward($url);
 
