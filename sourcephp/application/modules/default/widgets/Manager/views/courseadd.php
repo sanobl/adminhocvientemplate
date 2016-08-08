@@ -173,7 +173,13 @@
                                 </div>
                                 
                                 <div class="list-class">
-                                    <div class="class collection-fields-list" data-last-index="1" data-row-count-add="1" data-index="0" data-prototype="<?php
+                                    <div class="class collection-fields-list" data-last-index="<?php if(isset($dataclass) && count($dataclass) > 0) { 
+                                        echo count($dataclass) + 1;
+                                            
+                                        }else {
+                                            echo 1;
+                                            
+                                        }?>" data-row-count-add="1" data-index="0" data-prototype="<?php
                                     if (isset($lsTeachers)) {
                                         $stringTeachers = '';
                                         foreach ($lsTeachers as $teacher) {
@@ -242,54 +248,147 @@
                                         '</div>'.
                                     '</div>';
                                 echo htmlentities($stringaddmore);
-                                ?>">
+                                ?>">    
+                                        <?php if(isset($dataclass) && count($dataclass) > 0){  
+                                            for($i = 0; $i<count($dataclass); $i++){ ?>                                            
+                                            <div class="class" data-content="<?php echo $i;?>">
+                                                <?php if($i==0) {?>
+                                                    <h5>Lớp khởi tạo</h5>
+                                                <?php }else {?>
+                                                    <h5>Thêm lớp mới | <a class="removeRow " type="button" data-related="<?php echo $i;?>">xóa lớp</a></h5>
+                                                <?php } ?>
+                                                    
+                                                <div class="control-group">
+                                                    <label class="control-label">Thời gian học</label>
+                                                    <?php
+                                                $lsTime = array();
+                                                if (isset($dataclass[$i]['timelearning'])) {
+
+                                                    $lsTime = explode(',', $dataclass[$i]['timelearning']);
+                                                }
+                                                ?>
+                                                <div class="controls">
+                                                        <div class="span12">
+                                                            <div class="span12">
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="monday" <?php if (in_array('monday', $lsTime)) echo 'checked="checked"'; ?> >
+                                                                    Thứ Hai
+                                                                </label>
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="tuesday" <?php if (in_array('tuesday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                    Thứ Ba
+                                                                </label>
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="wednesday" <?php if (in_array('wednesday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                    Thứ Tư
+                                                                </label>
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="thursday" <?php if (in_array('thursday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                    Thứ Năm
+                                                                </label>
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="friday" <?php if (in_array('friday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                    Thứ Sáu
+                                                                </label>
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="saturday" <?php if (in_array('saturday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                    Thứ Bảy
+                                                                </label>
+                                                                <label class="checkbox inline">
+                                                                    <input type="checkbox" name="class[<?php echo $i;?>][timelearning][]"
+                                                                           value="sunday" <?php if (in_array('sunday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                    Chủ nhật
+                                                                </label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>   
+                                                </div>
+                                                <div class="control-group">
+                                                    <label class="control-label"></label>
+                                                    <div class="controls">
+                                                        <div class="span12">
+                                                            <input type="text" class="width_number60" placeholder="Từ giờ"
+                                                                   name="class[<?php echo $i;?>][fromhours]"
+                                                                   value="<?php echo isset($dataclass[$i]['fromhours']) ? $dataclass[$i]['fromhours'] : ''; ?>">
+                                                            <input type="text" class="width_number60" placeholder="Đến giờ"
+                                                                   name="class[<?php echo $i;?>][tohours]"
+                                                                   value="<?php echo isset($dataclass[$i]['tohours']) ? $dataclass[$i]['tohours'] : ''; ?>">
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="control-group">
+                                                <label class="control-label">Giáo viên</label>
+                                                <div class="controls">
+                                                    <select name="class[<?php echo $i;?>][teachers]">
+                                                        <option value="0">Vui lòng chọn</option>
+                                                        <?php
+                                                        if (isset($lsTeachers)) {
+                                                            $stringTeachers = '';
+                                                            foreach ($lsTeachers as $teacher) {                                                            
+                                                                ?>
+
+                                                                <option
+                                                                    value="<?php echo $teacher['id']; ?>" <?php if ($dataclass[$i]['teacher_id'] == $teacher['id']) echo 'selected="selected"'; ?> ><?php echo $teacher['name']; ?></option>
+                                                                                <?php }
+                                                                            }
+                                                                            ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            </div>
+                                             
+                                        <?php }
+                                        }else {
+                                        ?>
                                         <div class="class">
                                             <h5>Lớp khởi tạo</h5>
                                             <div class="control-group">
                                                 <label class="control-label">Thời gian học</label>
-                                                <?php
-                                                $lsTime = array();
-                                                if (isset($dataget['timelearning'])) {
-
-                                                    $lsTime = explode(',', $dataget['timelearning']);
-                                                }
-                                                ?>
+                                                
                                                 <div class="controls">
                                                     <div class="span12">
                                                         <div class="span12">
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="monday" <?php if (in_array('monday', $lsTime)) echo 'checked="checked"'; ?> >
+                                                                       value="monday" >
                                                                 Thứ Hai
                                                             </label>
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="tuesday" <?php if (in_array('tuesday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                       value="tuesday" >
                                                                 Thứ Ba
                                                             </label>
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="wednesday" <?php if (in_array('wednesday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                       value="wednesday">
                                                                 Thứ Tư
                                                             </label>
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="thursday" <?php if (in_array('thursday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                       value="thursday">
                                                                 Thứ Năm
                                                             </label>
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="friday" <?php if (in_array('friday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                       value="friday">
                                                                 Thứ Sáu
                                                             </label>
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="saturday" <?php if (in_array('saturday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                       value="saturday">
                                                                 Thứ Bảy
                                                             </label>
                                                             <label class="checkbox inline">
                                                                 <input type="checkbox" name="class[0][timelearning][]"
-                                                                       value="sunday" <?php if (in_array('sunday', $lsTime)) echo 'checked="checked"'; ?>>
+                                                                       value="sunday">
                                                                 Chủ nhật
                                                             </label>
                                                         </div>
@@ -303,10 +402,10 @@
                                                     <div class="span12">
                                                         <input type="text" class="width_number60" placeholder="Từ giờ"
                                                                name="class[0][fromhours]"
-                                                               value="<?php echo isset($dataget['fromhours']) ? $dataget['fromhours'] : ''; ?>">
+                                                               value="">
                                                         <input type="text" class="width_number60" placeholder="Đến giờ"
                                                                name="class[0][tohours]"
-                                                               value="<?php echo isset($dataget['tohours']) ? $dataget['tohours'] : ''; ?>">
+                                                               value="">
                                                     </div>
 
                                                 </div>
@@ -331,6 +430,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <?php }?>
                                     </div>
                                     <div>
                                         <div class="control-group">

@@ -19,8 +19,8 @@ class Widget_Manager_CourseAdd extends Core_Widget
                     $dataSubject = Core_MysqlStatistic::getInstance()->getSubjectById($subjectId);
                     $dataSubjectClass = Core_MysqlStatistic::getInstance()->getListSubjectClassById($subjectId);
                 }
-//                echo '<pre>';
-//                print_r($dataSubject);
+                //echo '<pre>';
+                //echo json_encode($dataSubjectClass);
                 $this->render('courseadd', array(
                     'lsTeachers' => $lsTeachers,
                     'dataget' => $dataSubject[0],
