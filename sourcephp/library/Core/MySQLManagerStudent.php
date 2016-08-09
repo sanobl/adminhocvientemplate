@@ -308,6 +308,47 @@ left join `teachers` t on sc.teacher_id = t.id";
 
         }
     }
+    
+    public function getbillofstudent($studentid){
+        $this->_db = MysqliDb::getInstance();
+        $result = $this->_db->rawQuery('
+            SELECT
+                bill_code,
+                student_id,
+                students.student_fullname,
+                student_bill.created_by,
+                student_bill.created_at,
+                subjects.title,
+                money,
+                is_status,
+                student_bill.subject_id,
+                content
+              FROM
+                student_bill
+              INNER JOIN
+                subjects ON student_bill.subject_id = subjects.id
+              INNER JOIN
+                students ON student_bill.student_id = students.id
+              WHERE
+                student_id = ?
+                ',array($studentid));
+        return $result;
+        
+    }
+    public function insertNewBill($dataBill)
+    {
+        try
+        {
+            $this->_db = MysqliDb::getInstance();
+            $dataBill['created_at'] = $this->_db->now();
+            $billId = $this->_db->insert('student_bill', $dataBill);
+
+        }
+        catch (Exception $e)
+        {
+
+        }
+    }
 
 
 

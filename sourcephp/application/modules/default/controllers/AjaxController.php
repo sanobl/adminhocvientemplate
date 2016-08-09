@@ -250,7 +250,37 @@ class AjaxController extends Zend_Controller_Action
         echo $output;
         die;
     }
+    public function insertbillAction(){
+        $created_by = 'thuatnv';
+        $student_fullname = trim($this->_request->getParam('student_fullname'));
+        $student_id = trim($this->_request->getParam('student_id'));
+        $subjecttitle = trim($this->_request->getParam('subjecttitle'));
+        $subject_id = trim($this->_request->getParam('subject_id'));
+        $money = trim($this->_request->getParam('money'));
+        $idCode = '';
+        try {
+            $idCode = Core_MySQLManagerStudent::getInstance()->insertBillCode1();
+            if ($idCode > 0){
 
+                $dataBill = array();
+                $idCode = $dataBill['bill_code'] = str_pad($idCode, 6, '0', STR_PAD_LEFT);
+                $dataBill['student_id'] = $student_id;
+                $dataBill['money'] = $money;
+                $dataBill['created_by']= $created_by;
+                $dataBill['is_status'] = 0;
+                $dataBill['subject_id'] = $subject_id;
+                $dataBill['content'] = '';
+                Core_MySQLManagerStudent::getInstance()->insertNewBill($dataBill);
+            }
+            
+        } catch (Exception $exc) {
+            
+        }
+
+        
+        echo $idCode;
+        die;
+    }
 }
 
 ?>
