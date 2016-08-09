@@ -9,11 +9,14 @@
                     <div class="span12">
                         <form class="form-horizontal" method="POST" action="" enctype="multipart/form-data">
                             <fieldset>
-
-                                <div class="span6 boder-right">
+                                <?php $classfull = 'span6 boder-right';
+                                    if ($service == 1)
+                                        $classfull = 'span12 boder-right'
+                                ?>
+                                <div class="<?php echo $classfull;?>">
 
                                     <div class="span12">
-                                        <h4> Thông tin học viên</h4>
+                                        <h4> Thông tin người đăng ký</h4>
 
                                         <div class="control-group">
                                             <label class="control-label">Họ và tên</label>
@@ -49,6 +52,8 @@
                                     </div>
 
                                 </div>
+                                <?php if ($service != 1)
+                                { ?>
                                 <div class="span6">
 
                                     <div class="span12">
@@ -86,12 +91,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php }?>
                                 <div class="clearfix"></div>
                                 <hr>
-                                <h4 class="title-form"> Thông tin khóa học</h4>
+                                <h4 class="title-form"> Thông tin dịch vụ</h4>
 
                                 <div class="control-group">
-                                    <label class="control-label">Chọn khóa học</label>
+                                    <label class="control-label">Chọn dịch vụ</label>
 
                                     <div class="controls">
                                         <select id="khoahoc" name="subject_id">
@@ -231,7 +237,8 @@
         var dataadd = {
             id:select,
             is_old_student:<?php echo $is_old_student;?>,
-            student_id: <?php echo $student_id;?>
+            student_id: <?php echo $student_id;?>,
+            service: <?php echo $service;?>
         };
         $.ajax({
             url: '/Ajax/getinfocourse',

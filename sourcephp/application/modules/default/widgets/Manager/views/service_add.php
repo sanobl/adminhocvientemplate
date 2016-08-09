@@ -2,7 +2,7 @@
     <div class="main_content">
         <div class="row-fluid">
             <div class="span12">
-                <h3 class="heading">Thêm môn học </h3>
+                <h3 class="heading">Thêm dịch vụ</h3>
                 <div class="row-fluid sepH_c">
                     <div class="span12">
                         <form class="form-horizontal" id="myform" method="post">
@@ -11,14 +11,14 @@
                             <fieldset>
 
                                 <div class="control-group">
-                                    <label class="control-label">Tên môn học</label>
+                                    <label class="control-label">Tên dịch vụ</label>
                                     <div class="controls">
                                         <input type="text" class="span10" name="title"
                                                value="<?php echo isset($dataget['title']) ? $dataget['title'] : ''; ?>">
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label"> Mô tả  học</label>
+                                    <label class="control-label"> Mô tả dịch </label>
                                     <div class="controls">
                                         <textarea cols="30" rows="5" class="span10"
                                                   name="description"><?php echo isset($dataget['description']) ? $dataget['description'] : ''; ?></textarea>
@@ -89,13 +89,13 @@
 <!--                                        </div>-->
 <!--                                    </div>-->
 <!--                                </div>-->
-                                <div class="control-group">
-                                    <label class="control-label">Hỗ trợ học viên cũ</label>
-                                    <div class="controls">
-                                        <input type="checkbox" value="1"
-                                               name="is_support_old_student" <?php if ($dataget['is_support_old_student'] == 1) echo 'checked="checked"'; ?>>
-                                    </div>
-                                </div>
+<!--                                <div class="control-group">-->
+<!--                                    <label class="control-label">Hỗ trợ học viên cũ</label>-->
+<!--                                    <div class="controls">-->
+<!--                                        <input type="checkbox" value="1"-->
+<!--                                               name="is_support_old_student" --><?php //if ($dataget['is_support_old_student'] == 1) echo 'checked="checked"'; ?><!-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="control-group">
                                     <label class="control-label" id="titlemoney">Số tiền/tháng(VNĐ)</label>
                                     <div class="controls">
@@ -104,14 +104,14 @@
                                                name="money_total" id="money_total">
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Tỷ lệ % chia giáo viên</label>
-                                    <div class="controls">
-                                        <input type="number" name="money_percent_for_teacher"
-                                               id="money_percent_for_teacher"
-                                               value="<?php echo isset($dataget['money_percent_for_teacher']) ? $dataget['money_percent_for_teacher'] : ''; ?>">
-                                    </div>
-                                </div>
+<!--                                <div class="control-group">-->
+<!--                                    <label class="control-label">Tỷ lệ % chia giáo viên</label>-->
+<!--                                    <div class="controls">-->
+<!--                                        <input type="text" name="money_percent_for_teacher"-->
+<!--                                               id="money_percent_for_teacher"-->
+<!--                                               value="--><?php //echo isset($dataget['money_percent_for_teacher']) ? $dataget['money_percent_for_teacher'] : ''; ?><!--">-->
+<!--                                    </div>-->
+<!--                                </div>-->
 <!--                                <div class="control-group" id="hinhthucthanhtoan">-->
 <!--                                    <label class="control-label">Hình thức thanh toán</label>-->
 <!--                                    --><?php
@@ -170,7 +170,7 @@
                                                name="isactive" <?php if ($dataget['isactive'] == 1) echo 'checked="checked"'; ?>>
                                     </div>
                                 </div>
-
+                              <!--
                                 <div class="list-class">
                                     <div class="class collection-fields-list"
                                          data-last-index="<?php if (isset($dataclass) && count($dataclass) > 0) {
@@ -266,7 +266,7 @@
                                                         $lsTime = array();
                                                         if (isset($dataclass[$i]['timelearning'])) {
 
-                                                            $lsTime = explode(';', $dataclass[$i]['timelearning']);
+                                                            $lsTime = explode(',', $dataclass[$i]['timelearning']);
                                                         }
                                                         ?>
                                                         <div class="controls">
@@ -465,6 +465,7 @@
 
                                     </div>
                                 </div>
+                                -->
                                 <div class="control-group">
                                     <div class="controls">
                                         <button class="btn btn-info" type="submit">Lưu thông tin</button>

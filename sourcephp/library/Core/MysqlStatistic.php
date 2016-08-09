@@ -129,13 +129,6 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
     {
         try {
             $this->_db = MysqliDb::getInstance();
-//            $arrKey = array("title", "description", "subject_payment_type", "subject_type",
-//                "fromdate", "todate","timelearning","fromhours","tohours","teacher_id",
-//                "money_total","payment_type","phase","isactive");
-//            $subjectId = $this->_db->rawQuery('INSERT INTO `subjects`(`title`, `description`, `subject_payment_type`, `subject_type`,
-// `fromdate`, `todate`,`timelearning`,`fromhours`,`tohours`,`teacher_id`,
-//`money_total`,`payment_type`,`phase`,`isactive`) '
-//                . 'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', $data);
             if ($id > 0) { //update
                 $this->_db->where('id', $id);
                 $data['updated_at'] = $this->_db->now();
@@ -205,9 +198,9 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
 
                                 $timeLearning .= $item['timelearning'][$i];
                                 if ($i != count($item['timelearning']))
-                                    $timeLearning .= ',';
+                                    $timeLearning .= ';';
                             }
-                            $timeLearning = rtrim($timeLearning, ",");
+                            $timeLearning = rtrim($timeLearning, ";");
                         }
                         $arrClass[] = array("timelearning" => $timeLearning,
                             "fromhours" => $item['fromhours'],
@@ -270,7 +263,7 @@ GROUP_CONCAT(sc.timelearning) as timelearning from `subjects` s
 inner join `subject_class` sc on s.id = sc.subject_id
 inner join `teachers` t
 on sc.teacher_id = t.id
-where IFNULL(s.isdelete,0) <> 1';
+where IFNULL(s.isdelete,0) <> 1 and s.subject_payment_type = 1' ;
             $sqlGroupBy = ' group by s.id,s.title,t.`name`,s.todate,s.created_at,t.id,s.fromdate';
             $sqlWhere = '';
             if (!empty($title)) {
@@ -281,6 +274,36 @@ where IFNULL(s.isdelete,0) <> 1';
                 $sqlWhere .= " and t.`name` like '%$teacherName%'";
 //                $param[] = $teacherName;
             }
+//            print_r($sqlWhere);die;
+            $param[] = $pageIndex;
+            $param[] = $pageSize;
+            $sqlOrder = ' order by s.id desc limit ?,?';
+            $sql = $sql . $sqlWhere . $sqlGroupBy . $sqlOrder;
+//           var_dump($sql);
+//            print_r($param);die;
+            $data = $this->_db->rawQuery($sql, $param);
+//            print_r($data);die;
+        } catch (Exception $e) {
+            print_r($e);
+            die;
+        }
+        return $data;
+    }
+
+    public function getListServiceWithPaging($title, $pageIndex, $pageSize)
+    {
+        try {
+            $this->_db = MysqliDb::getInstance();
+            $pageIndex = $pageIndex * $pageSize;
+            $sql = 'select s.id,s.title,s.todate,s.created_at from `subjects` s  
+                        where IFNULL(s.isdelete,0) <> 1 and subject_payment_type = 0';
+            $sqlGroupBy = ' group by s.id,s.title,s.created_at';
+            $sqlWhere = '';
+            if (!empty($title)) {
+                $sqlWhere .= " and s.title like '%$title%'";
+//                $param[] = $title;
+            }
+
 //            print_r($sqlWhere);die;
             $param[] = $pageIndex;
             $param[] = $pageSize;
@@ -313,5 +336,29 @@ where IFNULL(s.isdelete,0) <> 1';
             ->where("password", md5($password))
             ->get('users');
         return $results;
+    }
+
+
+    public function insertService($data, $id)
+    {
+        try {
+            $this->_db = MysqliDb::getInstance();
+//
+            if ($id > 0) { //update
+                $this->_db->where('id', $id);
+                $data['updated_at'] = $this->_db->now();
+                if ($this->_db->update('subjects', $data)) { //update thanh cong
+                    $subjectId = $id;
+                }
+            } else {
+                $data['created_at'] = $this->_db->now();
+                $data['updated_at'] = $this->_db->now();
+                $subjectId = $this->_db->insert('subjects', $data);
+            }
+            return $subjectId;
+        } catch (Exception $e) {
+            print_r($e);
+            die;
+        }
     }
 }

@@ -10,9 +10,10 @@ class Widget_Manager_StudentAdd extends Core_Widget
         $createdby = 'thuatnv';
         $studentdetail = '';
         if ($isLogin) {
-            $listsubjects = Core_MySQLManagerStudent::getInstance()->getlistsubjects();
-            $studentid = intval($this->getRequest()->getParam("index1"));
 
+            $studentid = intval($this->getRequest()->getParam("index1"));
+            $service = intval($this->getRequest()->getParam("service"));
+            $listsubjects = Core_MySQLManagerStudent::getInstance()->getlistsubjects($service);
             if (empty($_POST)) {
                 $student_fullname = '';
                 $student_fullname = '';
@@ -23,6 +24,7 @@ class Widget_Manager_StudentAdd extends Core_Widget
                 $parent_email = '';
                 $subject_id = '';
                 $payment_type = '';
+                $subject_class_id = 0;
                 $is_old_student = 0;
                 if ($studentid != 0) {
                     $studentdetail = Core_MySQLManagerStudent::getInstance()->getstudentbyid($studentid);
@@ -53,7 +55,8 @@ class Widget_Manager_StudentAdd extends Core_Widget
                     'payment_type' => $payment_type,
                     'is_old_student' => $is_old_student,
                     'subject_class_id'=> $subject_class_id,
-                    'student_id' => $studentid
+                    'student_id' => $studentid,
+                    'service' => $service
                 ));
             } else {
                 //echo json_encode($_POST);die;

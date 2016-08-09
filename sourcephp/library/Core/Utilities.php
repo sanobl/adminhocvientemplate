@@ -6,7 +6,7 @@ class Core_Utilities
     public static function convertListDayToVN($ls)
     {
         $str = '';
-        $arr = explode(',', $ls);
+        $arr = explode(';', $ls);
         if (count($arr) > 0) {
             foreach ($arr as $ar) {
 

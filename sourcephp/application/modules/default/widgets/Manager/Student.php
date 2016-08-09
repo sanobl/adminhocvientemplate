@@ -11,7 +11,7 @@ class Widget_Manager_Student extends Core_Widget {
         $liststudent = null;
         $listteacher = null;
         $listsubjects = null;
-        $listsubjects = Core_MySQLManagerStudent::getInstance()->getlistsubjects();
+        $listsubjects = Core_MySQLManagerStudent::getInstance()->getlistsubjects(0);
         $listteacher = Core_MySQLManagerStudent::getInstance()->getlistteacher();
         if($fullname != '' || $teacherid != '' || $subjectsid != '' || $usercreate != ''){
             $liststudent = Core_MySQLManagerStudent::getInstance()->searchstudent($fullname,$teacherid,$subjectsid,$usercreate);

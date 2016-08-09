@@ -99,7 +99,8 @@
                 <div class="span12">
                     <h3 class="heading">Danh sách học viên</h3>
                     <div class="btn-group sepH_b">
-                        <a href="them-hoc-vien.html"> <i class="splashy-add"></i> Thêm mới</a>
+                        <a href="them-hoc-vien.html"> <i class="splashy-add"></i> Đăng ký môn học </a>
+                        <a href="them-hoc-vien.html?service=1"> <i class="splashy-add"></i> Đăng ký dịch vụ</a>
                     </div>
                     <div class="row-fluid sepH_c">
                         <div class="span12">

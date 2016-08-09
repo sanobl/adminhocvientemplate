@@ -54,10 +54,18 @@ class Core_MySQLManagerStudent
         return $users;
     }
 
-    public function getlistsubjects()
+    public function getlistsubjects($service)
     {
         $this->_db = MysqliDb::getInstance();
-        $listsubjects = $this->_db->rawQuery('SELECT id, title from subjects');
+        $sql = 'SELECT id, title from subjects';
+        if ($service == 1)
+            $sql .= ' where subject_payment_type = 0';
+        else if ($service == 0)
+            $sql .= ' where subject_payment_type = 1';
+        else
+            $sql .= ' where 1=1 ';
+        $sql .= ' and IFNULL(isdelete,0) <> 1 and IFNULL(isactive,0) = 1';
+        $listsubjects = $this->_db->rawQuery($sql);
 
         return $listsubjects;
     }
@@ -181,7 +189,7 @@ from `subject_class` sc inner JOIN teachers t on t.id = sc.teacher_id where sc.s
 
     public function insertstudent2($student_fullname, $student_phone, $student_email,
                                    $parent_fullname, $parent_phone, $parent_email, $subject_id, $payment_type, $money_total,
-                                   $created_at, $createdby, $is_old_student, $subject_class_id,$teacher_id)
+                                   $created_at, $createdby, $is_old_student, $subject_class_id, $teacher_id)
     {
         $this->_db = MysqliDb::getInstance();
         $data = Array("student_fullname" => $student_fullname,
@@ -196,7 +204,7 @@ from `subject_class` sc inner JOIN teachers t on t.id = sc.teacher_id where sc.s
             "created_at" => $created_at,
             "created_by" => $createdby,
             "is_old_student" => $is_old_student,
-            "subject_class_id"=>$subject_class_id,
+            "subject_class_id" => $subject_class_id,
             "teacher_id" => $teacher_id
         );
         $id = $this->_db->insert('students', $data);
@@ -213,7 +221,7 @@ from `subject_class` sc inner JOIN teachers t on t.id = sc.teacher_id where sc.s
 
     public function updatestudent($student_fullname, $student_phone, $student_email,
                                   $parent_fullname, $parent_phone, $parent_email, $subject_id, $payment_type,
-                                  $money_total, $created_at, $createdby, $id, $is_old_student,$subject_class_id,$teacher_id)
+                                  $money_total, $created_at, $createdby, $id, $is_old_student, $subject_class_id, $teacher_id)
     {
         $this->_db = MysqliDb::getInstance();
         $result = $this->_db->rawQuery('
@@ -248,7 +256,7 @@ from `subject_class` sc inner JOIN teachers t on t.id = sc.teacher_id where sc.s
             $money_total,
             $created_at,
             $createdby,
-            $id, $is_old_student,$subject_class_id,$teacher_id
+            $id, $is_old_student, $subject_class_id, $teacher_id
         ));
 //        $id = $this->_db->insert ('students', $data);
 //        if($id)
@@ -279,36 +287,29 @@ left join `teachers` t on sc.teacher_id = t.id";
 
     public function insertStudentDetail($dataDetail, $dataBill)
     {
-        try
-        {
+        try {
             $this->_db = MysqliDb::getInstance();
             $dataDetail['created_at'] = $this->_db->now();
             $detailId = $this->_db->insert('student_detail', $dataDetail);
             $dataBill['created_at'] = $this->_db->now();
             $billId = $this->_db->insert('student_bill', $dataBill);
 
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
 
         }
     }
 
     public function insertBillCode1()
     {
-        try
-        {
+        try {
             $this->_db = MysqliDb::getInstance();
             $dataDetail['datenow'] = $this->_db->now();
             $bId = $this->_db->insert('genbillcode1', $dataDetail);
             return $bId;
-        }
-        catch (Exception $e)
-        {
+        } catch (Exception $e) {
 
         }
     }
-
 
 
 }

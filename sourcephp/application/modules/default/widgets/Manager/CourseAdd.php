@@ -37,7 +37,7 @@ class Widget_Manager_CourseAdd extends Core_Widget
                 $datapost["description"] = isset($_POST['description']) ? $_POST['description'] : '';
                 $datapost["subject_payment_type"] = isset($_POST['subject_payment_type']) ? $_POST['subject_payment_type'] : 1;
                 $subjecttype = $_POST['subject_type'];
-                $datapost["subject_type"] = isset($subjecttype) ? $subjecttype : '';
+                $datapost["subject_type"] = isset($subjecttype) ? $subjecttype : 2;
                 if ($subjecttype == 2)
                 {
                     $datapost["payment_type"] = 2;
