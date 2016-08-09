@@ -37,6 +37,7 @@ class Widget_Manager_StudentAdd extends Core_Widget
                         $subject_id = $studentdetail['subject_id'];
                         $payment_type = $studentdetail['payment_type'];
                         $is_old_student = $studentdetail['is_old_student'];
+                        $subject_class_id = $studentdetail['subject_class_id'];
                     }
 
                 }
@@ -50,7 +51,9 @@ class Widget_Manager_StudentAdd extends Core_Widget
                     'parent_email' => $parent_email,
                     'subject_id' => $subject_id,
                     'payment_type' => $payment_type,
-                    'is_old_student' => $is_old_student
+                    'is_old_student' => $is_old_student,
+                    'subject_class_id'=> $subject_class_id,
+                    'student_id' => $studentid
                 ));
             } else {
                 //echo json_encode($_POST);die;
@@ -73,7 +76,6 @@ class Widget_Manager_StudentAdd extends Core_Widget
                         $subjectsdetail = $subjectsdetail[0];
                         $teacher_id = $subjectsdetail['teacher_id'];
                         $money_total = $subjectsdetail['money_total'];
-
                     }
                 }
                 $created_at = date("Y-m-d H:i:s");

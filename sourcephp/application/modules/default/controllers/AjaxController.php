@@ -20,6 +20,7 @@ class AjaxController extends Zend_Controller_Action
 
         $courseid = intval($this->_request->getParam('id'));
         $is_old_student = intval($this->_request->getParam('is_old_student'));
+        $student_id = intval($this->_request->getParam('student_id'));
         $result = null;
         $result = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($courseid);
 //        print_r($result);die;
@@ -65,7 +66,7 @@ class AjaxController extends Zend_Controller_Action
                             $html .= ' <div class="control-group">';
                             $html .= '<label class="control-label">Thời gian học</label>';
                             $html .= ' <div class="controls" style="padding-top:5px">';
-                            $html .= '<input type="radio" name="subject_class_id" value="'.$item['id'].'" />';
+                            $html .= '<input type="radio" name="subject_class_id" value="' . $item['id'] . '" />';
                             $html .= Core_Utilities::convertListDayToVN($item['timelearning']) . '-' . $item['fromhours'] . '->' .
                                 $item['tohours'] . '-' . $item['teacher_name'];
                             $html .= '</div>';
@@ -74,7 +75,7 @@ class AjaxController extends Zend_Controller_Action
                             $html .= ' <div class="control-group">';
                             $html .= '<label class="control-label"></label>';
                             $html .= ' <div class="controls" style="padding-top:5px">';
-                            $html .= '<input type="radio" name="subject_class_id" value="'.$item['id'].'" />';
+                            $html .= '<input type="radio" name="subject_class_id" value="' . $item['id'] . '" />';
                             $html .= Core_Utilities::convertListDayToVN($item['timelearning']) . '-' . $item['fromhours'] . '->' .
                                 $item['tohours'] . '-' . $item['teacher_name'];
                             $html .= '</div>';
@@ -215,27 +216,41 @@ class AjaxController extends Zend_Controller_Action
 
     public function excelAction()
     {
-        $output = '  
-                <table class="table" bordered="1">  
+        $output = '<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8"> 
+</head>
+<style>.xlText { mso-number-format: "\@"; } th,td { border:solid 0.1pt #000000; }body { border:solid 0.1pt #000000; }</style>';
+        $output .= '  
+                <table class="table">  <THEAD>
                      <tr>  
                           <th>Id</th>  
                           <th>First Name</th>  
                           <th>Last Name</th>  
-                     </tr>  
+                     </tr>  </THEAD>
+                     <TBODY>
+                      <tr>  
+                          <th>1</th>  
+                          <th>First Name</th>  
+                          <th>Last Name</th>  
+                     </tr>  </TBODY>
+
            ';
 
         $output .= '</table>';
 //        header("Content-Type: application/xlsx");
 //        header("Content-Disposition: attachment; filename=download.xlsx");
-        header("Content-Type: application/vnd.ms-excel;");
-        header("Content-Disposition: attachment; filename=reports.xls");
-        header("Pragma: no-cache");
-        header("Expires: 0");
-
+//        header("Content-Type: application/vnd.ms-excel;");
+//        header("Content-Disposition: attachment; filename=reports.xls");
+//        header("Pragma: no-cache");
+//        header("Expires: 0");
+        header("Content-Type:   application/vnd.ms-excel; charset=utf-8");
+        header("Content-Disposition: attachment; filename=card-history-reports.xls");
+//        header("Pragma: no-cache");
+//        header("Expires: 0");
         echo $output;
         die;
     }
-    
+
 }
 
 ?>

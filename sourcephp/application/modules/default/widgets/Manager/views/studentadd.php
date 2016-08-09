@@ -85,10 +85,7 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
-
                                 <div class="clearfix"></div>
                                 <hr>
                                 <h4 class="title-form"> Thông tin khóa học</h4>
@@ -233,7 +230,8 @@
         
         var dataadd = {
             id:select,
-            is_old_student:<?php echo $is_old_student;?>
+            is_old_student:<?php echo $is_old_student;?>,
+            student_id: <?php echo $student_id;?>
         };
         $.ajax({
             url: '/Ajax/getinfocourse',
