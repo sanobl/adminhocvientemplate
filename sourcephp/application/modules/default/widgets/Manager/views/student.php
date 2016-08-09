@@ -106,10 +106,11 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>id</th>
+                                        <th>STT</th>
+                                        <th>Học viên</th>
                                         <th>Khoá học</th>
                                         <th>Giáo viên</th>
-                                        <th>Học viên</th>
+
                                         <th>Thời gian đăng ký</th>
                                         <th>Học phí</th>
                                         <th></th>
@@ -121,9 +122,10 @@
                                             $j = $i + 1;
                                                echo ' <tr>
                                                 <td>'. $j .'</td>
+                                                 <td>'. $data[$i]['student_fullname'].'</td>
                                                 <td>'. $data[$i]['title'] .'</td>
                                                 <td>'. $data[$i]['name'].'</td>
-                                                <td>'. $data[$i]['student_fullname'].'</td>
+                                               
                                                 <td>'. $data[$i]['created_at'].'</td>
                                                 <td>
                                                     

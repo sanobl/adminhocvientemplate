@@ -24,24 +24,24 @@
                                                   name="description"><?php echo isset($dataget['description']) ? $dataget['description'] : ''; ?></textarea>
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Loại thu tiền</label>
-                                    <div class="controls">
-                                        <div class="span12">
-
-                                            <label class="checkbox inline">
-                                                <input type="radio" name="subject_payment_type"
-                                                       value="1" <?php if ($dataget['subject_payment_type'] == 1) echo 'checked="checked"'; ?>>
-                                                Thu học phí
-                                            </label>
-                                            <label class="checkbox inline">
-                                                <input type="radio" name="subject_payment_type"
-                                                       value="2" <?php if ($dataget['subject_payment_type'] == 2) echo 'checked="checked"'; ?>>
-                                                Thu khác
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="control-group">-->
+<!--                                    <label class="control-label">Loại thu tiền</label>-->
+<!--                                    <div class="controls">-->
+<!--                                        <div class="span12">-->
+<!---->
+<!--                                            <label class="checkbox inline">-->
+<!--                                                <input type="radio" name="subject_payment_type"-->
+<!--                                                       value="1" --><?php //if ($dataget['subject_payment_type'] == 1) echo 'checked="checked"'; ?><!-->
+<!--                                                Thu học phí-->
+<!--                                            </label>-->
+<!--                                            <label class="checkbox inline">-->
+<!--                                                <input type="radio" name="subject_payment_type"-->
+<!--                                                       value="2" --><?php //if ($dataget['subject_payment_type'] == 2) echo 'checked="checked"'; ?><!-->
+<!--                                                Thu khác-->
+<!--                                            </label>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="control-group">
                                     <label class="control-label">Loại môn học </label>
                                     <div class="controls">
@@ -101,7 +101,7 @@
                                     <label class="control-label" id="titlemoney">Số tiền/khoá(VNĐ)</label>
                                     <div class="controls">
                                         <input type="text"
-                                               value="<?php echo isset($dataget['money_total']) ? $dataget['money_total'] : ''; ?>"
+                                               value="<?php echo isset($dataget['money_total']) ? number_format($dataget['money_total'] ,0,'.','.'): ''; ?>"
                                                name="money_total" id="money_total">
                                     </div>
                                 </div>

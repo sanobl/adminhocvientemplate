@@ -202,11 +202,12 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
                         $timeLearning = '';
                         if (isset($item['timelearning'])) {
                             for ($i = 0; $i < count($item['timelearning']); $i++) {
+
+                                $timeLearning .= $item['timelearning'][$i];
                                 if ($i != count($item['timelearning']))
                                     $timeLearning .= ',';
-                                $timeLearning .= $item['timelearning'][$i];
                             }
-
+                            $timeLearning = rtrim($timeLearning, ",");
                         }
                         $arrClass[] = array("timelearning" => $timeLearning,
                             "fromhours" => $item['fromhours'],
@@ -228,9 +229,8 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
     {
         try {
             $this->_db = MysqliDb::getInstance();
-            $sql = 'select s.id,s.title,s.description,s.subject_type,s.fromdate,s.todate,s.fromhours,s.tohours
-,s.teacher_id,s.money_total,s.phase,s.isactive,s.is_support_old_student,
-s.money_percent_for_teacher,s.subject_payment_type,s.timelearning,
+            $sql = 'select s.id,s.title,s.description,s.subject_type,s.fromdate,s.todate,s.money_total,s.phase,s.isactive,s.is_support_old_student,
+s.money_percent_for_teacher,s.subject_payment_type,
 GROUP_CONCAT(sd.pay_period) as pay_period,GROUP_CONCAT(sd.pay_money) as pay_money,
 GROUP_CONCAT(sd.payment_type) as payment_type from `subjects` s inner join `subject_detail` sd
 on s.id = sd.subject_id 
@@ -264,10 +264,14 @@ where sc.subject_id = ?';
         try {
             $this->_db = MysqliDb::getInstance();
             $pageIndex = $pageIndex * $pageSize;
-            $sql = 'select s.id,s.title,t.`name`,s.fromhours,s.tohours,s.todate,s.created_at,
-                s.fromdate,s.timelearning from `subjects` s inner join `teachers` t
-                on s.teacher_id = t.id
-                where IFNULL(s.isdelete,0) <> 1 ';
+            $sql = 'select s.id,s.title,t.`name` as teacher_name,s.todate,s.created_at,t.id as teacher_id,
+s.fromdate,GROUP_CONCAT(sc.tohours) as tohours,GROUP_CONCAT(sc.fromhours) as fromhours,
+GROUP_CONCAT(sc.timelearning) as timelearning from `subjects` s 
+inner join `subject_class` sc on s.id = sc.subject_id
+inner join `teachers` t
+on sc.teacher_id = t.id
+where IFNULL(s.isdelete,0) <> 1';
+            $sqlGroupBy = ' group by s.id,s.title,t.`name`,s.todate,s.created_at,t.id,s.fromdate';
             $sqlWhere = '';
             if (!empty($title)) {
                 $sqlWhere .= " and s.title like '%$title%'";
@@ -281,7 +285,7 @@ where sc.subject_id = ?';
             $param[] = $pageIndex;
             $param[] = $pageSize;
             $sqlOrder = ' order by s.id desc limit ?,?';
-            $sql = $sql . $sqlWhere . $sqlOrder;
+            $sql = $sql . $sqlWhere . $sqlGroupBy . $sqlOrder;
 //           var_dump($sql);
 //            print_r($param);die;
             $data = $this->_db->rawQuery($sql, $param);

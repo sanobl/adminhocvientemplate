@@ -59,7 +59,7 @@
                                     <tr>
                                         <td><?php echo $i ?></td>
                                         <td><?php echo $item['title']; ?></td>
-                                        <td><?php echo $item['name']; ?></td>
+                                        <td><?php echo $item['teacher_name']; ?></td>
                                         <td><?php echo Core_Utilities::convertListDayToVN($item['timelearning']); ?></td>
                                         <td><?php echo $item['fromhours'] . '-' . $item['tohours']; ?></td>
                                         <td><?php echo date("d/m/Y", strtotime($item['created_at'])); ?></td>

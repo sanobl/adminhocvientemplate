@@ -26,6 +26,7 @@ class Widget_Manager_StudentDetail extends Core_Widget{
         if($isLogin){
             if($studentid != 0){
                 $studentdetail = Core_MySQLManagerStudent::getInstance()->getstudentbyid($studentid);
+
                 if(is_array($studentdetail) && count($studentdetail) > 0){
                     //echo json_encode($studentdetail);die;
                     $studentdetail = $studentdetail[0];
@@ -37,11 +38,12 @@ class Widget_Manager_StudentDetail extends Core_Widget{
                     $parent_email = $studentdetail['parent_email'];
                     $subject_id = $studentdetail['subject_id'];
                     $payment_type = $studentdetail['payment_type'];
-                    $teachername = $studentdetail['name'];
+//                    $teachername = $studentdetail['name'];
                     $subjectname = $studentdetail['title'];
                     $money_total = $studentdetail['money_total'];
                     $money_convert = Core_Utilities::convert_number_to_words($money_total);
                     $resultsubject = Core_MySQLManagerStudent::getInstance()->getsubjectsbyid($subject_id);
+                    $subjectClass= Core_MySQLManagerStudent::getInstance()->getsubjectsClassBySubjectId($subject_id);
                     if(is_array($resultsubject) && count($resultsubject)>0){
                         if(isset($resultsubject[0]["monday"]) && $resultsubject[0]["monday"]!= null){
                             $time .= 'Hai, ';
@@ -96,7 +98,8 @@ class Widget_Manager_StudentDetail extends Core_Widget{
             'studentid'=>$studentid,
             'time' => $time,
             'isprint'=> $isprint,
-            'money_convert'=>$money_convert
+            'money_convert'=>$money_convert,
+            'subjectclass'=>$subjectClass
         ));
         
          

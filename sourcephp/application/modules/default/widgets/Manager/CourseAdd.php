@@ -35,7 +35,7 @@ class Widget_Manager_CourseAdd extends Core_Widget
                 $id = isset($_POST['id']) ? $_POST['id'] : 0;
                 $datapost["title"] = isset($_POST['title']) ? $_POST['title'] : '';
                 $datapost["description"] = isset($_POST['description']) ? $_POST['description'] : '';
-                $datapost["subject_payment_type"] = isset($_POST['subject_payment_type']) ? $_POST['subject_payment_type'] : '';
+                $datapost["subject_payment_type"] = isset($_POST['subject_payment_type']) ? $_POST['subject_payment_type'] : 1;
                 $subjecttype = $_POST['subject_type'];
                 $datapost["subject_type"] = isset($subjecttype) ? $subjecttype : '';
                 if ($subjecttype == 2)
@@ -57,20 +57,34 @@ class Widget_Manager_CourseAdd extends Core_Widget
                     $datapost["todate"] = date("Y-m-d",strtotime($tDate));
                 }
 
-                if (isset($_POST['timelearning'])) {
-                    $timelearning = '';
-                    $dTime = $_POST['timelearning'];
-                    for ($i = 0; $i < count($dTime); $i++) {
-                        if ($i != count($dTime) && $i > 0)
-                            $timelearning .= ',';
-                        $timelearning .= $dTime[$i];
-                    }
-                    $datapost["timelearning"] = $timelearning;
+//                if (isset($_POST['timelearning'])) {
+//                    $timelearning = '';
+//                    $dTime = $_POST['timelearning'];
+//                    for ($i = 0; $i < count($dTime); $i++) {
+//                        if ($i != count($dTime) && $i > 0)
+//                            $timelearning .= ',';
+//                        $timelearning .= $dTime[$i];
+//                    }
+//                    $datapost["timelearning"] = $timelearning;
+//                }
+//                $datapost["fromhours"] = isset($_POST['fromhours']) ? $_POST['fromhours'] : '';
+//                $datapost["tohours"] = isset($_POST['tohours']) ? $_POST['tohours'] : '';
+//                $datapost["teacher_id"] = isset($_POST['teachers']) ? $_POST['teachers'] : 0;
+                $money_total = isset($_POST['money_total']) ? $_POST['money_total'] : 0;
+                if ($money_total != 0)
+                {
+//                    print_r('abcde'.$money_total);
+//                    $tmp = intval($money_total);
+//                    print_r($tmp);
+                    $money_total = str_replace(".","",$money_total);
+//                    print_r('abcd'.$money_total);
+                    $datapost["money_total"] = $money_total;
                 }
-                $datapost["fromhours"] = isset($_POST['fromhours']) ? $_POST['fromhours'] : '';
-                $datapost["tohours"] = isset($_POST['tohours']) ? $_POST['tohours'] : '';
-                $datapost["teacher_id"] = isset($_POST['teachers']) ? $_POST['teachers'] : 0;
-                $datapost["money_total"] = isset($_POST['money_total']) ? $_POST['money_total'] : 0;
+                else {
+                    print_r('abc'.$money_total);
+                }
+
+
                 $datapost["money_percent_for_teacher"] = isset($_POST['money_percent_for_teacher']) ? $_POST['money_percent_for_teacher'] : 0;
 
                 $datapost["phase"] = isset($_POST['phase']) ? $_POST['phase'] : 0;
