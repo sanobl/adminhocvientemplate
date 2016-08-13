@@ -279,7 +279,7 @@
                 /*font-family: Arial, Helvetica, sans-serif;*/
                 /*font-size: 11px;*/
                 /*}*/
-                table {
+                table.print_table {
                     border: 1px solid #000;
                     width: 100%;
                     max-width: 100%;
@@ -287,13 +287,13 @@
                     border-collapse: collapse;
                 }
 
-                table > thead > tr > th, table > tbody > tr > td, table > tfoot > tr > td {
+                table.print_table > thead > tr > th, table.print_table > tbody > tr > td, table > tfoot > tr > td {
                     border: 1px solid #000;
                     line-height: 1.42857143;
                     padding: 8px;
                 }
 
-                table > tbody > tr > td, table > tfoot > tr > td {
+                table.print_table > tbody > tr > td, table.print_table > tfoot > tr > td {
                     border-top: 1px solid #000;
                 }
 
@@ -302,7 +302,6 @@
                     display: block;
                     margin: 0 auto;
                     margin-bottom: 0.5cm;
-                    box-shadow: 0 0 0.5cm rgba(0, 0, 0, 0.5);
 
                 }
 
@@ -343,6 +342,21 @@
                         font-family: Arial, Helvetica, sans-serif;
                         font-size: 11px;
                     }
+                    body * {
+                            visibility: hidden;
+                        }
+
+                    page * {
+                        visibility: visible;
+                    }
+
+                    page {
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-size: 16px;
+                    }
                 }
             </style>
             <div class="modal-header">
@@ -377,7 +391,7 @@
                     </div>
                     <br style="clear: both">
                     <br style="clear: both">
-                    <table style="width: 100%;">
+                    <table style="width: 100%;" class="print_table">
                         <thead>
                         <tr style="text-align: center">
                             <th style="width: 20px">Stt</th>
