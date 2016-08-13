@@ -5,11 +5,18 @@ class Widget_Manager_CourseAdd extends Core_Widget
 
     public function run()
     {
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $isLogin = true;
         $dataSubject[] = null;
         $dataSubjectClass = null;
         $listsubjects = '';
-        $creatby = 'thuatnv';
+        session_start();
+        $createdby = $_SESSION['name'];
+//        $creatby = 'thuatnv';
         if ($isLogin) {
             $subjectId = $this->getRequest()->getParam('subid');
 
@@ -38,13 +45,14 @@ class Widget_Manager_CourseAdd extends Core_Widget
                 $datapost["subject_payment_type"] = isset($_POST['subject_payment_type']) ? $_POST['subject_payment_type'] : 1;
                 $subjecttype = $_POST['subject_type'];
                 $datapost["subject_type"] = isset($subjecttype) ? $subjecttype : 2;
-                if ($subjecttype == 2)
-                {
-                    $datapost["payment_type"] = 2;
-                }
-                else {
-                    $datapost["payment_type"] = 0;
-                }
+//                if ($subjecttype == 2)
+//                {
+//                    $datapost["payment_type"] = 2;
+//                }
+//                else {
+//                    $datapost["payment_type"] = 0;
+//                }
+                $datapost["payment_type"] = 2;
                 if (isset($_POST['fromdate'])) {
 //                    $dt = DateTime::createFromFormat('d/m/Y', $_POST['fromdate']);
 //                    date("Y-m-d H:i:s",strtotime($_POST['fromdate']);
@@ -86,6 +94,7 @@ class Widget_Manager_CourseAdd extends Core_Widget
 
 
                 $datapost["money_percent_for_teacher"] = isset($_POST['money_percent_for_teacher']) ? $_POST['money_percent_for_teacher'] : 0;
+                $datapost["money_percent_for_old_student"] = isset($_POST['money_percent_for_old_student']) ? $_POST['money_percent_for_old_student'] : 0;
 
                 $datapost["phase"] = isset($_POST['phase']) ? $_POST['phase'] : 0;
                 $datapost["isactive"] = isset($_POST['isactive']) ? $_POST['isactive'] : 0;

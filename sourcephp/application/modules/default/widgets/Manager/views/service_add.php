@@ -18,7 +18,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group">
-                                    <label class="control-label"> Mô tả dịch </label>
+                                    <label class="control-label"> Mô tả dịch vụ</label>
                                     <div class="controls">
                                         <textarea cols="30" rows="5" class="span10"
                                                   name="description"><?php echo isset($dataget['description']) ? $dataget['description'] : ''; ?></textarea>
@@ -164,7 +164,7 @@
 <!---->
 <!--                                </div>-->
                                 <div class="control-group">
-                                    <label class="control-label">Active</label>
+                                    <label class="control-label">Kích hoạt </label>
                                     <div class="controls">
                                         <input type="checkbox" value="1"
                                                name="isactive" <?php if ($dataget['isactive'] == 1) echo 'checked="checked"'; ?>>
@@ -537,14 +537,14 @@
             }
 
         });
-        <?php if (in_array('2', $lsPaymentType)) { ?>
+        <?php if (isset($lsPaymentType) && in_array('2', $lsPaymentType)) { ?>
         bindMonthShow();
         <?php } ?>
-        <?php if (in_array('1', $lsPaymentType)) { ?>
+        <?php if (isset($lsPaymentType) && in_array('1', $lsPaymentType)) { ?>
         $("#payment_type_onetime").css("display", "block");
         bindOneTimeShow();
         <?php } ?>
-        <?php if (in_array('3', $lsPaymentType)) { ?>
+        <?php if (isset($lsPaymentType) && in_array('3', $lsPaymentType)) { ?>
         $("#payment_type_phase").css("display", "block");
         bindPhaseShow();
         <?php } ?>

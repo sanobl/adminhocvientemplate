@@ -45,16 +45,16 @@
                                                 echo $teacher["address"];?>">
                                     </div>
                                 </div>
+<!--                                <div class="control-group">-->
+<!--                                    <label class="control-label">Xoá</label>-->
+<!--                                    <div class="controls">-->
+<!--                                        <input type="checkbox" value="1" name="teacher_isDelete"-->
+<!--                                            --><?php //if(isset($teacher) && $teacher != null)
+//                                                echo $teacher["isdelete"]==1?'checked="checked"':'';?><!-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="control-group">
-                                    <label class="control-label">Delete</label>
-                                    <div class="controls">
-                                        <input type="checkbox" value="1" name="teacher_isDelete"
-                                            <?php if(isset($teacher) && $teacher != null) 
-                                                echo $teacher["isdelete"]==1?'checked="checked"':'';?>>
-                                    </div>
-                                </div>
-                                <div class="control-group">
-                                    <label class="control-label">Active</label>
+                                    <label class="control-label">Kích hoạt</label>
                                     <div class="controls">
                                         <input type="checkbox" value="1" name="teacher_isActive"
                                             <?php if(isset($teacher) && $teacher != null) 

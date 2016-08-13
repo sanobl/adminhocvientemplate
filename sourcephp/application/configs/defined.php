@@ -41,7 +41,7 @@ define('CONFIG_TRACKING', serialize(array (
                                     ), 
 )));
 
-define('PAGE_DESCRIPTION', 'hotro.zing.vn, hotro1.zing.vn, hỗ trợ, hỗ trợ khách hàng, VNG, chăm sóc khách hàng, thông tin tài khoản, thông tin thanh toán, thanh toán, nghênh khách đường');
-define('PAGE_KEYWORDS', 'hotro.zing.vn, ho tro khach hang, ho tro, VNG, cham soc khach hang, thong tin tai khoan, thong tin thanh toan, thanh toan, nghenh khach duong, gui yeu cau, xem yeu cau da gui, khoa tai khoan, mo khoa tai khoan, doi CMND, thay doi so giay to online, huong dan, khoi phuc mat khau, lich su giao dich, bao loi san pham');
-define('PAGE_TITLE','FE Staging');
+define('PAGE_DESCRIPTION', 'Nhà thiếu nhi quận 4 - Thành phố Hồ Chí Minh');
+define('PAGE_KEYWORDS', 'nha thieu nhi, quan 4, ho chi minh');
+define('PAGE_TITLE','Nhà thiếu nhi quận 4 - Hồ Chí Minh');
 ?>

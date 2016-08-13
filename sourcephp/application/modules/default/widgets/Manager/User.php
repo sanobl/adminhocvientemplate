@@ -2,7 +2,12 @@
 
 class Widget_Manager_User extends Core_Widget{
     
-    public function run(){    
+    public function run(){
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $users = null;       
         if(!empty($_POST)){
             if(trim($this->getRequest()->getParam("useredt_id")) != ''){

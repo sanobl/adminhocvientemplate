@@ -2,8 +2,14 @@
 
 class Widget_Manager_UserAdd extends Core_Widget{
     
-    public function run(){    
+    public function run(){
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $user_id = intval($this->getRequest()->getParam("id"));
+        $view = intval($this->getRequest()->getParam("view"));
         $user = null;
         if($user_id !=0){
             $user = Core_MysqlUser::getInstance()->getUser($user_id);
@@ -38,7 +44,8 @@ class Widget_Manager_UserAdd extends Core_Widget{
                             'password' => $user_password,
                             'isadmin' => $user_isAdmin,
                             'isdelete' => $user_isDelete,
-                            'full_name' => $user_fullname
+                            'full_name' => $user_fullname,
+                            'view' =>$view
                         )
                     ));
                 } else {
@@ -53,7 +60,8 @@ class Widget_Manager_UserAdd extends Core_Widget{
             if($user_id !=0 && $user != null){
                 return $this->render('user_add', array(     
                     'error' => $error,
-                    'user' => $user[0]
+                    'user' => $user[0],
+                    'view' =>$view
                 ));
             }
         }

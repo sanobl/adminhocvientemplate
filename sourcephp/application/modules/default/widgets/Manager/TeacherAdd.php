@@ -1,7 +1,12 @@
 <?php
 class Widget_Manager_TeacherAdd extends Core_Widget{
     
-    public function run(){   
+    public function run(){
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $teacher_id = intval($this->getRequest()->getParam("id"));
         $teacher = null;
         if($teacher_id !=0){

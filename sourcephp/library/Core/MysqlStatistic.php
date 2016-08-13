@@ -84,7 +84,7 @@ class Core_MysqlStatistic
         $this->_db = MysqliDb::getInstance();
         // obtain db object created in init  ()
 //        $this->_db = MysqliDb::getInstance();
-        $sql = 'Select `name`,`address`,`title`,GROUP_CONCAT(money_percent_for_teacher) as money_percent_for_teacher,
+      /*  $sql = 'Select `name`,`address`,`title`,GROUP_CONCAT(money_percent_for_teacher) as money_percent_for_teacher,
 GROUP_CONCAT(stu) as stu,GROUP_CONCAT(money) as money,GROUP_CONCAT(money_of_teacher) as money_of_teacher
  from 
 (
@@ -96,6 +96,20 @@ where DATE(st.created_at) =  ?
 group by t.`name`,t.address,s.title,st.is_old_student,st.money_percent_for_teacher
 order by t.`name` 
 ) as tableA
+group by `name`,`address`,`title`';*/
+        $sql = 'select `name`,`address`,`title`,GROUP_CONCAT(money_percent_for_teacher) as money_percent_for_teacher,
+GROUP_CONCAT(totalmoney) as totalmoney,GROUP_CONCAT(totalmoney) as totalmoneyteacher,
+GROUP_CONCAT(totalstudent) as totalstudent
+ from (
+select t.`name`,t.`address`,s.title,ifnull(st.`money_percent_for_teacher`,0) as money_percent_for_teacher
+, st.`is_old_student`,ifnull(sum(st.`money_of_teacher`),0) as totalmoneyteacher,
+ifnull(sum(st.`money_detail`),0) as totalmoney, count(st.id) as totalstudent
+ from `teachers` t inner join `subject_class` sc
+on t.id = sc.teacher_id inner join `subjects` s on sc.subject_id = s.id
+inner join `students` st on st.subject_class_id = sc.id
+group by t.`name`,t.`address`,s.title,ifnull(st.`money_percent_for_teacher`,0),st.`is_old_student`
+order by t.`name`
+) as TableA
 group by `name`,`address`,`title`';
         $data = $this->_db->rawQuery($sql, Array($date));
 //        foreach ($users as $user) {
@@ -107,7 +121,7 @@ group by `name`,`address`,`title`';
     public function getHoaDon($date)
     {
         $this->_db = MysqliDb::getInstance();
-        $arr = array();
+        /*$arr = array();
         $sql = 'SELECT MIN(bill_code) as min, MAX(bill_code) as max FROM `student_bill`
 where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
         $data = $this->_db->rawQuery($sql);
@@ -121,8 +135,13 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
             if (isset($datadetail))
                 $sumtotal = $datadetail[0]['total'];
             $arr = array($min, $max, $sumtotal);
-        }
-        return $arr;
+        }*/
+        $sql = 'select isservice,SUM(money) as total,MAX(bill_code) as maxbill,MIN(bill_code) as minbill
+                from `student_bill` where IFNULL(isdelete,0) <> 1
+                and DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'
+                group by isservice';
+        $data = $this->_db->rawQuery($sql);
+        return $data;
     }
 
     public function insertSubject($data, $datadetail, $id, $dataClass)
@@ -223,7 +242,7 @@ where DATE_FORMAT(created_at, \'%Y-%m\') = \'2016-08\'';
         try {
             $this->_db = MysqliDb::getInstance();
             $sql = 'select s.id,s.title,s.description,s.subject_type,s.fromdate,s.todate,s.money_total,s.phase,s.isactive,s.is_support_old_student,
-s.money_percent_for_teacher,s.subject_payment_type,
+s.money_percent_for_teacher,s.subject_payment_type,s.money_percent_for_old_student,
 GROUP_CONCAT(sd.pay_period) as pay_period,GROUP_CONCAT(sd.pay_money) as pay_money,
 GROUP_CONCAT(sd.payment_type) as payment_type from `subjects` s inner join `subject_detail` sd
 on s.id = sd.subject_id 

@@ -18,7 +18,7 @@
     <!-- sticky messages -->
     <script src="<?php echo $this->getView()->app->static->frontend->lib; ?>/sticky/sticky.min.js"></script>
     <!-- fix for ios orientation change -->
-    <script src="<?php echo $this->getView()->app->static->frontend->lib; ?>/ios-orientationchange-fix.js"></script>
+<!--    <script src="--><?php //echo $this->getView()->app->static->frontend->lib; ?><!--/ios-orientationchange-fix.js"></script>-->
     <!-- scrollbar -->
     <script src="<?php echo $this->getView()->app->static->frontend->lib; ?>/antiscroll/antiscroll.js"></script>
     <script src="<?php echo $this->getView()->app->static->frontend->lib; ?>/antiscroll/jquery-mousewheel.js"></script>

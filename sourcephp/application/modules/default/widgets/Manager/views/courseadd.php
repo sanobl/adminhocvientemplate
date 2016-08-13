@@ -89,13 +89,13 @@
 <!--                                        </div>-->
 <!--                                    </div>-->
 <!--                                </div>-->
-                                <div class="control-group">
-                                    <label class="control-label">Hỗ trợ học viên cũ</label>
-                                    <div class="controls">
-                                        <input type="checkbox" value="1"
-                                               name="is_support_old_student" <?php if ($dataget['is_support_old_student'] == 1) echo 'checked="checked"'; ?>>
-                                    </div>
-                                </div>
+<!--                                <div class="control-group">-->
+<!--                                    <label class="control-label">Hỗ trợ học viên cũ</label>-->
+<!--                                    <div class="controls">-->
+<!--                                        <input type="checkbox" value="1"-->
+<!--                                               name="is_support_old_student" --><?php //if ($dataget['is_support_old_student'] == 1) echo 'checked="checked"'; ?><!-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="control-group">
                                     <label class="control-label" id="titlemoney">Số tiền/tháng(VNĐ)</label>
                                     <div class="controls">
@@ -110,6 +110,14 @@
                                         <input type="number" name="money_percent_for_teacher"
                                                id="money_percent_for_teacher"
                                                value="<?php echo isset($dataget['money_percent_for_teacher']) ? $dataget['money_percent_for_teacher'] : ''; ?>">
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label">Tỷ lệ % giảm học phí</label>
+                                    <div class="controls">
+                                        <input type="number" name="money_percent_for_old_student"
+                                               id="money_percent_for_old_student"
+                                               value="<?php echo isset($dataget['money_percent_for_old_student']) ? $dataget['money_percent_for_old_student'] : ''; ?>">
                                     </div>
                                 </div>
 <!--                                <div class="control-group" id="hinhthucthanhtoan">-->
@@ -164,7 +172,7 @@
 <!---->
 <!--                                </div>-->
                                 <div class="control-group">
-                                    <label class="control-label">Active</label>
+                                    <label class="control-label">Kích hoạt</label>
                                     <div class="controls">
                                         <input type="checkbox" value="1"
                                                name="isactive" <?php if ($dataget['isactive'] == 1) echo 'checked="checked"'; ?>>
@@ -536,14 +544,14 @@
             }
 
         });
-        <?php if (in_array('2', $lsPaymentType)) { ?>
+        <?php if (isset($lsPaymentType) && in_array('2', $lsPaymentType)) { ?>
         bindMonthShow();
         <?php } ?>
-        <?php if (in_array('1', $lsPaymentType)) { ?>
+        <?php if (isset($lsPaymentType) &&  in_array('1', $lsPaymentType)) { ?>
         $("#payment_type_onetime").css("display", "block");
         bindOneTimeShow();
         <?php } ?>
-        <?php if (in_array('3', $lsPaymentType)) { ?>
+        <?php if (isset($lsPaymentType) &&  in_array('3', $lsPaymentType)) { ?>
         $("#payment_type_phase").css("display", "block");
         bindPhaseShow();
         <?php } ?>

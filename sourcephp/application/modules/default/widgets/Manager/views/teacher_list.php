@@ -39,7 +39,7 @@
                                         <th>Số điện thoại</th>
                                         <th>Email</th>
                                         <th>Địa chỉ</th>
-                                        <th>Đã active</th>
+                                        <th>Đã kích hoạt</th>
                                         <th>Đã xoá</th>
                                         <th></th>
                                     </tr>

@@ -8,9 +8,6 @@
     <meta name="format-detection" content="telephone=no"/>
     <meta name="robots" content="INDEX,FOLLOW"/>
     <meta http-equiv="Cache-control" content="public, max-age=86400">
-    <meta property="og:image" content="http://img.zing.vn/vng/skin/vng-2014/image/vng-logo-share-v2.jpg"/>
-    <link rel="shortcut icon"
-          href="<?php echo Core_Global::getApplicationIni()->app->static->frontend->images; ?>/ico_cs_vng.ico"/>
     <?php echo $this->headTitle(); ?>
     <?php echo $this->headMeta(); ?>
     <?php echo $this->headLink(); ?>

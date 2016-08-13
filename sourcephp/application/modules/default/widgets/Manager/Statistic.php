@@ -2,6 +2,11 @@
 class Widget_Manager_Statistic extends Core_Widget{
 
     public function run(){
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $typeShowData = isset($_POST['typeshowdata']) ? $_POST['typeshowdata'] : 0;
         $subjectId = isset($_POST['subject']) ? $_POST['subject'] : 0;
         $teacherId = isset($_POST['teacher']) ? $_POST['teacher'] : 0;
@@ -17,6 +22,8 @@ class Widget_Manager_Statistic extends Core_Widget{
             else if ($typeShowData == 2)
                 $lsData = Core_MysqlStatistic::getInstance()->getHoaDon('2016-08-02');
         }
+//        echo '<pre>';
+//        print_r($lsData);die;
         $this->render('statistic', array(
             'lsSubjects' => $lsSubjects,
             'lsTeachers' => $lsTeachers,

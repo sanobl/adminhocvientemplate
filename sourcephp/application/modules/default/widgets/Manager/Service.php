@@ -9,6 +9,11 @@
 class Widget_Manager_Service extends Core_Widget
 {
     public function run(){
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $title = isset($_POST['title']) ? $_POST['title'] : '';
         $pageIndex = 0;
         $pageSize = 100;

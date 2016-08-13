@@ -11,7 +11,7 @@ class Widget_User_Login extends Core_Widget
             $username = isset($_POST['username']) ? trim($_POST['username']) : '';
             $password = isset($_POST['password']) ? trim($_POST['password']) : '';
             $result = Core_MysqlStatistic::getInstance()->checkUserLogin($username, $password);
-
+//            print_r($result);die;
             if (isset($result) && count($result) > 0) { //login thanh cong
                 session_start(); // Starting Session
                 $_SESSION['start'] = time();
@@ -22,7 +22,7 @@ class Widget_User_Login extends Core_Widget
                 $_SESSION['full_name'] = $result[0]['full_name']; // Initializing Session
                 $_SESSION['isadmin'] = $result[0]['isadmin']; // Initializing Session
                 $_SESSION['id'] = $result[0]['id']; // Initializing Session
-
+//                print_r($_SESSION);die;
                 $url = '/quan-ly-hoc-vien.html';
                 $this->forward($url);
             } else

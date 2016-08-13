@@ -10,7 +10,7 @@
                                 class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="/them-nguoi-dung.html?id=<?php echo $id;?>">Xem thông tin</a>
+                                <a href="/them-nguoi-dung.html?id=<?php echo $id;?>&view=1">Xem thông tin</a>
                             </li>
 
                             <li>
@@ -39,7 +39,10 @@
                                         <a href="/quan-ly-giao-vien.html">Giáo viên</a>
                                     </li>
                                     <li>
-                                        <a href="/quan-ly-khoa-hoc.html">Khoá học</a>
+                                        <a href="/quan-ly-khoa-hoc.html">Môn học</a>
+                                    </li>
+                                    <li>
+                                        <a href="/quan-ly-dich-vu.html">Dịch vụ</a>
                                     </li>
                                     <li>
                                         <a href="/thong-ke.html">Thống kê</a>

@@ -12,32 +12,34 @@ class Core_Utilities
 
                 switch ($ar) {
                     case 'monday':
-                        $str .= 'Hai,';
+                        $str .= 'Thứ Hai, ';
                         break;
                     case 'tuesday':
-                        $str .= 'Ba,';
+                        $str .= 'Thứ Ba, ';
                         break;
                     case 'wednesday':
-                        $str .= 'Tư,';
+                        $str .= 'Thứ Tư, ';
                         break;
                     case 'thursday':
-                        $str .= 'Năm,';
+                        $str .= 'Thứ Năm, ';
                         break;
                     case 'friday':
-                        $str .= 'Sáu,';
+                        $str .= 'Thứ Sáu, ';
                         break;
                     case 'saturday':
-                        $str .= 'Bảy,';
+                        $str .= 'Thứ Bảy, ';
                         break;
                     case 'sunday':
-                        $str .= 'Chủ nhật,';
+                        $str .= 'Chủ Nhật, ';
                         break;
                     default:
                         break;
                 }
             }
         }
-        return trim($str, ",");
+        $str =  trim($str, " ");
+        $str =  trim($str, ",");
+        return $str;
     }
 
     static function  convert_number_to_words($number)

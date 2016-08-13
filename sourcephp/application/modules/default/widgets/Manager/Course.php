@@ -3,6 +3,11 @@
 class Widget_Manager_Course extends Core_Widget{
     
     public function run(){
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $title = isset($_POST['title']) ? $_POST['title'] : '';
         $teacherName = isset($_POST['name']) ? $_POST['name'] : '';
         $pageIndex = 0;

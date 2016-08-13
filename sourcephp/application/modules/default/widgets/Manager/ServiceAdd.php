@@ -5,13 +5,22 @@ class Widget_Manager_ServiceAdd extends Core_Widget
 
     public function run()
     {
+        $isadmin = $_SESSION['isadmin'];
+        if ($isadmin != 1)
+        {
+            $this->forward("/quan-ly-hoc-vien.html");
+        }
         $isLogin = true;
         $dataSubject[] = null;
         $dataSubjectClass = null;
         $listsubjects = '';
-        $creatby = 'thuatnv';
+//        $creatby = 'thuatnv';
+        session_start();
+        $createdby = $_SESSION['name'];
         if ($isLogin) {
-            $subjectId = $this->getRequest()->getParam('subid');
+//            $subjectId = $this->getRequest()->getParam('subid');
+            $subjectId = intval($this->getRequest()->getParam("subid"));
+//            print_r($subjectId);
             if (empty($_POST)) {
                 if (isset($subjectId) && $subjectId > 0) {
                     $dataSubject = Core_MysqlStatistic::getInstance()->getSubjectById($subjectId);
@@ -51,6 +60,7 @@ class Widget_Manager_ServiceAdd extends Core_Widget
 
                 $dataClass = $_POST['class'];
                 $result = Core_MysqlStatistic::getInstance()->insertService($datapost, $id);
+
                 $url = '/quan-ly-dich-vu.html';
                 $this->forward($url);
 

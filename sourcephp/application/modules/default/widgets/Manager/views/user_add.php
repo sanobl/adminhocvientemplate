@@ -51,6 +51,7 @@
                                                 echo $user["phone"];?>"> 
                                     </div>
                                 </div>
+                                <?php if ($view != 1) {?>
                                 <div class="control-group">
                                     <label class="control-label">Admin</label>
                                     <div class="controls">
@@ -59,14 +60,15 @@
                                                 echo $user["isadmin"]==1?'checked="checked"':'';?>>
                                     </div>
                                 </div>
-                                <div class="control-group">
-                                    <label class="control-label">Delete</label>
-                                    <div class="controls">
-                                        <input type="checkbox" value="1" name="user_isdelete"
-                                        <?php if(isset($user) && $user != null) 
-                                                echo $user["isdelete"]==1?'checked="checked"':'';?>>
-                                    </div>
-                                </div>
+                                <?php }?>
+<!--                                <div class="control-group">-->
+<!--                                    <label class="control-label">Xoá </label>-->
+<!--                                    <div class="controls">-->
+<!--                                        <input type="checkbox" value="1" name="user_isdelete"-->
+<!--                                        --><?php //if(isset($user) && $user != null)
+//                                                echo $user["isdelete"]==1?'checked="checked"':'';?><!-->
+<!--                                    </div>-->
+<!--                                </div>-->
                                 <div class="control-group">
                                     <div class="controls">
                                         <button class="btn btn-info" type="button" id="btnAddUser">Lưu thông tin
